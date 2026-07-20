@@ -1,0 +1,270 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 96%;
+    --card: 222 40% 9%;
+    --card-foreground: 210 40% 96%;
+    --popover: 222 40% 9%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 222 35% 14%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 222 30% 12%;
+    --muted-foreground: 215 25% 65%;
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 222 30% 16%;
+    --input: 222 30% 16%;
+    --ring: 217 91% 60%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  *, ::before, ::after {
+    border-color: hsl(var(--border));
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+  }
+  body {
+    @apply bg-background text-foreground;
+    overflow-x: hidden;
+    font-synthesis: none;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.025em;
+  }
+  ::selection {
+    background: hsl(217 91% 60%);
+    color: hsl(0 0% 100%);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(222 47% 6%);
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(222 30% 20%);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(217 91% 60% / 0.5);
+}
+
+/* Blueprint grid background utility with GPU-accelerated slow movement */
+@keyframes grid-drift {
+  from { background-position: 0 0; }
+  to { background-position: 48px 48px; }
+}
+@keyframes grid-drift-fine {
+  from { background-position: 0 0; }
+  to { background-position: 24px 24px; }
+}
+
+.bp-grid {
+  position: relative;
+  background-image:
+    linear-gradient(hsl(222 30% 16% / 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(222 30% 16% / 0.4) 1px, transparent 1px);
+  background-size: 48px 48px;
+  animation: grid-drift 80s linear infinite;
+  contain: style layout;
+  will-change: background-position;
+}
+
+.bp-grid::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 20%, hsl(var(--background)) 85%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bp-grid-fine {
+  background-image:
+    linear-gradient(hsl(217 91% 60% / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(217 91% 60% / 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+  animation: grid-drift-fine 50s linear infinite;
+}
+
+/* Gradient breathing background animation */
+@keyframes breathe {
+  0%, 100% {
+    opacity: 0.45;
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1) translate3d(3%, 2%, 0);
+  }
+}
+
+.bg-glow-breathe-1 {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsl(var(--primary) / 0.08) 0%, hsl(var(--primary) / 0.02) 40%, transparent 70%);
+  pointer-events: none;
+  animation: breathe 20s ease-in-out infinite;
+  z-index: 0;
+  contain: style;
+  will-change: transform, opacity;
+}
+
+.bg-glow-breathe-2 {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsl(var(--accent) / 0.06) 0%, hsl(var(--accent) / 0.01) 40%, transparent 70%);
+  pointer-events: none;
+  animation: breathe 28s ease-in-out infinite reverse;
+  z-index: 0;
+  contain: style;
+  will-change: transform, opacity;
+}
+
+/* Premium micro-interactions classes */
+.btn-premium {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-premium:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 30px -10px hsl(var(--primary) / 0.4);
+}
+.btn-premium:active {
+  transform: translateY(0px) scale(0.97);
+}
+
+.card-premium {
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-premium:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 30px 60px -15px rgba(59, 130, 246, 0.15), 
+              0 0 50px -10px rgba(59, 130, 246, 0.2);
+}
+
+
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+.scan-line {
+  animation: scan 8s linear infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+.pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Marquee scroll animations */
+@keyframes marquee-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+@keyframes marquee-right {
+  0%   { transform: translateX(-33.333%); }
+  100% { transform: translateX(0); }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Line draw animation for feature cards */
+@keyframes line-grow {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+/* Neumorphic Input & Textarea styles from Uiverse.io */
+.neumorphic-container {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  position: relative;
+  color: white;
+  margin-top: 1.25rem;
+}
+
+.neumorphic-input {
+  width: 100%;
+  height: 48px;
+  border: none;
+  outline: none;
+  padding: 0px 14px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 15px;
+  background-color: transparent;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 1),
+              -1px -1px 6px rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+}
+
+.neumorphic-input:focus {
+  border: 2px solid transparent;
+  color: #fff;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 1),
+              -1px -1px 6px rgba(255, 255, 255, 0.4),
+              inset 3px 3px 10px rgba(0, 0, 0, 1),
+              inset -1px -1px 6px rgba(255, 255, 255, 0.4);
+}
+
+.neumorphic-textarea {
+  width: 100%;
+  min-height: 120px;
+  border: none;
+  outline: none;
+  padding: 14px 14px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 15px;
+  background-color: transparent;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 1),
+              -1px -1px 6px rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+  resize: none;
+}
+
+.neumorphic-textarea:focus {
+  border: 2px solid transparent;
+  color: #fff;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 1),
+              -1px -1px 6px rgba(255, 255, 255, 0.4),
+              inset 3px 3px 10px rgba(0, 0, 0, 1),
+              inset -1px -1px 6px rgba(255, 255, 255, 0.4);
+}
+
