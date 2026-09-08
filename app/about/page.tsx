@@ -6,8 +6,16 @@ import { timelineEvents } from '@/lib/data';
 import Link from 'next/link';
 import { 
   History, Eye, Heart, ShieldCheck, Milestone, Users, Award, 
-  Settings, CheckCircle2, ChevronRight 
+  Settings, CheckCircle2, ChevronRight, Rocket, TrendingUp, Lightbulb, Target, Flag 
 } from 'lucide-react';
+
+const timelineIconMap: Record<string, any> = {
+  Rocket,
+  TrendingUp,
+  Lightbulb,
+  Target,
+  Flag
+};
 
 const values = [
   {
@@ -29,7 +37,7 @@ const values = [
 
 const leaders = [
   { name: 'K. Srinivasan', role: 'Head of Embedded Systems', dept: 'R&D', bio: 'Former aerospace controller architect with 15+ years experience in deterministic logic loop designs.' },
-  { name: 'Dr. Ramesh Kumar', role: 'Lead Calibration Scientist', dept: 'Calibration Labs', bio: 'NABL assessor specializing in ultra-low range differential pressure and gas humidity calibration loops.' },
+  { name: 'Dr. Ramesh Kumar', role: 'Lead Calibration Scientist', dept: 'Calibration Labs', bio: 'Calibration scientist specializing in ultra-low range differential pressure and gas humidity calibration loops.' },
   { name: 'Sarah Ahmed', role: 'Quality Assurance Director', dept: 'QA & Auditing', bio: 'Cleanroom validation expert auditing operations to maintain strict ISO 9001 and CE compliance.' },
   { name: 'M. Anand Rao', role: 'Chief of Production Operations', dept: 'Manufacturing', bio: 'Supervising the SMT pick-and-place lines, testing loops, and thermal burn-in aging procedures.' }
 ];
@@ -72,7 +80,7 @@ export default function AboutPage() {
             </RevealItem>
             <RevealItem>
               <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-                Established in 2019, Neural Industrial Automation has grown from a specialized engineering firm into a premier cleanroom automation partner trusted by over 60+ pharmaceutical leaders and technology laboratories.
+                Established in 2019, Neural Industrial Automation has grown from a specialized engineering firm into a premier cleanroom automation partner trusted across leading pharmaceutical facilities and technology laboratories.
               </p>
             </RevealItem>
           </Reveal>
@@ -112,60 +120,98 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Interactive Timeline Section */}
+      {/* Interactive Timeline Section - OUR JOURNEY */}
       <section className="relative py-24 border-t border-border/60 z-10">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
-          <Reveal className="max-w-2xl mb-12">
+          
+          {/* Section Header */}
+          <Reveal className="text-center max-w-3xl mx-auto mb-16">
             <RevealItem>
-              <div className="flex items-center gap-3">
-                <span className="h-px w-8 bg-primary/40" />
-                <span className="text-xs font-bold uppercase tracking-wider text-primary">Milestones</span>
+              <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.25em] text-primary">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                OUR JOURNEY
               </div>
             </RevealItem>
             <RevealItem>
-              <h2 className="mt-4 text-3xl font-extrabold tracking-tight">Industrial Timeline</h2>
+              <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+                Driving innovation <span className="text-primary font-normal">•</span> Delivering impact <span className="text-primary font-normal">•</span> Building the future.
+              </h2>
             </RevealItem>
             <RevealItem>
-              <p className="mt-4 text-sm text-muted-foreground">
-                Trace our roadmap from custom prototyping to deploying multi-door interlocking loops globally.
+              <p className="mt-4 text-sm sm:text-base text-muted-foreground leading-relaxed">
+                Trace our roadmap from foundation and custom cleanroom controls to global telemetry architectures and advanced systems integration.
               </p>
             </RevealItem>
           </Reveal>
 
-          {/* Timeline Buttons */}
-          <div className="flex justify-between items-center border-b border-border/60 pb-8 relative">
-            {/* Horizontal line marker */}
-            <div className="absolute bottom-0 left-0 h-[2px] w-full bg-border" />
-            <div className="flex gap-4 sm:gap-8 z-10">
-              {timelineEvents.map((e) => (
-                <button
-                  key={e.year}
-                  onClick={() => setActiveYear(e.year)}
-                  className={`relative pb-8 text-sm font-bold uppercase tracking-wider transition-all duration-300 ${
-                    activeYear === e.year
-                      ? 'text-primary scale-105'
-                      : 'text-muted-foreground hover:text-foreground'
-                  }`}
-                >
-                  <span>{e.year}</span>
-                  {activeYear === e.year && (
-                    <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary" />
-                  )}
-                </button>
-              ))}
+          {/* Timeline 5-Column Stepper Layout */}
+          <div className="relative">
+            {/* Horizontal Connecting Line (Desktop) */}
+            <div className="hidden lg:block absolute top-[88px] left-[10%] right-[10%] h-[2px] bg-gradient-to-r from-primary/20 via-primary/60 to-primary/20 z-0" />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-4 relative z-10">
+              {timelineEvents.map((evt) => {
+                const IconComp = timelineIconMap[evt.icon] || Milestone;
+                const isSelected = activeYear === evt.year;
+
+                return (
+                  <div
+                    key={evt.year}
+                    onClick={() => setActiveYear(evt.year)}
+                    className={`group cursor-pointer rounded-2xl border p-6 transition-all duration-300 flex flex-col justify-between ${
+                      isSelected
+                        ? 'border-primary/80 bg-primary/10 shadow-[0_0_25px_-5px_rgba(59,130,246,0.3)] ring-1 ring-primary/50'
+                        : 'border-border/70 bg-card/40 hover:border-primary/50 hover:bg-card/70'
+                    }`}
+                  >
+                    <div>
+                      {/* Node Circle Header */}
+                      <div className="flex flex-col items-center text-center">
+                        <div
+                          className={`relative mb-4 flex h-14 w-14 items-center justify-center rounded-full border transition-all duration-300 ${
+                            isSelected
+                              ? 'border-primary bg-primary text-primary-foreground shadow-[0_0_15px_rgba(59,130,246,0.6)] scale-110'
+                              : 'border-primary/40 bg-secondary/50 text-primary group-hover:border-primary group-hover:scale-105'
+                          }`}
+                        >
+                          <IconComp className="h-6 w-6" />
+                        </div>
+
+                        {/* Year Banner */}
+                        <div className="text-3xl font-black tracking-tight text-primary font-mono">
+                          {evt.year}
+                        </div>
+
+                        {/* Phase Title */}
+                        <div className="mt-1 text-xs font-extrabold uppercase tracking-wider text-foreground">
+                          {evt.title}
+                        </div>
+
+                        {/* Subtitle */}
+                        <div className="text-[11px] font-medium text-muted-foreground/80 mt-0.5 mb-4">
+                          {evt.subtitle}
+                        </div>
+                      </div>
+
+                      {/* Divider */}
+                      <div className="w-full h-px bg-border/60 my-3" />
+
+                      {/* Bullet points */}
+                      <ul className="space-y-3 mt-4 text-xs text-muted-foreground leading-relaxed">
+                        {evt.points.map((pt, pIdx) => (
+                          <li key={pIdx} className="flex items-start gap-2">
+                            <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0 mt-1.5" />
+                            <span>{pt}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
-          {/* Timeline Detail Panel */}
-          <div className="mt-10 rounded-2xl border border-border bg-secondary/5 p-8 relative overflow-hidden min-h-[160px] bp-grid-fine">
-            <div className="flex items-center gap-3">
-              <Milestone className="h-5 w-5 text-accent animate-pulse" />
-              <h4 className="text-lg font-bold text-foreground">{selectedEvent.title}</h4>
-            </div>
-            <p className="text-sm text-muted-foreground mt-4 leading-relaxed max-w-3xl">
-              {selectedEvent.desc}
-            </p>
-          </div>
         </div>
       </section>
 
@@ -190,16 +236,52 @@ export default function AboutPage() {
                   </h2>
                 </RevealItem>
                 <RevealItem>
-                  <div className="mt-5 inline-flex items-center gap-4 bg-primary/10 border border-primary/25 rounded-xl px-5 py-3 shadow-[0_4px_20px_-4px_rgba(59,130,246,0.15)]">
-                    <span className="text-2xl font-mono tracking-widest text-primary font-extrabold">SIEMENS</span>
-                    <span className="text-sm text-primary/40 font-light">|</span>
-                    <span className="text-sm font-bold text-foreground uppercase tracking-wider">System Integrator</span>
-                  </div>
-                </RevealItem>
-                <RevealItem>
-                  <p className="mt-6 text-base leading-relaxed text-muted-foreground">
+                  <p className="mt-4 text-base leading-relaxed text-muted-foreground">
                     End-to-end industrial automation solutions including design, engineering, programming, panel manufacturing, commissioning, and support services.
                   </p>
+                </RevealItem>
+                <RevealItem>
+                  {/* Official Siemens System Integrator Authorization Badge Block */}
+                  <div className="mt-6 w-full max-w-md rounded-xl border border-border/60 p-2 bg-secondary/30 backdrop-blur-md shadow-xl overflow-hidden">
+                    <div className="relative p-4 sm:p-5 rounded-lg bg-[#efefe8] overflow-hidden border border-black/10">
+                      
+                      {/* Faint repeating official watermark background */}
+                      <div className="absolute inset-0 opacity-[0.06] pointer-events-none select-none overflow-hidden font-mono text-[8px] text-black leading-relaxed tracking-wider py-1 px-1 whitespace-nowrap">
+                        {Array.from({ length: 16 }).map((_, i) => (
+                          <div key={i} className="-rotate-1 my-0.5">
+                            M/s. Neural Industrial Automation Pvt. Ltd. &nbsp;&nbsp;&nbsp;&nbsp; M/s. Neural Industrial Automation Pvt. Ltd. &nbsp;&nbsp;&nbsp;&nbsp; M/s. Neural Industrial Automation Pvt. Ltd.
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Official Authorization Badge Grid (Matching Heights & Proportions) */}
+                      <div className="relative z-10 grid grid-cols-2 gap-3 sm:gap-4 items-stretch">
+                        
+                        {/* Official Authorization Badge Block 1 (Left: Authorized System Integrator) */}
+                        <div className="bg-[#dcdcd4] p-4 sm:p-5 rounded-sm text-left shadow-sm flex flex-col justify-between border border-black/5 min-h-[120px] sm:min-h-[140px]">
+                          <div className="text-xs sm:text-sm font-extrabold tracking-tight text-[#1a1a1a] leading-tight font-sans">
+                            Authorized<br />
+                            System<br />
+                            Integrator
+                          </div>
+                          <div className="mt-3 text-[10px] sm:text-xs font-semibold text-[#404040] leading-snug font-sans">
+                            Industrial<br />
+                            Automation &<br />
+                            Communication
+                          </div>
+                        </div>
+
+                        {/* Official Authorization Badge Block 2 (Right: SIEMENS) */}
+                        <div className="bg-[#e5e5de] p-4 sm:p-5 rounded-sm flex items-center justify-center shadow-sm border border-black/5 min-h-[120px] sm:min-h-[140px]">
+                          <span className="text-xl sm:text-2xl lg:text-3xl font-black tracking-[0.18em] text-[#111111] font-sans text-center">
+                            SIEMENS
+                          </span>
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
                 </RevealItem>
 
               </Reveal>
@@ -289,14 +371,26 @@ export default function AboutPage() {
                 {[
                   'ISO 9001:2015 Manufacturing Quality Standards',
                   'CE Compliant EMI/EMC Circuit Protections',
-                  'WHO GMP Cleanroom Parameter Validation Compatibility',
-                  'NABL Traceable calibration instrumentation systems'
+                  'Cleanroom Parameter Validation Compatibility',
+                  '100% Traceable Calibration Certificates'
                 ].map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-3 text-xs text-foreground/80 font-medium">
-                    <CheckCircle2 className="h-4.5 w-4.5 text-primary shrink-0" />
-                    <span>{item}</span>
+                  <div key={idx} className="flex items-center gap-3">
+                    <CheckCircle2 className="h-4 w-4 text-primary shrink-0" />
+                    <span className="text-sm text-foreground/80 font-medium">{item}</span>
                   </div>
                 ))}
+              </div>
+
+              {/* Stat callout inside card */}
+              <div className="mt-8 grid grid-cols-2 gap-4 border-t border-border/50 pt-6">
+                <div>
+                  <div className="text-2xl font-black text-primary">ISO 9001</div>
+                  <div className="text-xs text-muted-foreground mt-0.5">Quality Standard</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-black text-accent">CE</div>
+                  <div className="text-xs text-muted-foreground mt-0.5">Certified Standard</div>
+                </div>
               </div>
             </div>
 
@@ -304,9 +398,7 @@ export default function AboutPage() {
             <div className="grid grid-cols-2 gap-4">
               {[
                 { title: 'ISO 9001', val: '2015 Cert' },
-                { title: 'CE Compliant', val: 'EMC Shielded' },
-                { title: 'NABL Calibration', val: '12 Month TDS' },
-                { title: 'GMP Cleanroom', val: 'Grade A-D Compliant' }
+                { title: 'CE Compliant', val: 'EMC Shielded' }
               ].map((c, idx) => (
                 <div key={idx} className="rounded-xl border border-border bg-secondary/15 p-6 text-center">
                   <Award className="h-6 w-6 text-primary mx-auto" />

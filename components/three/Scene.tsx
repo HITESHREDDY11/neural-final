@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, PerformanceMonitor } from '@react-three/drei';
 import { ACESFilmicToneMapping } from 'three';
@@ -92,7 +92,14 @@ function SceneContents({ inView }: { inView: boolean }) {
 }
 
 export default function Scene({ inView = true }: { inView?: boolean }) {
-  const [dpr, setDpr] = useState<[number, number]>([1, 1.25]);
+  const [dpr, setDpr] = useState<number>(1);
+
+  // Set high-resolution DPR safely after client mount to avoid hydration mismatch
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setDpr(Math.min(window.devicePixelRatio || 2, 2));
+    }
+  }, []);
 
   return (
     <Canvas
@@ -100,20 +107,19 @@ export default function Scene({ inView = true }: { inView?: boolean }) {
       shadows={false}
       dpr={dpr}
       gl={{
-        antialias: true,
+        antialias: true,         // Ultra-sharp 1080p line anti-aliasing
         alpha: true,
+        precision: 'highp',      // High precision floating point rendering
         toneMapping: ACESFilmicToneMapping,
-        toneMappingExposure: 1.1,
+        toneMappingExposure: 1.2,
         powerPreference: 'high-performance',
         failIfMajorPerformanceCaveat: false,
+        stencil: false,
+        depth: true,
       }}
-      camera={{ position: [0, 3, 7.5], fov: 45, near: 0.1, far: 100 }}
+      camera={{ position: [0, 3, 7.5], fov: 45, near: 0.5, far: 60 }}
       style={{ background: 'transparent' }}
     >
-      <PerformanceMonitor
-        onDecline={() => setDpr([1, 1])}
-        onIncline={() => setDpr([1, 1.25])}
-      />
       <Suspense fallback={null}>
         <SceneContents inView={inView} />
       </Suspense>

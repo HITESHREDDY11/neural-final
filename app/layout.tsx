@@ -4,6 +4,8 @@ import { Outfit } from 'next/font/google';
 import SmoothScroll from '@/components/SmoothScroll';
 import NavbarServer from '@/components/NavbarServer';
 import FooterServer from '@/components/FooterServer';
+import NavigationProgressBar from '@/components/NavigationProgressBar';
+import PageTransition from '@/components/PageTransition';
 
 const outfit = Outfit({
   subsets: ['latin'],
@@ -16,7 +18,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://neuralindustrialautomation.com'),
   title: 'Neural Industrial Automation — Redefining Innovation & Excellence',
   description:
-    'Making enterprises safe, smart, and sustainable with precision-engineered automation systems trusted by 60+ pharmaceutical leaders.',
+    'Making enterprises safe, smart, and sustainable with precision-engineered automation systems trusted across leading pharmaceutical facilities.',
   icons: {
     icon: '/assets/images/logo.png',
     shortcut: '/assets/images/logo.png',
@@ -25,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Neural Industrial Automation — Redefining Innovation & Excellence',
     description:
-      'Precision-engineered automation systems trusted by 60+ pharmaceutical leaders.',
+      'Precision-engineered automation systems trusted across leading pharmaceutical facilities.',
     type: 'website',
   },
 };
@@ -34,14 +36,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={outfit.variable} suppressHydrationWarning>
       <head>
-        <link rel="preload" href="/assets/outfit.woff" as="font" type="font/woff" crossOrigin="anonymous" />
+        {/* Preconnect to Google Fonts CDN for fast font loading */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={`${outfit.className} antialiased`}>
+      <body className={`${outfit.className} antialiased`} suppressHydrationWarning>
+        <NavigationProgressBar />
         <SmoothScroll>
           <div className="flex flex-col min-h-screen">
             <NavbarServer />
-            <main className="flex-grow">
-              {children}
+            <main className="flex-grow flex flex-col">
+              <PageTransition>
+                {children}
+              </PageTransition>
             </main>
             <FooterServer />
           </div>
@@ -50,3 +57,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+

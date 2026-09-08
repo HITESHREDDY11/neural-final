@@ -13,7 +13,7 @@ const features = [
     icon: ShieldCheck,
     title: 'High Quality & Affordable',
     body: 'Our systems are affordable with the highest quality to keep your enterprise safe and secure at every step — without compromise on value.',
-    points: ['ISO-grade components', 'Cost-effective scaling', 'Lifetime support'],
+    points: ['High-grade components', 'Cost-effective scaling', 'Lifetime support'],
     from: { x: -36, y: 0 },
   },
   {
@@ -29,7 +29,7 @@ const features = [
     icon: Crosshair,
     title: 'Precision Engineered',
     body: 'Every product is designed for pharmaceutical-grade compliance, built to withstand demanding industrial environments reliably.',
-    points: ['Cleanroom certified', 'GMP compliant', 'Calibrated accuracy'],
+    points: ['Cleanroom certified', 'Calibrated accuracy'],
     from: { x: 36, y: 0 },
   },
 ];
@@ -171,9 +171,9 @@ export default function Features() {
         <RevealItem>
           <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-5">
             {[
-              { num: '60+', label: 'Trusted Clients', sub: 'Across India & Abroad' },
-              { num: '7+', label: 'Product Lines', sub: 'Cleanroom Certified' },
-              { num: '150+', label: 'Team Members', sub: 'Skilled Professionals' },
+              { num: 'Global', label: 'Trusted Reach', sub: 'Across India & Abroad' },
+              { num: '9+', label: 'Product Categories', sub: 'Cleanroom Certified' },
+              { num: 'Expert', label: 'Engineering Team', sub: 'Dedicated Specialists' },
               { num: '100%', label: 'Quality Assured', sub: 'Pharma Grade' },
               { num: '2019', label: 'Established', sub: 'Years of Expertise' },
             ].map((s) => (

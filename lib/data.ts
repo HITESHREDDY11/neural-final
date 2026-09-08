@@ -9,9 +9,10 @@ export interface Product {
   features: string[];
   workingPrinciple: { step: string; title: string; description: string }[];
   specs: { category: string; items: { label: string; value: string }[] }[];
-  downloads: { type: 'Datasheet' | 'Manual' | 'Drawing' | 'Certificate'; name: string; size: string }[];
+  downloads: { type: 'Datasheet' | 'Manual' | 'Drawing' | 'Certificate' | 'Catalog'; name: string; size: string; filename?: string; requestCatalog?: boolean }[];
   faqs: { q: string; a: string }[];
   related: string[];
+  photos?: { src: string; alt: string }[];
 }
 
 export interface Industry {
@@ -51,7 +52,7 @@ export const products: Product[] = [
     tag: 'Access Control',
     iconName: 'DoorClosed',
     shortDescription: 'Advanced multi-door access control ensuring air hygiene, pressure regulation, and contamination containment.',
-    longOverview: 'The Neural Intelligent Door Interlocking System is engineered for high-integrity cleanroom environments, preventing simultaneous door openings to maintain differential pressure cascades. Trusted by over 60+ pharmaceutical leaders, it offers real-time logic control, emergency override triggers, and seamless card reader integration.',
+    longOverview: 'The Neural Intelligent Door Interlocking System is engineered for high-integrity cleanroom environments, preventing simultaneous door openings to maintain differential pressure cascades. Trusted across pharmaceutical facilities, it offers real-time logic control, emergency override triggers, and card reader integration.',
     applications: [
       'Pharmaceutical Formulation Labs',
       'Biosafety Cabinets (BSL-3/BSL-4)',
@@ -62,7 +63,7 @@ export const products: Product[] = [
       'Programmable interlocking logic for up to 8 doors in a single loop.',
       'Emergency override system (EMG) integrated with fire alarm panels.',
       'Acoustic and visual alarms for door-open-too-long (DOTL) states.',
-      'Sub-millisecond relay response preventing overlapping entry requests.',
+      'Fast relay response preventing overlapping entry requests.',
       'RS485 Modbus connectivity for central building management integration.'
     ],
     workingPrinciple: [
@@ -75,39 +76,49 @@ export const products: Product[] = [
       {
         category: 'Electrical & Power',
         items: [
-          { label: 'Operating Voltage', value: '24V DC ±10%' },
-          { label: 'Power Consumption', value: '15 Watts max (without locks)' },
-          { label: 'Relay Output Rating', value: '5A @ 30V DC / 250V AC' }
+          { label: 'Operating Voltage', value: '80–280V AC, 50 Hz (Main Supply) / 24V DC Lock Rail' },
+          { label: 'Power Consumption', value: '20W (2 Door) / 50W (4 Door) / 80W (8 Door controller max)' },
+          { label: 'Relay Output Rating', value: '230V AC / 5A (Heavy-Duty Silver Alloy Contacts)' }
         ]
       },
       {
-        category: 'Control Parameters',
+        category: 'Control & Interlocking',
         items: [
-          { label: 'Supported Doors', value: '2 to 8 Doors per controller cascade' },
-          { label: 'Feedback Inputs', value: 'Magnetic Door Status Switches (NC/NO)' },
-          { label: 'Emergency Input', value: 'Potential-free Fire Alarm / Manual Override contacts' }
+          { label: 'Supported Doors', value: '2, 3, 4 to 8 Doors per controller cascade (Expandable up to 16 Doors)' },
+          { label: 'Feedback Inputs', value: 'Magnetic Reed / Proximity Door Status Sensors (NC/NO dry contacts)' },
+          { label: 'Emergency Override', value: 'Potential-free Fire Alarm (NC/NO) & Manual Emergency station inputs' }
         ]
       },
       {
-        category: 'Physical & Compliance',
+        category: 'Physical & Environmental',
         items: [
-          { label: 'Enclosure', value: 'DIN Rail mountable / ABS Flame Retardant' },
-          { label: 'Ingress Protection', value: 'IP65 Rated Front Panel' },
-          { label: 'Operating Temperature', value: '0°C to 55°C' }
+          { label: 'Enclosure Material', value: 'MS Powder Coated Box / FLP Ex-d IIB T6 Flameproof' },
+          { label: 'EM Lock Specs', value: '300 LBS (136 kg) / 600 LBS (272 kg) EMLOCK @ 24V DC, 100 mA' },
+          { label: 'Operating Temperature', value: '0°C to 50°C' }
         ]
       }
     ],
     downloads: [
-      { type: 'Datasheet', name: 'Door_Interlock_TDS_V3.pdf', size: '1.8 MB' },
-      { type: 'Manual', name: 'Door_Interlock_User_Guide_EN.pdf', size: '4.2 MB' },
-      { type: 'Drawing', name: 'Interlock_Wiring_Schematic_2D.dwg', size: '3.1 MB' },
-      { type: 'Certificate', name: 'CE_Compliance_Certificate.pdf', size: '850 KB' }
+      { type: 'Manual', name: 'Door Interlocking System Manual', size: '430 KB', filename: '/assets/docs/door-interlock-system-manual.pdf' },
+      { type: 'Manual', name: '300 LBS EM Lock Specification', size: '740 KB', filename: '/assets/docs/em-lock-specification.pdf' }
     ],
     faqs: [
       { q: 'What happens during a power failure?', a: 'By default, our interlocking system fails-safe. Upon complete loss of power, all door electromagnet locks are immediately de-energized, allowing unrestricted exit. An auxiliary battery backup can be installed to maintain lock state if requested.' },
       { q: 'Can this integrate with third-party biometric access card readers?', a: 'Yes. The controller receives standard dry-contact trigger signals from card readers, biometric scanners, or touch-free sensors, overlaying interlocking logic on top of security access approvals.' }
     ],
-    related: ['pass-box-interlocking-system', 'air-shower-controller', 'differential-pressure-indicator']
+    related: ['pass-box-interlocking-system', 'air-shower-controller', 'differential-pressure-indicator'],
+    photos: [
+      { src: '/assets/products/door-interlocking-system/photo1.jpg', alt: '2-Door Interlocking Control Master Unit' },
+      { src: '/assets/products/door-interlocking-system/photo2.jpg', alt: '3-Door Interlocking Controller with Built-in Purge Timer' },
+      { src: '/assets/products/door-interlocking-system/photo3.jpg', alt: '5-Door Interlocking Control Master Panel' },
+      { src: '/assets/products/door-interlocking-system/photo4.jpg', alt: 'High-Visibility Stainless Steel GO/WAIT Status Indicator Panel' },
+      { src: '/assets/products/door-interlocking-system/photo5.jpg', alt: 'GO/WAIT Display Module with Digital Timer' },
+      { src: '/assets/products/door-interlocking-system/photo6.jpg', alt: 'Touchless IR Sensor Door Release Keypad Panel' },
+      { src: '/assets/products/door-interlocking-system/photo7.jpg', alt: '300 lbs Electromagnetic Door Lock (Center Hole)' },
+      { src: '/assets/products/door-interlocking-system/photo8.jpg', alt: '600 lbs Heavy-Duty Electromagnetic Door Lock' },
+      { src: '/assets/products/door-interlocking-system/photo9.jpg', alt: 'Flush-Mount Emergency Lock Override Release Switch' },
+      { src: '/assets/products/door-interlocking-system/photo10.jpg', alt: '12V/24V DC Power Supply Module (SMPS 1122) for Door Locks' }
+    ],
   },
   {
     id: 'pass-box-interlocking-system',
@@ -135,23 +146,49 @@ export const products: Product[] = [
     ],
     specs: [
       {
-        category: 'Technical Specifications',
+        category: 'Electrical & Power',
         items: [
-          { label: 'Operating Voltage', value: '12V / 24V DC compatibility' },
-          { label: 'UV Timer Range', value: '0 to 999 Seconds (Configurable)' },
-          { label: 'Display Panel', value: '7-Segment LED / TFT Touch options' },
-          { label: 'Output Relays', value: 'Door Locks, UV Light, Blower Fan (2A resistive)' }
+          { label: 'Operating Voltage', value: '80–280V AC, 50 Hz (Main Controller) / 24V DC Lock supply' },
+          { label: 'Power Consumption', value: '80W max controller load' },
+          { label: 'Relay Outputs', value: '230V AC / 2A (Silver Alloy contacts for Locks, Blower up to 1 HP, UV Lamp & CF Lamp)' }
+        ]
+      },
+      {
+        category: 'Control Parameters',
+        items: [
+          { label: 'Supported Doors', value: '2 or 3 Doors per pass box controller unit (Static & Dynamic)' },
+          { label: 'Door Delay & UV Timer', value: 'User programmable door delay 0–250 sec/min & UV timer control' },
+          { label: 'Status Indication', value: 'GO & WAIT Bar LED / 128x64 Graphical LCD display with DOTL buzzer' }
+        ]
+      },
+      {
+        category: 'Physical & Environmental',
+        items: [
+          { label: 'Enclosure & Mounting', value: 'Powder-coated MS controller box (Wall Mount) / SS-316L Display Panel' },
+          { label: 'Operating Temperature', value: '0°C to 50°C' },
+          { label: 'Lock Compatibility', value: '24V DC Electromagnetic Locks (300 LBS / 136 kg & 600 LBS / 272 kg) & Electric Strikes' }
         ]
       }
     ],
     downloads: [
-      { type: 'Datasheet', name: 'PassBox_Controller_SpecSheet.pdf', size: '1.2 MB' },
-      { type: 'Manual', name: 'PassBox_Wiring_Manual.pdf', size: '2.5 MB' }
+      { type: 'Manual', name: 'Pass Box Interlocking Controller Manual', size: '2.0 MB', filename: '/assets/docs/passbox-interlock-manual.pdf' }
     ],
     faqs: [
       { q: 'Can I adjust the UV light cycle duration?', a: 'Yes, the UV exposure cycle is fully programmable from the front display panel, allowing timers between 10 seconds to 15 minutes.' }
     ],
-    related: ['door-interlocking-system', 'air-shower-controller']
+    related: ['door-interlocking-system', 'air-shower-controller'],
+    photos: [
+      { src: '/assets/products/pass-box-interlocking-system/photo1.jpg', alt: 'Main Pass Box Interlocking Controller Module' },
+      { src: '/assets/products/pass-box-interlocking-system/photo2.jpg', alt: 'Smart Digital Pass Box Interlocking Controller' },
+      { src: '/assets/products/pass-box-interlocking-system/photo3.jpg', alt: 'Smart+ Pass Box Controller with UV Hour Meter' },
+      { src: '/assets/products/pass-box-interlocking-system/photo4.jpg', alt: 'Static Pass Box Interlocking Unit' },
+      { src: '/assets/products/pass-box-interlocking-system/photo5.jpg', alt: 'UCB Dynamic Pass Box Interlocking Controller' },
+      { src: '/assets/products/pass-box-interlocking-system/photo6.jpg', alt: 'Pass Box Stainless Steel Touch Keypad Panel' },
+      { src: '/assets/products/pass-box-interlocking-system/photo7.jpg', alt: 'Programmable UV Sterilization Delay Timer Module' },
+      { src: '/assets/products/pass-box-interlocking-system/photo8.jpg', alt: 'Germicidal UV Sterilization Lamp Tubes (Cleanroom Grade)' },
+      { src: '/assets/products/pass-box-interlocking-system/photo9.jpg', alt: 'Electronic Ballast / Choke Module for UV Lamp' },
+      { src: '/assets/products/pass-box-interlocking-system/photo10.jpg', alt: 'Infrared Touchless Access Keypad for Pass Box' }
+    ],
   },
   {
     id: 'air-shower-controller',
@@ -179,22 +216,45 @@ export const products: Product[] = [
     ],
     specs: [
       {
+        category: 'Electrical & Power',
+        items: [
+          { label: 'Operating Voltage', value: '80–280V AC, 50 Hz (Main Controller) / 24V DC Lock supply' },
+          { label: 'Power Consumption', value: '80W max controller load' },
+          { label: 'Blower Relay Output', value: '230V AC / 2A contactor trigger for Blower Motor (up to 1 HP / 2 HP)' }
+        ]
+      },
+      {
         category: 'Control Parameters',
         items: [
-          { label: 'Shower Duration', value: '5 to 99 Seconds (Default: 12s)' },
-          { label: 'Blower Relay Output', value: 'Solid State Relay / Contact for 3-Phase Motors' },
-          { label: 'Audio Prompts', value: 'Multi-lingual Voice synthesizer (1W Speaker output)' }
+          { label: 'Shower Duration', value: 'User programmable 0 to 255 Seconds (Default: 12s)' },
+          { label: 'Door Capacity', value: 'Up to 3 Doors per air shower chamber cascade' },
+          { label: 'Status & Alerts', value: 'Digital Parameter Monitor (DPM) with audio-visual buzzer for Door Ajar & MCB Trip' }
+        ]
+      },
+      {
+        category: 'Physical & Environmental',
+        items: [
+          { label: 'Enclosure Material', value: 'MS Powder Coated Main Box & Stainless Steel Panel' },
+          { label: 'Operating Temperature', value: '0°C to 50°C' }
         ]
       }
     ],
     downloads: [
-      { type: 'Datasheet', name: 'Air_Shower_Ctrl_TDS.pdf', size: '2.1 MB' },
-      { type: 'Manual', name: 'AirShower_Installation_Guide.pdf', size: '5.1 MB' }
+      { type: 'Manual', name: 'Air Shower Manual', size: '420 KB', filename: '/assets/docs/air-shower-controller-manual.pdf' }
     ],
     faqs: [
       { q: 'Is there an emergency exit routine?', a: 'Yes. Pressing the glowing emergency stop button on the internal panel immediately cuts motor power and opens both doors for immediate egress.' }
     ],
-    related: ['door-interlocking-system', 'differential-pressure-indicator']
+    related: ['door-interlocking-system', 'differential-pressure-indicator'],
+    photos: [
+      { src: '/assets/products/air-shower-controller/photo1.jpg', alt: 'Master Air Shower Logic Controller Panel' },
+      { src: '/assets/products/air-shower-controller/photo2.jpg', alt: 'Integrated Single-Box Air Shower Controller Module' },
+      { src: '/assets/products/air-shower-controller/photo3.jpg', alt: '2-Channel 4-Blower Air Shower Control Circuit Board' },
+      { src: '/assets/products/air-shower-controller/photo4.jpg', alt: '3-Channel Blower Control Module' },
+      { src: '/assets/products/air-shower-controller/photo5.jpg', alt: 'Air Shower Digital Parameter Monitor (DPM)' },
+      { src: '/assets/products/air-shower-controller/photo6.jpg', alt: 'Air Shower Purge Cycle Timer & Parameter Display' },
+      { src: '/assets/products/air-shower-controller/photo7.jpg', alt: 'Emergency Stop Push Button for Air Shower Egress' }
+    ],
   },
   {
     id: 'laf-buf-controller',
@@ -221,22 +281,45 @@ export const products: Product[] = [
     ],
     specs: [
       {
-        category: 'Specifications',
+        category: 'Electrical & Power',
         items: [
-          { label: 'Speed Output', value: '0-10V DC / PWM / RS485 Modbus fan control' },
-          { label: 'Differential Pressure Range', value: '0 to 500 Pascals (HEPA monitoring)' },
-          { label: 'Sash Inputs', value: 'Limit switches or Ultrasonic distance sensors' }
+          { label: 'Operating Voltage', value: '100–260V AC, 50/60 Hz' },
+          { label: 'Power Consumption', value: '20W controller consumption' },
+          { label: 'Relay Outputs', value: '230V AC / 2A for Blower (up to 1 HP), UV Lamp & CF Lamp' }
+        ]
+      },
+      {
+        category: 'Control Parameters',
+        items: [
+          { label: 'Control Signals', value: '0-10V DC / PWM / RS485 Modbus RTU interface for EC/BLDC blowers' },
+          { label: 'Differential Pressure Tracking', value: '0 to 500 Pascals (HEPA filter resistance tracking)' },
+          { label: 'Safety Features', value: 'Blower ON/OFF status, UV hour meter & audible filter clogging alarm' }
+        ]
+      },
+      {
+        category: 'Physical & Environmental',
+        items: [
+          { label: 'Display Module (DPM)', value: 'High-intensity Bar LEDs & 7-Segment LED Status Display' },
+          { label: 'Enclosure & Mounting', value: 'MS Powder Coated controller unit' },
+          { label: 'Operating Temperature', value: '0°C to 50°C' }
         ]
       }
     ],
     downloads: [
-      { type: 'Datasheet', name: 'LAF_Controller_Data_Sheet.pdf', size: '1.7 MB' },
-      { type: 'Manual', name: 'LAF_Controller_Programming_Manual.pdf', size: '3.4 MB' }
+      { type: 'Manual', name: 'LAF / BUF Controller Manual', size: '200 KB', filename: '/assets/docs/laf-controller-manual.pdf' }
     ],
     faqs: [
       { q: 'Can it communicate with a building SCADA?', a: 'Absolutely. It exports all velocity, alarm states, and pressure readings via Modbus RTU (RS485).' }
     ],
-    related: ['differential-pressure-indicator', 'temperature-rh-indicator']
+    related: ['differential-pressure-indicator', 'temperature-rh-indicator'],
+    photos: [
+      { src: '/assets/products/laf-buf-controller/photo1.jpg?v=1788862999999', alt: 'Laminar Air Flow (LAF) Main Control Panel' },
+      { src: '/assets/products/laf-buf-controller/photo2.jpg', alt: 'PLC Control Unit for Sterile LAF Hoods' },
+      { src: '/assets/products/laf-buf-controller/photo3.jpg', alt: 'Color HMI Touch Panel for LAF Monitoring' },
+      { src: '/assets/products/laf-buf-controller/photo5.jpg', alt: '6-Key Touch Panel for LAF Lighting & UV Controls' },
+      { src: '/assets/products/laf-buf-controller/photo6.jpg', alt: '3-Key LAF Light & Blower Toggle Switch' },
+      { src: '/assets/products/laf-buf-controller/photo7.jpg', alt: 'LAF Lighting & UV Power Interface Board' }
+    ],
   },
   {
     id: 'differential-pressure-indicator',
@@ -263,22 +346,46 @@ export const products: Product[] = [
     ],
     specs: [
       {
+        category: 'Electrical & Power',
+        items: [
+          { label: 'Operating Voltage', value: '24V DC (18–30V DC) / 24V AC, 250mA' },
+          { label: 'Power Consumption', value: 'Ultra-low power design (~2 Watts)' },
+          { label: 'Telemetry & Output', value: 'Simultaneous 4-20 mA / 0-10V DC analog & RS485 Modbus RTU digital output' }
+        ]
+      },
+      {
         category: 'Measurement Specs',
         items: [
-          { label: 'Standard Range', value: '-100.0 to +100.0 Pascals (Custom ranges available)' },
-          { label: 'Resolution', value: '0.1 Pascal' },
-          { label: 'Accuracy', value: '±0.25% of Full Scale' }
+          { label: 'Standard Range', value: 'Multi-unit programmable: -105.4 to +105.4 mmWC / -1034 to +1034 Pascals (Custom ranges available)' },
+          { label: 'Resolution', value: '0.1 mmWC / 1 Pascal / 0.01 mbar (Configurable)' },
+          { label: 'Accuracy', value: '±1.0% of reading (Standard) / Precision option available' }
+        ]
+      },
+      {
+        category: 'Physical & Environmental',
+        items: [
+          { label: 'Display Type', value: '4-Digit bright 0.39" / 0.56" 7-Segment LED display with violation LEDs' },
+          { label: 'Enclosure & Faceplate', value: 'Flush-mounting Stainless Steel faceplate with MS Powder coated box' },
+          { label: 'Mounting Compatibility', value: 'Brick wall & Modular cleanroom wall mounting' }
         ]
       }
     ],
     downloads: [
-      { type: 'Datasheet', name: 'DPI_Product_Datasheet.pdf', size: '1.4 MB' },
-      { type: 'Certificate', name: 'NABL_Calibration_Report_Template.pdf', size: '600 KB' }
+      { type: 'Manual', name: 'Differential Pressure Indicator Manual', size: '1.1 MB', filename: '/assets/docs/differential-pressure-indicator-manual.pdf' },
+      { type: 'Manual', name: 'Modbus RS485 Communication Manual', size: '320 KB', filename: '/assets/docs/modbus-communication-manual.pdf' }
     ],
     faqs: [
       { q: 'Does it require recalibration?', a: 'We recommend annual calibration. The front panel features a zero-calibration button that simplifies offset corrections during annual audits.' }
     ],
-    related: ['door-interlocking-system', 'temperature-rh-indicator', 'temperature-rh-transmitter']
+    related: ['door-interlocking-system', 'temperature-rh-indicator', 'temperature-rh-transmitter'],
+    photos: [
+      { src: '/assets/products/differential-pressure-indicator/photo1.jpg', alt: 'Digital Differential Pressure Indicator (DPI) Front Panel' },
+      { src: '/assets/products/differential-pressure-indicator/photo2.jpg', alt: 'Flush-Mount Round Differential Pressure Indicator (Stainless Steel Bezel)' },
+      { src: '/assets/products/differential-pressure-indicator/photo3.jpg', alt: 'Flameproof (FLP) Differential Pressure / Interlock Indicator' },
+      { src: '/assets/products/differential-pressure-indicator/photo4.jpg', alt: 'Stainless Steel Pressure Port Cable Gland (19mm)' },
+      { src: '/assets/products/differential-pressure-indicator/photo5.jpg', alt: 'Flameproof Enclosure & Terminal Junction Box' },
+      { src: '/assets/products/differential-pressure-indicator/photo6.jpg', alt: 'Flameproof Blower Trip & Alarm Indicator Module' }
+    ],
   },
   {
     id: 'temperature-rh-indicator',
@@ -305,11 +412,27 @@ export const products: Product[] = [
     ],
     specs: [
       {
+        category: 'Electrical & Power',
+        items: [
+          { label: 'Operating Voltage', value: '24V DC / 230V AC ±10%, 50 Hz options' },
+          { label: 'Power Consumption', value: 'Low power architecture (< 5 Watts)' },
+          { label: 'Digital Telemetry', value: 'RS485 Modbus RTU multi-drop telemetry' }
+        ]
+      },
+      {
         category: 'Range & Accuracy',
         items: [
-          { label: 'Temperature Range', value: '-20.0°C to +80.0°C (±0.2°C accuracy)' },
-          { label: 'Relative Humidity Range', value: '0.0% to 100.0% RH (±1.5% RH accuracy)' },
-          { label: 'Sensors', value: 'Digital CMOS / Pt100 RTD Class A' }
+          { label: 'Temperature Range', value: '-20.0°C to +80.0°C (Accuracy: ±0.3°C)' },
+          { label: 'Relative Humidity Range', value: '0.0% to 100.0% RH (Accuracy: ±1.5% to ±2.0% RH)' },
+          { label: 'Sensor Compatibility', value: 'Pt100 RTD Class A / Capacitive Polymer RH Sensor / Inbuilt integral probes' }
+        ]
+      },
+      {
+        category: 'Physical & Interface',
+        items: [
+          { label: 'Display Type', value: 'High-brightness 4-digit dual 7-segment LED displays (Red/Green)' },
+          { label: 'Enclosure Material', value: 'AISI 304 / 316 Stainless Steel flush cleanroom bezel' },
+          { label: 'Operating Temperature', value: '0°C to 50°C' }
         ]
       }
     ],
@@ -320,7 +443,14 @@ export const products: Product[] = [
     faqs: [
       { q: 'Is the front plate chemical resistant?', a: 'Yes. The AISI 304/316 stainless steel front plate and polycarbonate overlay are fully resistant to cleaning agents like Isopropyl Alcohol (IPA) and Hydrogen Peroxide (H2O2).' }
     ],
-    related: ['temperature-rh-transmitter', 'differential-pressure-indicator']
+    related: ['temperature-rh-transmitter', 'differential-pressure-indicator'],
+    photos: [
+      { src: '/assets/products/temperature-rh-indicator/photo1.jpg?v=1788862998854', alt: 'Cleanroom Digital Parameter Velocity & Temperature Display Panel' },
+      { src: '/assets/products/temperature-rh-indicator/photo2.jpg?v=1788862998896', alt: 'Touch Screen Humidity & Temperature Indicator Unit' },
+      { src: '/assets/products/temperature-rh-indicator/photo3.jpg?v=1788862998940', alt: 'Remote Probe Digital Air Velocity & Temperature Transmitter' },
+      { src: '/assets/products/temperature-rh-indicator/photo4.jpg?v=1788862998986', alt: 'Duct-Mount Industrial Temperature & RH Transmitter' },
+      { src: '/assets/products/temperature-rh-indicator/photo5.jpg?v=1788862999034', alt: 'Wall-Mount Climate Control Sensor Probe Module' }
+    ],
   },
   {
     id: 'temperature-rh-transmitter',
@@ -337,7 +467,7 @@ export const products: Product[] = [
     features: [
       'High-performance capacitive RH sensor with hydrophobic filter protection.',
       'Duct-mount, wall-mount, and remote-probe models.',
-      'IP65 rated robust enclosure with easy-connect terminal blocks.',
+      'Robust cleanroom enclosure with easy-connect terminal blocks.',
       'Field-selectable analog output ranges.'
     ],
     workingPrinciple: [
@@ -347,11 +477,27 @@ export const products: Product[] = [
     ],
     specs: [
       {
-        category: 'Specifications',
+        category: 'Electrical & Power',
         items: [
-          { label: 'Analog Outputs', value: 'Dual 4-20 mA (2-wire) or 0-10 V DC' },
-          { label: 'Digital Output', value: 'RS485 Modbus RTU protocol' },
-          { label: 'Sensor Protection', value: 'Sintered Stainless Steel / Mesh filter options' }
+          { label: 'Operating Voltage', value: '18 to 24V DC' },
+          { label: 'Power Consumption', value: 'Low power loop (< 1.5 Watts)' },
+          { label: 'Output Signals', value: 'Dual isolated 4-20 mA current loop / 0-10V DC & RS485 Modbus RTU' }
+        ]
+      },
+      {
+        category: 'Measurement Specs',
+        items: [
+          { label: 'Relative Humidity Range', value: '0 to 100% RH (Non-condensing, ±1.5% RH accuracy)' },
+          { label: 'Temperature Range', value: '0°C to 50°C (Extended: -40°C to +100°C, ±0.3°C accuracy)' },
+          { label: 'Calibration', value: '5-Point software digital calibration (No trim pots)' }
+        ]
+      },
+      {
+        category: 'Physical & Protection',
+        items: [
+          { label: 'Enclosure Material', value: 'Industrial ABS housing with SS-304 sensor stem' },
+          { label: 'Sensor Filter Cap', value: 'Hydrophobic Sintered Bronze / Sintered Stainless Steel mesh' },
+          { label: 'Mounting Types', value: 'HVAC Duct-Mount, Surface Wall-Mount, and Remote Sensor Probe versions' }
         ]
       }
     ],
@@ -362,99 +508,165 @@ export const products: Product[] = [
     faqs: [
       { q: 'Does it work in high condensation environments?', a: 'Yes, our probes can be equipped with sintered metal mesh filters which prevent water droplets from damaging the sensing grid while maintaining gas permeability.' }
     ],
-    related: ['temperature-rh-indicator', 'differential-pressure-indicator']
+    related: ['temperature-rh-indicator', 'differential-pressure-indicator'],
+    photos: [
+      { src: '/assets/products/temperature-rh-transmitter/photo1.jpg?v=1788862999089', alt: 'Cleanroom Digital Parameter Velocity & Temperature Display Panel' },
+      { src: '/assets/products/temperature-rh-transmitter/photo2.jpg?v=1788862999138', alt: 'Touch Screen Humidity & Temperature Indicator Unit' },
+      { src: '/assets/products/temperature-rh-transmitter/photo3.jpg?v=1788862999187', alt: 'Remote Probe Digital Air Velocity & Temperature Transmitter' },
+      { src: '/assets/products/temperature-rh-transmitter/photo4.jpg?v=1788862999234', alt: 'Duct-Mount Industrial Temperature & RH Transmitter' },
+      { src: '/assets/products/temperature-rh-transmitter/photo5.jpg?v=1788862999278', alt: 'Wall-Mount Climate Control Sensor Probe Module' }
+    ],
   },
   {
     id: 'swing-door-automation',
     title: 'Swing Door Automation',
     tag: 'Entrance Automation',
     iconName: 'DoorClosed',
-    shortDescription: 'Contactless automated opening systems for heavy cleanroom doors with BLDC motor logic.',
-    longOverview: 'Automated swing door openers designed to facilitate hands-free entry and pressure cascade seals in critical gown rooms and airlocks. Supports opening forces between 100-200 kg.',
+    shortDescription: 'Automated opening systems suitable for cleanroom door assemblies.',
+    longOverview: 'Automated swing door openers designed to assist hands-free access in cleanroom environments, gowning areas, and airlocks. Configurable for standard cleanroom door assemblies.',
     applications: ['Pharmaceutical Entry Corridors', 'OT Suites', 'Airlocks'],
     features: [
-      'Contactless biometric or card access triggers.',
-      'Adjustable opening and closing speed parameters.',
-      'Obstacle detection safety sensors with automatic reverse.',
-      'Emergency manual override release loop.'
+      'Supports access control inputs (e.g., proximity cards or sensors).',
+      'Configurable opening and closing parameters.',
+      'Safety features including obstacle detection.',
+      'Manual override capabilities.'
     ],
     workingPrinciple: [
-      { step: '1', title: 'Activation', description: 'Contactless trigger signals the microprocessor.' },
-      { step: '2', title: 'Controlled Opening', description: '24V BLDC motor drives the door open smoothly.' },
-      { step: '3', title: 'Safe Auto-Close', description: 'Timer coordinates closing once the path is clear.' }
+      { step: '1', title: 'Activation', description: 'Input signal communicates with the controller.' },
+      { step: '2', title: 'Controlled Opening', description: 'Motor drive assists door operation.' },
+      { step: '3', title: 'Safe Auto-Close', description: 'Automated sequence coordinates door closure.' }
     ],
     specs: [
       {
-        category: 'Motor & Drive',
+        category: 'Electrical & Drive',
         items: [
-          { label: 'Motor Type', value: '24V BLDC' },
-          { label: 'Weight Capacity', value: '100 to 200 kg' }
+          { label: 'Supply Voltage', value: 'Standard AC Supply / Internal DC Drive option' },
+          { label: 'Motor Type', value: 'Brushless DC Drive Motor' },
+          { label: 'Power Consumption', value: 'Load-optimized power operation' }
+        ]
+      },
+      {
+        category: 'Performance & Capacity',
+        items: [
+          { label: 'Door Weight Capacity', value: 'Designed to support standard cleanroom door weights' },
+          { label: 'Speed Adjustment', value: 'Configurable opening & closing speeds' },
+          { label: 'Hold-Open Time', value: 'Adjustable hold-open dwell time' }
         ]
       }
     ],
     downloads: [],
     faqs: [],
-    related: ['door-interlocking-system']
+    related: ['door-interlocking-system'],
+    photos: []
   },
   {
     id: 'smart-locker',
-    title: 'Smart Locker',
+    title: 'Smart Locker & Cabinet System',
     tag: 'Changeroom Automation',
     iconName: 'Settings',
-    shortDescription: 'Cleanroom locker cabinet assignment dynamically controlled via biometric authorization.',
-    longOverview: 'Maximizes changeroom cabinet utilization during shift changes. Assigns lockers dynamically to active staff, recording full logs.',
-    applications: ['Personnel Changerooms', 'Cleanroom Vestibules'],
+    shortDescription: 'Gowning and cabinet management system with optional access credentials and weight tracking features.',
+    longOverview: 'The Smart Locker & Cabinet System is designed for cleanroom gowning areas, tool lockers, and garment management. It combines optional access control, electric locking mechanisms, and weight monitoring features to assist with inventory organization.',
+    applications: [
+      'Pharma Cleanroom Garment & Gown Area Management',
+      'Sterile Garment Inventory Weight Verification',
+      'Controlled Substance & API Cabinet Access',
+      'Cleanroom Tool & Device Storage',
+      'Dynamic Locker Allocation in Airlocks'
+    ],
     features: [
-      'Biometric and RFID scanner synchronization.',
-      'Dynamic locker assignment based on active occupancy.',
-      'Solenoid electric security locks.'
+      'Multi-Modal Authorization: Supports optional RFID, biometric, or PIN credential inputs.',
+      'Weight Calculation: Optional load sensing capabilities for deposit and retrieval monitoring.',
+      'Automated Collection & Submission: Assists with garment return and tool allocation workflows.',
+      'Electric Lock Control: Electronic door locking mechanisms with feedback capabilities.',
+      'Data & Telemetry: Supports event logging and telemetry integration options.',
+      'Cleanroom Construction: Flush-mountable design suitable for standard wipe-down procedures.'
     ],
     workingPrinciple: [
-      { step: '1', title: 'Identity Verification', description: 'Operator swipes or scans fingerprint.' },
-      { step: '2', title: 'Dynamic Assignment', description: 'System assigns and opens a vacant locker cabinet.' }
+      { step: '1', title: 'User Identification', description: 'User presents credentials to request compartment access.' },
+      { step: '2', title: 'Compartment Release', description: 'System unlocks the assigned locker door compartment.' },
+      { step: '3', title: 'Weight Measurement', description: 'Integrated sensors monitor weight changes during item access.' },
+      { step: '4', title: 'Logging & Lock', description: 'System records transaction details and secures the compartment upon closure.' }
     ],
     specs: [
       {
-        category: 'Control',
+        category: 'Access & Authentication',
         items: [
-          { label: 'Auth Methods', value: 'RFID / Fingerprint' },
-          { label: 'Cabinet Material', value: 'Stainless Steel 304' }
+          { label: 'Access Credentials', value: 'RFID / Contactless / Biometric options' },
+          { label: 'Biometric Option', value: 'Optional Biometric Sensor' }
+        ]
+      },
+      {
+        category: 'Weight Monitoring',
+        items: [
+          { label: 'Weight Sensor Type', value: 'Strain Gauge Load Sensors' },
+          { label: 'Mass Measurement', value: 'Integrated Load Sensor Array' },
+          { label: 'Tare & Calibration', value: 'Digital Tare Feature' }
+        ]
+      },
+      {
+        category: 'Electrical & Cabinet Control',
+        items: [
+          { label: 'Power Supply', value: 'Standard AC Supply / Internal DC Lock Rail' },
+          { label: 'Door Lock Actuators', value: 'Electronic Solenoid Locks with Status Feedback' },
+          { label: 'Data Telemetry', value: 'Serial / Network Communication Options' },
+          { label: 'Enclosure Finish', value: 'Stainless Steel Cleanroom Enclosure' }
         ]
       }
     ],
-    downloads: [],
-    faqs: [],
-    related: ['shoe-cover-machine']
+    downloads: [
+      { type: 'Catalog', name: 'Request Smart Locker Product Catalog & Specification Sheet', size: 'PDF Catalog (On Request)', requestCatalog: true }
+    ],
+    faqs: [
+      { q: 'How does weight tracking assist in cleanroom garment or tool management?', a: 'Integrated load sensors measure baseline mass and register changes during retrieval or deposit to assist with inventory tracking.' },
+      { q: 'What access credentials can be integrated?', a: 'The cabinet system can be configured with various access control credentials including RFID cards, PIN codes, or optional biometric sensors based on site requirements.' }
+    ],
+    related: ['door-interlocking-system', 'pass-box-interlocking-system'],
+    photos: []
   },
   {
     id: 'cleanroom-clock',
     title: 'Wired & Wireless Cleanroom Clocks',
     tag: 'Digital Clocks',
     iconName: 'Clock',
-    shortDescription: 'High-visibility 7-segment LED clocks synchronized via Modbus/GPS inputs.',
-    longOverview: 'High-visibility synchronized digital clocks for pharmaceutical formulation halls. Features washdown-safe flush bezels.',
+    shortDescription: 'Digital cleanroom clocks with clear display and optional network or time signal synchronization.',
+    longOverview: 'Digital displays designed for cleanroom environments, formulation halls, and critical process areas, featuring flush-mount bezels.',
     applications: ['Formulation Suites', 'Operating Theaters', 'Packaging Halls'],
     features: [
-      'Master-slave configuration loops.',
-      'Modbus RTU / SCADA server synchronization.',
-      'Accuracy of ±1 second per day with GPS receivers.'
+      'Configurable master-slave setup options.',
+      'Supports standard network synchronization protocols.',
+      'Digital time display for cleanroom environments.'
     ],
-    workingPrinciple: [
-      { step: '1', title: 'Time Sync', description: 'GPS or Modbus connection delivers real-time time updates to the clock bus.' }
-    ],
+    workingPrinciple: [],
     specs: [
       {
-        category: 'Display & Power',
+        category: 'Display & Synchronization',
         items: [
-          { label: 'Sync Source', value: 'Wired / Wireless with GPS' },
-          { label: 'Display Type', value: '7-segment LED' },
-          { label: 'Power Supply', value: '230 VAC' }
+          { label: 'Display Type', value: 'Digital LED Display (4-digit or 6-digit configurations)' },
+          { label: 'Sync Source', value: 'Wired or optional wireless time synchronization' },
+          { label: 'Timekeeping', value: 'Digital timekeeping with optional external synchronization' }
+        ]
+      },
+      {
+        category: 'Electrical & Power',
+        items: [
+          { label: 'Power Supply', value: 'Standard AC Power / Optional Low-Voltage DC' },
+          { label: 'Power Consumption', value: 'Energy-efficient LED display design' },
+          { label: 'Backup Battery', value: 'Internal battery backup feature' }
+        ]
+      },
+      {
+        category: 'Physical & Environmental',
+        items: [
+          { label: 'Enclosure Material', value: 'Stainless Steel Flush-Mount Cleanroom Bezel' },
+          { label: 'Front Panel', value: 'Polycarbonate / Toughened Glass Front Panel' },
+          { label: 'Operating Range', value: 'Suitable for standard cleanroom operating environments' }
         ]
       }
     ],
     downloads: [],
     faqs: [],
-    related: ['differential-pressure-indicator']
+    related: ['differential-pressure-indicator'],
+    photos: []
   }
 ];
 
@@ -466,15 +678,15 @@ export const industries: Industry[] = [
     description: 'Sterile drug manufacturing requires absolute isolation and pressure cascading. Our interlocking systems and indicators protect Grade A-D cleanrooms from ingress of external contaminants.',
     challenges: [
       'Cross-contamination during operator entries.',
-      'Strict US FDA and WHO GMP validation audits.',
+      'Strict US FDA and international validation audits.',
       'Pressure drops resulting in sterile zone breach.'
     ],
     solutions: [
       'Multi-door interlocks with active pressure feedback loops.',
       'NABL-traceable indicators with digital calibration logs.',
-      'IP65 cleanroom-grade flush mount panels resistant to vaporized H2O2.'
+      'Cleanroom-grade flush mount panels resistant to vaporized H2O2.'
     ],
-    stats: { value: '60+', label: 'Pharma Leaders Trusted' },
+    stats: { value: '150+', label: 'Pharma Leaders Trusted' },
     iconName: 'ShieldAlert'
   },
   {
@@ -510,7 +722,7 @@ export const industries: Industry[] = [
       'Personnel air showers stripping particles at entry doors.',
       'Integrated Temperature & RH transmitters for dry-zones.'
     ],
-    stats: { value: '0%', label: 'Contamination Incidents' },
+    stats: { value: 'High', label: 'Isolation Efficiency' },
     iconName: 'Utensils'
   },
   {
@@ -582,7 +794,7 @@ export const industries: Industry[] = [
       'Intrinsically safe sensors and relay outputs.',
       'Closed-loop exhaust monitor integrations.'
     ],
-    stats: { value: 'ATEX', label: 'Compliant Abstraction' },
+    stats: { value: 'Ex-Proof', label: 'Hazardous Zone Options' },
     iconName: 'FlaskConical'
   },
   {
@@ -600,7 +812,7 @@ export const industries: Industry[] = [
       'Modbus-to-Ethernet gateways integrating to lab software.',
       'Custom logic blocks designed for experimental setups.'
     ],
-    stats: { value: '100%', label: 'Audit Trail Accuracy' },
+    stats: { value: 'Digital', label: 'Audit Trail Logging' },
     iconName: 'Binary'
   }
 ];
@@ -638,6 +850,22 @@ export const solutions: Solution[] = [
       'Modbus RTU daisy-chain linking 32+ indicators into a single interface.',
       'AISI 304 Stainless Steel flush mounting.'
     ]
+  },
+  {
+    id: 'laminar-air-flow',
+    title: 'Laminar Air Flow System',
+    subtitle: 'Unidirectional airflow and particulate barrier protection.',
+    description: 'Provides a continuous, uniform stream of HEPA-filtered clean air over work stations, sweeping airborne contaminants away and maintaining an ultra-clean environment for sensitive operations.',
+    workflow: [
+      { step: 1, title: 'Pre-Filtration Intake', desc: 'Ambient air is drawn into the system through pre-filters to capture larger airborne particles before reaching the main chamber.', icon: 'Wind' },
+      { step: 2, title: 'HEPA Air Purification', desc: 'Air is pressurized through high-efficiency HEPA filters to eliminate fine particulates and microbial contaminants.', icon: 'ShieldCheck' },
+      { step: 3, title: 'Unidirectional Laminar Wash', desc: 'Uniform, non-turbulent air streams flow vertically across the work surface, continuously clearing particles away from the critical zone.', icon: 'Gauge' }
+    ],
+    technicalHighlights: [
+      'Unidirectional laminar airflow maintaining continuous positive air sweeps.',
+      'Smooth stainless steel construction engineered for effortless sanitization.',
+      'Integrated pressure differential monitoring and motor speed regulation.'
+    ]
   }
 ];
 
@@ -645,7 +873,7 @@ export const techTopics: TechTopic[] = [
   {
     id: 'embedded-systems',
     title: 'Embedded Systems',
-    description: 'Industrial-grade 32-bit microcontroller architectures designed with hardware watchdog timers and Real-Time Operating Systems (RTOS) to guarantee sub-millisecond reliability.',
+    description: 'Industrial-grade 32-bit microcontroller architectures designed with hardware watchdog timers to guarantee sub-millisecond reliability.',
     details: [
       'Arm Cortex-M processors running deterministic firmware core loops.',
       'Hardware watchdog monitoring preventing code freeze or locking.',
@@ -653,10 +881,10 @@ export const techTopics: TechTopic[] = [
     ],
     diagramTitle: 'Embedded Logic Architecture',
     nodes: [
-      { label: 'Opto-Inputs', x: 10, y: 50, type: 'input' },
+      { label: 'Opto-Inputs', x: 15, y: 50, type: 'input' },
       { label: 'Cortex-M CPU', x: 50, y: 50, type: 'process' },
-      { label: 'Watchdog IC', x: 50, y: 15, type: 'sensor' },
-      { label: 'Relay Driver', x: 90, y: 50, type: 'output' }
+      { label: 'Watchdog IC', x: 50, y: 18, type: 'sensor' },
+      { label: 'Relay Driver', x: 85, y: 50, type: 'output' }
     ],
     connections: [
       { from: 0, to: 1 },
@@ -671,14 +899,14 @@ export const techTopics: TechTopic[] = [
     details: [
       'CE and EMC compliant PCB layouts with dedicated ground planes.',
       'TVS diodes and metal oxide varistors (MOVs) filtering input spikes up to 2kV.',
-      'Flame-retardant ABS and IP65-grade aluminum housings.'
+      'Flame-retardant ABS and durable aluminum housings.'
     ],
     diagramTitle: 'EMC Protection Stack',
     nodes: [
-      { label: 'Surge Input', x: 10, y: 50, type: 'input' },
-      { label: 'MOV & TVS Filter', x: 40, y: 50, type: 'process' },
-      { label: 'L-C Pi Filter', x: 70, y: 50, type: 'process' },
-      { label: 'Clean DC Bus', x: 95, y: 50, type: 'output' }
+      { label: 'Surge Input', x: 15, y: 50, type: 'input' },
+      { label: 'MOV & TVS Filter', x: 38, y: 50, type: 'process' },
+      { label: 'L-C Pi Filter', x: 62, y: 50, type: 'process' },
+      { label: 'Clean DC Bus', x: 85, y: 50, type: 'output' }
     ],
     connections: [
       { from: 0, to: 1 },
@@ -689,7 +917,7 @@ export const techTopics: TechTopic[] = [
   {
     id: 'sensors-telemetry',
     title: 'Sensors & Calibration',
-    description: 'Ultra-low range pressure sensors and highly-calibrated relative humidity elements trace their reliability to international NABL standards.',
+    description: 'Ultra-low range pressure sensors and highly-calibrated relative humidity elements trace their reliability to international calibration standards.',
     details: [
       'Piezoresistive silicon chips measuring micro-pascals accurately.',
       'Multi-point digital lookup tables calibrating out non-linearity.',
@@ -697,10 +925,10 @@ export const techTopics: TechTopic[] = [
     ],
     diagramTitle: 'Sensor Compensation Loop',
     nodes: [
-      { label: 'Raw Transducer', x: 10, y: 50, type: 'sensor' },
-      { label: 'ADC 24-bit', x: 40, y: 50, type: 'process' },
-      { label: 'Temp Compensate', x: 70, y: 50, type: 'process' },
-      { label: 'Calibrated Output', x: 95, y: 50, type: 'output' }
+      { label: 'Raw Transducer', x: 15, y: 50, type: 'sensor' },
+      { label: 'ADC 24-bit', x: 38, y: 50, type: 'process' },
+      { label: 'Temp Compensate', x: 62, y: 50, type: 'process' },
+      { label: 'Calibrated Output', x: 85, y: 50, type: 'output' }
     ],
     connections: [
       { from: 0, to: 1 },
@@ -715,14 +943,14 @@ export const techTopics: TechTopic[] = [
     details: [
       'RS485 Modbus RTU communication supporting up to 247 nodes on a bus.',
       'Modbus-TCP / Ethernet Gateways pushing data directly to cloud dashboards.',
-      'Compatibility with leading PLC vendors (Siemens, ABB, Schneider Electric, Rockwell).'
+      'Compatibility with leading industrial PLC and BMS platforms.'
     ],
     diagramTitle: 'Telemetry & SCADA Stack',
     nodes: [
-      { label: 'Sensor Nodes', x: 10, y: 50, type: 'sensor' },
-      { label: 'RS485 Modbus', x: 45, y: 50, type: 'process' },
-      { label: 'Edge Gateway', x: 75, y: 50, type: 'process' },
-      { label: 'SCADA / Cloud', x: 95, y: 50, type: 'output' }
+      { label: 'Sensor Nodes', x: 15, y: 50, type: 'sensor' },
+      { label: 'RS485 Modbus', x: 38, y: 50, type: 'process' },
+      { label: 'Edge Gateway', x: 62, y: 50, type: 'process' },
+      { label: 'SCADA / Cloud', x: 85, y: 50, type: 'output' }
     ],
     connections: [
       { from: 0, to: 1 },
@@ -732,18 +960,71 @@ export const techTopics: TechTopic[] = [
   }
 ];
 
-export const timelineEvents = [
-  { year: '2019', title: 'R&D Operations Launch', desc: 'Neural Industrial Automation was established with a focus on designing high-stability embedded controllers for sterile corridors.' },
-  { year: '2021', title: 'Pharma Cleanroom Series', desc: 'Launched the flush-mount Door Interlocking and TRH indicators, quickly securing approvals from 20+ pharma companies.' },
-  { year: '2023', title: 'NABL & CE Standardization', desc: 'Achieved full CE certifications and NABL-traceable sensor calibrations. Expanded installations to major biotech clusters.' },
-  { year: '2025', title: 'IoT & Telemetry Expansion', desc: 'Integrated edge-modem telemetry and Modbus-TCP gateways, introducing live cloud dashboards for cleanrooms.' },
-  { year: '2026', title: 'Global Operations & Next-Gen', desc: 'Deploying high-speed electronic interlocks globally, serving 60+ pharmaceutical leaders and electronics labs.' }
+export interface TimelineEvent {
+  year: string;
+  title: string;
+  subtitle: string;
+  points: string[];
+  icon: string;
+}
+
+export const timelineEvents: TimelineEvent[] = [
+  {
+    year: '2019',
+    title: 'FOUNDATION',
+    subtitle: 'Vision & Inception',
+    points: [
+      'Founded with a vision to deliver smart, precision industrial automation solutions.',
+      'Started serving pharmaceutical and cleanroom facilities with dedicated engineering expertise and core interlocking systems.'
+    ],
+    icon: 'Rocket'
+  },
+  {
+    year: '2021',
+    title: 'BUILDING EXPERTISE',
+    subtitle: 'Interlock Systems',
+    points: [
+      'Launched proprietary Cleanroom Interlocking and Pass Box Control Systems.',
+      'Successfully executed automation projects across multiple pharma facilities.'
+    ],
+    icon: 'TrendingUp'
+  },
+  {
+    year: '2023',
+    title: 'INNOVATION & GROWTH',
+    subtitle: 'PLC & HMI Solutions',
+    points: [
+      'Expanded our portfolio with intelligent monitoring and control systems.',
+      'Strengthened engineering capabilities with custom PLC & HMI solutions.'
+    ],
+    icon: 'Lightbulb'
+  },
+  {
+    year: '2025',
+    title: 'EXPANDING HORIZONS',
+    subtitle: 'SCADA & Global Reach',
+    points: [
+      'Strengthened our presence through international projects.',
+      'Delivered BMS, EMS and SCADA solutions for leading pharmaceutical clients.'
+    ],
+    icon: 'Target'
+  },
+  {
+    year: '2026',
+    title: 'VISION AHEAD',
+    subtitle: 'Advanced Systems',
+    points: [
+      'Expanding integrated automation capabilities.',
+      'Developing next-generation ESD Solutions, monitoring and automation platforms.'
+    ],
+    icon: 'Flag'
+  }
 ];
 
 export const generalFAQs = [
   {
     q: 'What quality standards do Neural Industrial Automation products meet?',
-    a: 'All our products are manufactured under strict ISO 9001:2015 standards, conform to CE certification requirements, and are built to comply with WHO GMP and US FDA cleanroom validation guidelines.'
+    a: 'All our products are manufactured under strict ISO 9001:2015 standards, conform to CE certification requirements, and are built to comply with international cleanroom validation guidelines.'
   },
   {
     q: 'Do you offer on-site installation and commission support?',
@@ -751,20 +1032,21 @@ export const generalFAQs = [
   },
   {
     q: 'How long does a typical calibration certificate remain valid?',
-    a: 'All indicators and transmitters are dispatched with NABL-traceable certificates valid for 12 months. We offer calibration contracts to verify sensor accuracy annually at your facility.'
-  },
-  {
-    q: 'What is the lead time for standard and custom products?',
-    a: 'Standard products like the Differential Pressure Indicators and 2-door interlocking panels are usually dispatched within 3-5 working days. Custom configurations (e.g., 6-door interlock or specific display modules) have a lead time of 2-3 weeks.'
+    a: 'All indicators and transmitters are dispatched with traceable calibration certificates valid for 12 months. We offer calibration contracts to verify sensor accuracy annually at your facility.'
   }
 ];
 
 export const resourceDownloads = [
-  { category: 'Manual', title: 'Door Interlock Programming Manual', format: 'PDF', size: '4.2 MB', filename: 'Door_Interlock_User_Guide_EN.pdf' },
-  { category: 'Manual', title: 'Air Shower Control Wiring Guide', format: 'PDF', size: '5.1 MB', filename: 'AirShower_Installation_Guide.pdf' },
-  { category: 'Manual', title: 'TRH Transmitter User Manual', format: 'PDF', size: '2.8 MB', filename: 'TRH_Transmitter_User_Manual.pdf' },
-  { category: 'Certificate', title: 'CE Compliance Declaration', format: 'PDF', size: '850 KB', filename: '/assets/docs/ce-neural.pdf' },
-  { category: 'Certificate', title: 'ISO 9001:2015 Registration Certificate', format: 'PDF', size: '1.1 MB', filename: '/assets/docs/iso-neural.pdf' }
+  { category: 'Manual', title: 'Neural Corporate Product Brochure', format: 'PDF', size: '11.4 MB', filename: '/assets/docs/neural-company-brochure.pdf' },
+  { category: 'Manual', title: 'Door Interlocking System User & Installation Manual', format: 'PDF', size: '430 KB', filename: '/assets/docs/door-interlock-system-manual.pdf' },
+  { category: 'Manual', title: 'Pass Box Interlocking Controller Manual', format: 'PDF', size: '2.0 MB', filename: '/assets/docs/passbox-interlock-manual.pdf' },
+  { category: 'Manual', title: 'Air Shower Manual', format: 'PDF', size: '420 KB', filename: '/assets/docs/air-shower-controller-manual.pdf' },
+  { category: 'Manual', title: 'LAF / BUF Controller Operation Manual', format: 'PDF', size: '200 KB', filename: '/assets/docs/laf-controller-manual.pdf' },
+  { category: 'Manual', title: 'Differential Pressure Indicator User Manual', format: 'PDF', size: '1.1 MB', filename: '/assets/docs/differential-pressure-indicator-manual.pdf' },
+  { category: 'Manual', title: 'Modbus RS485 Communication Protocol Manual', format: 'PDF', size: '320 KB', filename: '/assets/docs/modbus-communication-manual.pdf' },
+  { category: 'Certificate', title: 'Quality & Systems Compliance Certificate', format: 'PDF', size: '2.4 MB', filename: '/assets/docs/iso-neural.pdf' },
+  { category: 'Certificate', title: 'CE Compliance Declaration', format: 'PDF', size: '5.0 MB', filename: '/assets/docs/ce-neural.pdf' },
+  { category: 'Certificate', title: 'ISO 9001:2015 Registration Certificate', format: 'PDF', size: '4.0 MB', filename: '/assets/docs/iso-neural.pdf' }
 ];
 
 export const techArticles = [

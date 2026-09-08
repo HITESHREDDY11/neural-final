@@ -5,12 +5,12 @@ import { Reveal, RevealItem } from '@/components/Reveal';
 import { solutions, Solution } from '@/lib/data';
 import Link from 'next/link';
 import { 
-  Workflow, ArrowRight, ShieldCheck, Play, RotateCcw, 
+  Workflow, ArrowRight, Play, RotateCcw, 
   DoorOpen, Wind, Gauge, Key, Lock, BellRing 
 } from 'lucide-react';
 
 export default function SolutionsPage() {
-  const [activeTab, setActiveTab] = useState<'cleanroom-entry-control' | 'environmental-monitoring-cascade'>('cleanroom-entry-control');
+  const [activeTab, setActiveTab] = useState<'cleanroom-entry-control' | 'environmental-monitoring-cascade' | 'laminar-air-flow'>('cleanroom-entry-control');
   const [simulationStep, setSimulationStep] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [timerVal, setTimerVal] = useState(12);
@@ -105,12 +105,12 @@ export default function SolutionsPage() {
       <section className="relative py-4 z-10">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
           <div className="flex border-b border-border/60 pb-6">
-            <div className="flex gap-4">
+            <div className="flex flex-wrap gap-3 sm:gap-4">
               <button
                 onClick={() => { setActiveTab('cleanroom-entry-control'); handleReset(); }}
-                className={`rounded-full px-6 py-2.5 text-xs font-semibold uppercase tracking-wider transition-all border ${
+                className={`rounded-full px-5 sm:px-6 py-2.5 text-xs font-semibold uppercase tracking-wider transition-all border ${
                   activeTab === 'cleanroom-entry-control'
-                    ? 'bg-primary text-primary-foreground border-primary'
+                    ? 'bg-primary text-primary-foreground border-primary shadow-[0_0_15px_rgba(59,130,246,0.4)]'
                     : 'bg-secondary/20 text-muted-foreground border-border/80 hover:bg-secondary/40'
                 }`}
               >
@@ -118,13 +118,23 @@ export default function SolutionsPage() {
               </button>
               <button
                 onClick={() => { setActiveTab('environmental-monitoring-cascade'); handleReset(); }}
-                className={`rounded-full px-6 py-2.5 text-xs font-semibold uppercase tracking-wider transition-all border ${
+                className={`rounded-full px-5 sm:px-6 py-2.5 text-xs font-semibold uppercase tracking-wider transition-all border ${
                   activeTab === 'environmental-monitoring-cascade'
-                    ? 'bg-primary text-primary-foreground border-primary'
+                    ? 'bg-primary text-primary-foreground border-primary shadow-[0_0_15px_rgba(59,130,246,0.4)]'
                     : 'bg-secondary/20 text-muted-foreground border-border/80 hover:bg-secondary/40'
                 }`}
               >
                 Environmental Monitoring Cascade
+              </button>
+              <button
+                onClick={() => { setActiveTab('laminar-air-flow'); handleReset(); }}
+                className={`rounded-full px-5 sm:px-6 py-2.5 text-xs font-semibold uppercase tracking-wider transition-all border ${
+                  activeTab === 'laminar-air-flow'
+                    ? 'bg-primary text-primary-foreground border-primary shadow-[0_0_15px_rgba(59,130,246,0.4)]'
+                    : 'bg-secondary/20 text-muted-foreground border-border/80 hover:bg-secondary/40'
+                }`}
+              >
+                Laminar Air Flow
               </button>
             </div>
           </div>
@@ -221,7 +231,7 @@ export default function SolutionsPage() {
                       className="fill-primary stroke-none transition-all duration-700"
                     />
                   </svg>
-                ) : (
+                ) : activeTab === 'environmental-monitoring-cascade' ? (
                   <svg className="w-full max-w-lg h-56 stroke-primary/30 fill-none" viewBox="0 0 300 150">
                     {/* DP Indicators cascading */}
                     <rect x="20" y="30" width="70" height="50" rx="3" className="stroke-primary/50" />
@@ -250,6 +260,35 @@ export default function SolutionsPage() {
                     {simulationStep === 2 && (
                       <circle cx="230" cy="115" r="3" className="fill-accent animate-ping" />
                     )}
+                  </svg>
+                ) : (
+                  /* Laminar Air Flow System SVG Schematic */
+                  <svg className="w-full max-w-lg h-56 stroke-primary/30 fill-none" viewBox="0 0 300 150">
+                    {/* Main Cabinet Frame */}
+                    <rect x="50" y="15" width="200" height="120" rx="6" className="stroke-primary/40" strokeWidth="1.5" />
+
+                    {/* Top Blower Housing Plenum */}
+                    <rect x="70" y="25" width="160" height="30" rx="3" className={`transition-all duration-300 ${simulationStep === 0 ? 'stroke-primary fill-primary/10' : 'stroke-primary/40'}`} />
+                    <text x="105" y="42" className="fill-primary font-mono text-[8px] font-bold" stroke="none">AIR INTAKE & BLOWER</text>
+                    
+                    {/* Air Intake Grills */}
+                    <path d="M 80 20 L 80 25 M 100 20 L 100 25 M 120 20 L 120 25 M 180 20 L 180 25 M 200 20 L 200 25 M 220 20 L 220 25" strokeWidth="1.5" className={simulationStep === 0 ? 'stroke-accent' : 'stroke-primary/50'} />
+
+                    {/* HEPA Filter Bar */}
+                    <rect x="70" y="60" width="160" height="16" rx="2" className={`transition-all duration-300 ${simulationStep === 1 ? 'stroke-accent fill-accent/20' : 'stroke-primary/50 fill-secondary/40'}`} strokeWidth="1.5" />
+                    <text x="108" y="71" className="fill-foreground font-mono text-[7.5px] font-bold" stroke="none">HEPA FILTER CHAMBER</text>
+
+                    {/* Unidirectional Laminar Air Flow Stream Lines */}
+                    <g className={`transition-opacity duration-300 ${simulationStep === 2 ? 'opacity-100' : 'opacity-40'}`}>
+                      <path d="M 85 80 L 85 115 M 115 80 L 115 115 M 150 80 L 150 115 M 185 80 L 185 115 M 215 80 L 215 115" strokeDasharray="3,3" strokeWidth="1.5" className={simulationStep === 2 ? 'stroke-primary animate-pulse' : 'stroke-primary/30'} />
+                      
+                      {/* Flow direction arrows */}
+                      <path d="M 82 110 L 85 115 L 88 110 M 112 110 L 115 115 L 118 110 M 147 110 L 150 115 L 153 110 M 182 110 L 185 115 L 188 110 M 212 110 L 215 115 L 218 110" strokeWidth="1.5" className={simulationStep === 2 ? 'stroke-accent' : 'stroke-primary/40'} />
+                    </g>
+
+                    {/* Work Surface Table */}
+                    <rect x="65" y="118" width="170" height="8" rx="1" className="fill-secondary stroke-primary/50" />
+                    <text x="106" y="125" className="fill-muted-foreground font-mono text-[7px]" stroke="none">CRITICAL WORK SURFACE</text>
                   </svg>
                 )}
               </div>
@@ -315,10 +354,6 @@ export default function SolutionsPage() {
               <div key={idx} className="rounded-xl border border-border/80 bg-card/40 p-6 backdrop-blur-sm">
                 <span className="text-xs font-mono text-primary font-bold">SPEC_HIGHLIGHT_0{idx+1}</span>
                 <p className="text-sm font-semibold text-foreground/90 mt-4 leading-relaxed">{hl}</p>
-                <div className="mt-6 flex items-center gap-2 text-[10px] text-muted-foreground font-mono">
-                  <ShieldCheck className="h-4.5 w-4.5 text-primary" />
-                  <span>GMP COMPLIANT PROTOCOL</span>
-                </div>
               </div>
             ))}
           </div>

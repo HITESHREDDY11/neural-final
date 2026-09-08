@@ -33,16 +33,16 @@ const zones: Zone[] = [
     id: 2,
     name: 'Manual Looming & Integration',
     machinery: 'Static-free ESD workstations and precision crimping rigs.',
-    details: 'Engineers integrate PCB modules into IP65 flame-retardant enclosures, wire relays to terminal ports, and secure stainless steel bezels for flush-mount indicators.',
+    details: 'Engineers integrate PCB modules into flame-retardant enclosures, wire relays to terminal ports, and secure stainless steel bezels for flush-mount indicators.',
     checks: ['Wiring continuity inspection', 'Crimping pull tests', 'ESD earth ground verification'],
     x: '50%', y: '10%', w: '45%', h: '35%'
   },
   {
     id: 3,
     name: 'Calibration Chamber',
-    machinery: 'NABL-traceable environmental chambers and digital DP calibrators.',
+    machinery: 'Traceable environmental calibration chambers and digital DP calibrators.',
     details: 'DP Indicators and Temp & RH transmitters undergo multi-point digital calibration. Reference values are matched against standards to generate lookup tables stored in firmware.',
-    checks: ['Zero-point digital calibration', 'NABL standard comparison', 'Linearity deviation tracking'],
+    checks: ['Zero-point digital calibration', 'Standard calibration comparison', 'Linearity deviation tracking'],
     x: '5%', y: '55%', w: '30%', h: '35%'
   },
   {
@@ -248,7 +248,7 @@ export default function ManufacturingPage() {
                 Each DP indicator and humidity transmitter is validated using high-accuracy calibration rigs trace-mapped to international standards. Lookup tables are burned into controller EEPROM to retain linearity.
               </p>
               <div className="mt-6 flex flex-wrap gap-2.5 justify-center">
-                {['CE Certified', 'WHO GMP Compliant', 'ISO 9001:2015'].map((cert) => (
+                {['CE Certified', 'ISO 9001:2015'].map((cert) => (
                   <span key={cert} className="rounded-full border border-border bg-secondary/40 px-3.5 py-1 text-[10px] font-bold uppercase tracking-wider text-primary">
                     {cert}
                   </span>

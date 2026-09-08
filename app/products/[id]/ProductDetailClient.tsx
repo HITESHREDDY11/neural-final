@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 import { Reveal, RevealItem } from '@/components/Reveal';
 import { products, Product } from '@/lib/data';
@@ -8,7 +9,8 @@ import Link from 'next/link';
 import { 
   DoorClosed, Box, Wind, Cpu, Gauge, Thermometer, Activity, 
   ArrowRight, ArrowLeft, ShieldCheck, HelpCircle, 
-  CheckCircle, Play, Settings, CheckCircle2, ChevronRight, Clock 
+  CheckCircle, Play, Settings, CheckCircle2, ChevronRight, Clock,
+  ZoomIn, ChevronLeft, Download, FileText
 } from 'lucide-react';
 
 const iconMap = {
@@ -28,13 +30,30 @@ export default function ProductDetailClient({ product }: { product: Product }) {
   const [inquirySent, setInquirySent] = useState(false);
   const [ticketId, setTicketId] = useState<number | null>(null);
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
+  const [activePhoto, setActivePhoto] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   const IconComponent = iconMap[product.iconName] || Cpu;
+  const photos = product.photos ?? [];
+  const hasPhotos = photos.length > 0;
 
   const handleInquirySubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setTicketId(Math.floor(1000 + Math.random() * 9000));
     setInquirySent(true);
+  };
+
+  const handleCatalogRequest = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const target = document.getElementById('wiring-inquiry');
+    if (target) {
+      const lenis = (window as any).__lenis;
+      if (lenis) {
+        lenis.scrollTo(target, { offset: -80 });
+      } else {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   };
 
   // Find related products
@@ -60,7 +79,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
 
           <div className="mt-8 grid gap-12 lg:grid-cols-12 items-start">
             {/* Left Col: Info */}
-            <div className="lg:col-span-7 space-y-6">
+            <div className={hasPhotos ? 'lg:col-span-7 space-y-6' : 'lg:col-span-12 max-w-4xl space-y-6'}>
               <Reveal>
                 <RevealItem>
                   <div className="flex items-center gap-3">
@@ -82,7 +101,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
               </Reveal>
 
               {/* Quick Specs summary */}
-              <Reveal className="border-y border-border/60 py-6 grid grid-cols-2 gap-4">
+              <Reveal className="border-y border-border/60 py-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
                 {product.specs[0]?.items.slice(0, 4).map((spec, idx) => (
                   <RevealItem key={idx} className="flex flex-col">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{spec.label}</span>
@@ -96,38 +115,193 @@ export default function ProductDetailClient({ product }: { product: Product }) {
                 <RevealItem>
                   <a
                     href="#wiring-inquiry"
-                    className="inline-flex h-12 items-center justify-center rounded-full bg-primary px-8 text-sm font-semibold text-primary-foreground hover:bg-primary/85 shadow-lg shadow-primary/20"
+                    onClick={handleCatalogRequest}
+                    className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-8 text-sm font-semibold text-primary-foreground hover:bg-primary/85 shadow-lg shadow-primary/20"
                   >
-                    Request Wiring Plan
+                    <span>Request Product Catalog & Inquiry</span>
+                    <ArrowRight className="h-4 w-4" />
                   </a>
                 </RevealItem>
-
+                {product.downloads && product.downloads.some(d => d.requestCatalog || !d.filename) ? (
+                  <RevealItem>
+                    <a
+                      href="#wiring-inquiry"
+                      onClick={handleCatalogRequest}
+                      className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-primary/40 bg-card/60 px-6 text-sm font-semibold text-foreground hover:bg-secondary/40 hover:border-primary transition-all shadow-md backdrop-blur-sm"
+                    >
+                      <FileText className="h-4 w-4 text-primary" />
+                      <span>Request Full Specification Sheet</span>
+                    </a>
+                  </RevealItem>
+                ) : product.downloads && product.downloads.length > 0 && product.downloads[0].filename ? (
+                  <RevealItem>
+                    <a
+                      href={product.downloads[0].filename}
+                      download
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-primary/40 bg-card/60 px-6 text-sm font-semibold text-foreground hover:bg-secondary/40 hover:border-primary transition-all shadow-md backdrop-blur-sm"
+                    >
+                      <Download className="h-4 w-4 text-primary" />
+                      <span>Download Manual (PDF)</span>
+                    </a>
+                  </RevealItem>
+                ) : null}
               </Reveal>
             </div>
 
-            {/* Right Col: High-tech Schematics Showcase */}
-            <div className="lg:col-span-5 relative rounded-2xl border border-primary/20 bg-card/40 p-8 backdrop-blur-md overflow-hidden bp-grid-fine flex flex-col items-center justify-center">
-              <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-transparent pointer-events-none" />
+            {/* Right Col: Product Photo Showcase (Only rendered when photos exist) */}
+            {hasPhotos && (
+              <div className="lg:col-span-5 relative">
+                <div className="space-y-3">
+                  {/* Main photo — click to open lightbox */}
+                  <div
+                    className="relative rounded-2xl overflow-hidden border border-primary/20 bg-card/40 aspect-[4/3] cursor-zoom-in group"
+                    onClick={() => setLightboxOpen(true)}
+                  >
+                    <Image
+                      key={photos[activePhoto].src}
+                      src={photos[activePhoto].src}
+                      alt={photos[activePhoto].alt}
+                      fill
+                      unoptimized
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent pointer-events-none" />
+                    {/* Zoom hint */}
+                    <div className="absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-background/60 border border-primary/20 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                      <ZoomIn className="h-4 w-4 text-primary" />
+                    </div>
+                    {/* Photo counter badge */}
+                    <div className="absolute bottom-3 right-3 rounded-full bg-background/70 backdrop-blur-sm border border-border/50 px-2.5 py-1 text-[10px] font-mono text-muted-foreground">
+                      {activePhoto + 1} / {photos.length}
+                    </div>
+                    <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(59,130,246,0.015) 2px, rgba(59,130,246,0.015) 4px)' }} />
+                  </div>
 
-              {/* Central Dynamic Schematic Graphic */}
-              <div className="h-60 w-60 rounded-full border-2 border-dashed border-primary/20 p-6 flex items-center justify-center relative">
-                <div className="absolute inset-0 rounded-full bg-primary/5 animate-pulse" />
-                <IconComponent className="h-24 w-24 text-primary animate-pulse" />
-                
-                {/* Orbital nodes */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-[8px] font-bold text-accent-foreground">IN</div>
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[8px] font-bold text-primary-foreground">OUT</div>
-                <div className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 flex h-5 w-5 items-center justify-center rounded-full border border-primary/40 bg-card text-[8px] font-mono text-primary font-bold">MCU</div>
+                  {/* Thumbnail strip — clicking thumbnail switches active photo preview */}
+                  <div className="flex gap-2 overflow-x-auto pb-1 max-w-full scrollbar-thin">
+                    {photos.map((photo, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setActivePhoto(idx)}
+                        className={`relative w-20 h-20 shrink-0 aspect-square rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+                          activePhoto === idx
+                            ? 'border-primary shadow-[0_0_12px_rgba(59,130,246,0.3)] ring-2 ring-primary/30'
+                            : 'border-border/40 hover:border-primary/60 opacity-70 hover:opacity-100'
+                        }`}
+                        title={photo.alt}
+                      >
+                        <Image
+                          key={photo.src}
+                          src={photo.src}
+                          alt={photo.alt}
+                          fill
+                          unoptimized
+                          className="object-cover"
+                          sizes="80px"
+                        />
+                        {activePhoto === idx && (
+                          <div className="absolute inset-0 bg-primary/10" />
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
-
-              <div className="w-full mt-10 text-center font-mono text-[10px] text-muted-foreground">
-                <p>32-BIT DETERMINISTIC ARM MICROCONTROLLER CORE</p>
-                <p className="text-primary/70 mt-1">NABL TRACEABLE ACCURACY LABS APPROVED</p>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </section>
+
+      {/* Lightbox */}
+      {lightboxOpen && hasPhotos && (
+        <div
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black/90 backdrop-blur-md"
+          onClick={() => setLightboxOpen(false)}
+        >
+          {/* Close button — top right */}
+          <button
+            onClick={() => setLightboxOpen(false)}
+            className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-card/80 text-muted-foreground hover:text-foreground hover:border-primary/40 transition-colors z-10"
+            aria-label="Close"
+          >
+            <span style={{ fontSize: '18px', lineHeight: 1 }}>✕</span>
+          </button>
+
+          {/* Prev arrow */}
+          <button
+            onClick={(e) => { e.stopPropagation(); setActivePhoto((p) => (p - 1 + photos.length) % photos.length); }}
+            className="absolute left-4 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full border border-border/60 bg-card/80 hover:border-primary/40 transition-colors z-10"
+            aria-label="Previous"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+
+          {/* Next arrow */}
+          <button
+            onClick={(e) => { e.stopPropagation(); setActivePhoto((p) => (p + 1) % photos.length); }}
+            className="absolute right-4 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full border border-border/60 bg-card/80 hover:border-primary/40 transition-colors z-10"
+            aria-label="Next"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+
+          {/* Main image container */}
+          <div
+            className="flex flex-col items-center gap-4 w-full max-w-5xl px-16"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Large image */}
+            <div className="relative w-full rounded-xl overflow-hidden border border-primary/20 shadow-2xl" style={{ maxHeight: '70vh', aspectRatio: '16/10' }}>
+              <Image
+                key={photos[activePhoto].src}
+                src={photos[activePhoto].src}
+                alt={photos[activePhoto].alt}
+                fill
+                unoptimized
+                className="object-contain"
+                sizes="90vw"
+                priority
+              />
+            </div>
+
+            {/* Caption + counter */}
+            <p className="text-center text-xs text-muted-foreground font-mono">
+              {photos[activePhoto].alt}&nbsp;&nbsp;·&nbsp;&nbsp;{activePhoto + 1} / {photos.length}
+            </p>
+
+            {/* Thumbnail strip inside lightbox */}
+            <div className="flex justify-center gap-2 flex-wrap max-w-full overflow-x-auto py-1">
+              {photos.map((photo, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActivePhoto(idx)}
+                  className={`relative w-16 h-16 shrink-0 rounded-lg overflow-hidden border-2 transition-all ${
+                    activePhoto === idx
+                      ? 'border-primary shadow-[0_0_10px_rgba(59,130,246,0.4)] ring-2 ring-primary/40'
+                      : 'border-border/40 hover:border-primary/50 opacity-60 hover:opacity-100'
+                  }`}
+                >
+                  <Image
+                    key={photo.src}
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    unoptimized
+                    className="object-cover"
+                    sizes="64px"
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
 
       {/* Applications & Features Section */}
       <section className="relative py-24 border-t border-border/60 bg-secondary/5 z-10">
@@ -201,8 +375,9 @@ export default function ProductDetailClient({ product }: { product: Product }) {
         </div>
       </section>
 
-      {/* Working Principle Section (Interactive Simulator) */}
-      <section className="relative py-24 border-t border-border/60 z-10">
+      {/* Working Principle Section — only shown when steps exist */}
+      {product.workingPrinciple.length > 0 && (
+        <section className="relative py-24 border-t border-border/60 z-10">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
           <Reveal className="max-w-2xl">
             <RevealItem>
@@ -290,6 +465,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
           </div>
         </div>
       </section>
+      )}
 
       {/* Technical Specifications Section */}
       <section className="relative py-24 border-t border-border/60 bg-secondary/5 z-10">
@@ -323,13 +499,61 @@ export default function ProductDetailClient({ product }: { product: Product }) {
               </div>
             ))}
           </div>
+
+          {/* Product Downloads / Manuals Section */}
+          {product.downloads && product.downloads.length > 0 && (
+            <div className="mt-12 border-t border-border/50 pt-8">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-primary mb-4 flex items-center gap-2">
+                <FileText className="h-4 w-4 text-primary" />
+                <span>Product Manuals & Specifications</span>
+              </h3>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {product.downloads.map((dl, idx) => (
+                  dl.requestCatalog || !dl.filename ? (
+                    <a
+                      key={idx}
+                      href="#wiring-inquiry"
+                      onClick={handleCatalogRequest}
+                      className="flex items-center justify-between rounded-xl border border-primary/40 bg-primary/5 p-4 hover:border-primary hover:bg-primary/10 transition-all backdrop-blur-sm group cursor-pointer"
+                    >
+                      <div>
+                        <div className="text-sm font-bold text-foreground group-hover:text-primary transition-colors flex items-center gap-2">
+                          <span>{dl.name}</span>
+                        </div>
+                        <span className="text-[10px] text-muted-foreground mt-1 block font-mono">{dl.type} · {dl.size}</span>
+                      </div>
+                      <ArrowRight className="h-4 w-4 text-primary group-hover:translate-x-1 transition-transform" />
+                    </a>
+                  ) : (
+                    <a
+                      key={idx}
+                      href={dl.filename}
+                      download
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between rounded-xl border border-border/80 bg-card/40 p-4 hover:border-primary/40 hover:bg-secondary/20 transition-all backdrop-blur-sm group"
+                    >
+                      <div>
+                        <div className="text-sm font-bold text-foreground group-hover:text-primary transition-colors flex items-center gap-2">
+                          <span>{dl.name}</span>
+                        </div>
+                        <span className="text-[10px] text-muted-foreground mt-1 block font-mono">{dl.type} · {dl.size}</span>
+                      </div>
+                      <Download className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                    </a>
+                  )
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
 
 
-      {/* FAQs Section */}
-      <section className="relative py-24 border-t border-border/60 bg-secondary/5 z-10">
+      {/* FAQs Section — only shown when FAQs exist */}
+      {product.faqs.length > 0 && (
+        <section className="relative py-24 border-t border-border/60 bg-secondary/5 z-10">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
           <div className="grid gap-12 lg:grid-cols-12">
             <div className="lg:col-span-5">
@@ -372,6 +596,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
           </div>
         </div>
       </section>
+      )}
 
       {/* Related Products Section */}
       {relatedList.length > 0 && (

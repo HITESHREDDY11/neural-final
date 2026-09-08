@@ -136,8 +136,7 @@ export default function TechnologyPage() {
             {/* Left side: Technical explanations */}
             <div className="lg:col-span-5 space-y-6">
               <div>
-                <span className="text-xs font-mono text-primary font-bold uppercase tracking-wider">TECT_CORE_ENGINE: {activeTopic.id.toUpperCase()}</span>
-                <h2 className="text-3xl font-extrabold tracking-tight text-foreground mt-3">{activeTopic.title}</h2>
+                <h2 className="text-3xl font-extrabold tracking-tight text-foreground">{activeTopic.title}</h2>
                 <p className="text-sm leading-relaxed text-muted-foreground mt-4">{activeTopic.description}</p>
               </div>
 
@@ -229,8 +228,8 @@ export default function TechnologyPage() {
                       }}
                       className={`
                         flex items-center justify-center rounded-xl border
-                        px-4 py-2 font-mono font-bold tracking-wide
-                        text-[13px] shadow-sm cursor-pointer select-none
+                        px-2.5 sm:px-4 py-1.5 sm:py-2 font-mono font-bold tracking-wide
+                        text-[11px] sm:text-[13px] shadow-sm cursor-pointer select-none
                         ${
                           isSelected
                             ? 'border-primary bg-primary text-primary-foreground shadow-[0_0_12px_2px_hsl(217_91%_60%/0.25)]'

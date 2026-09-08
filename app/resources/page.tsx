@@ -60,6 +60,20 @@ export default function ResourcesPage() {
                 Download verified wiring schematics, calibration sheets, datasheets, and user manuals, or read technical articles about cleanroom control protocols.
               </p>
             </RevealItem>
+            <RevealItem>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <a
+                  href="/assets/docs/neural-company-brochure.pdf"
+                  download
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-8 text-sm font-semibold text-primary-foreground hover:bg-primary/85 shadow-lg shadow-primary/20 transition-all"
+                >
+                  <Download className="h-4 w-4" />
+                  <span>Download Corporate Brochure (PDF)</span>
+                </a>
+              </div>
+            </RevealItem>
           </Reveal>
         </div>
       </section>
@@ -179,7 +193,7 @@ export default function ResourcesPage() {
                     className="mt-6 inline-flex h-9 items-center justify-center gap-1.5 rounded-lg bg-secondary/30 hover:bg-primary hover:text-primary-foreground border border-border transition-all text-xs font-semibold text-foreground w-full"
                   >
                     <Download className="h-3.5 w-3.5" />
-                    <span>{dl.category === 'Certificate' ? 'Download Certificate' : 'Download Datasheet'}</span>
+                    <span>{dl.category === 'Certificate' ? 'Download Certificate' : 'Download Manual'}</span>
                   </a>
                 </div>
               ))}

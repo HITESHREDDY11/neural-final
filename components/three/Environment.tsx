@@ -32,8 +32,8 @@ const _cCyan = new THREE.Color('#22d3ee');
 // Label colour — mutated in useFrame, never re-allocated
 const _labelColor = new THREE.Color();
 
-// Outfit Light 300 served locally — prevents Suspense hang due to 404/network errors
-const OUTFIT_URL = '/assets/outfit.woff';
+// Outfit Light 300 served locally
+const FONT_URL = '/assets/outfit.woff';
 
 // ─── Reveal timing (seconds) ──────────────────────────────────────────────────
 const T_LABEL_START = 2.2;   // first label starts fading in
@@ -48,7 +48,7 @@ function ramp(t: number, t0: number, dur: number) {
 
 // ─── Geometry helpers ─────────────────────────────────────────────────────────
 
-const WireBox = React.memo(function WireBox({ position, size, color = BLUE, opacity = 0.35 }: {
+const WireBox = React.memo(function WireBox({ position, size, color = BLUE, opacity = 0.5 }: {
   position: [number, number, number];
   size: [number, number, number];
   color?: string;
@@ -184,7 +184,7 @@ const Label = React.memo(function Label({ text, localY, revealIndex, hoveredRef 
     <group ref={groupRef} position={[0, localY, 0]}>
       <Text
         ref={textRef}
-        font={OUTFIT_URL}
+        font={FONT_URL}
         fontSize={0.18}
         letterSpacing={0.14}
         anchorX="center"
@@ -342,9 +342,10 @@ const AirShower = React.memo(function AirShower({ position }: { position: [numbe
   const nozzleRefs = useRef<(THREE.Mesh | null)[]>([]);
   const hoveredRef = useRef(false);
   const nozzles    = useMemo(() => {
+    // Reduced: 2 rows × 2 sides × 2 depths = 8 nozzles (was 18)
     const arr: [number, number, number][] = [];
-    for (let y = 0.5; y <= 2; y += 0.5)
-      for (let z = -0.3; z <= 0.3; z += 0.3) {
+    for (let y = 0.8; y <= 1.8; y += 1.0)
+      for (let z = -0.25; z <= 0.25; z += 0.5) {
         arr.push([-0.55, y, z]);
         arr.push([ 0.55, y, z]);
       }
@@ -378,7 +379,8 @@ const AirShower = React.memo(function AirShower({ position }: { position: [numbe
 
       {nozzles.map((p, i) => (
         <mesh key={i} position={p} ref={(el) => { nozzleRefs.current[i] = el; }}>
-          <sphereGeometry args={[0.03, 8, 8]} />
+          {/* 4×4 segments instead of 8×8 — same visual, 4× cheaper */}
+          <sphereGeometry args={[0.03, 4, 4]} />
           <meshBasicMaterial color={BLUE} transparent opacity={0.6} />
         </mesh>
       ))}
@@ -402,7 +404,8 @@ export default function Environment() {
     <group>
       {/* Floor */}
       <GridPanel position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} size={[16, 16]} opacity={0.04} />
-      <gridHelper args={[16, 32, BLUE, BLUE_DIM]} position={[0, 0.001, 0]} />
+      {/* Reduced from 32 to 16 grid divisions — less draw calls */}
+      <gridHelper args={[16, 16, BLUE, BLUE_DIM]} position={[0, 0.001, 0]} />
 
       {/* Walls */}
       <WireBox position={[0,   1.5, -4]}   size={[8,    3,    0.05]} color={BLUE} opacity={0.25} />
@@ -439,7 +442,8 @@ export default function Environment() {
       {([-4, 4] as const).flatMap((x) =>
         ([-4, 4] as const).map((z) => (
           <mesh key={`${x}-${z}`} position={[x, 1.5, z]}>
-            <cylinderGeometry args={[0.02, 0.02, 3, 8]} />
+            {/* 5 segments instead of 8 — visually identical for tiny pillars */}
+            <cylinderGeometry args={[0.02, 0.02, 3, 5]} />
             <meshBasicMaterial color={BLUE} transparent opacity={0.4} />
           </mesh>
         ))

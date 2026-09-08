@@ -3,15 +3,48 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  // Image optimization re-enabled — was disabled, causing all images to load
-  // at full resolution with no WebP conversion or lazy loading.
+  // Compress output with gzip for faster transfer
+  compress: true,
+  // Use SWC-based minifier (faster than Terser)
+  swcMinify: true,
+  // Image optimization — WebP/AVIF conversion + responsive sizes
   images: {
-    formats: ['image/webp', 'image/avif'],
+    formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    minimumCacheTTL: 31536000, // 1 year cache for optimized images
   },
-  // Tree-shake large icon and animation libraries — eliminates dead code from client bundles
+  // Aggressive HTTP cache headers for all static assets
+  // After the first visit, everything loads from disk — zero network cost
+  async headers() {
+    return [
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+      {
+        source: '/assets/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+    ];
+  },
   experimental: {
-    optimizePackageImports: ['lucide-react', 'framer-motion', '@radix-ui/react-accordion'],
+    // Tree-shake large icon and animation libraries + all Radix UI packages
+    // This eliminates unused component code from every page's client bundle
+    optimizePackageImports: [
+      'lucide-react',
+      'framer-motion',
+      '@radix-ui/react-accordion',
+      '@radix-ui/react-dialog',
+      '@radix-ui/react-dropdown-menu',
+      '@radix-ui/react-tabs',
+      '@radix-ui/react-tooltip',
+      '@radix-ui/react-select',
+      '@radix-ui/react-popover',
+    ],
   },
 };
 

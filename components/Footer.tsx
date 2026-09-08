@@ -114,7 +114,7 @@ export default function Footer() {
                   ) : (
                     <Link
                       href={l.href}
-                      onClick={(e) => handleAnchorClick(e, l.href)}
+                      onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleAnchorClick(e, l.href)}
                       className="text-sm text-muted-foreground transition-colors hover:text-primary"
                     >
                       {l.label}
@@ -144,7 +144,7 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-wrap items-center gap-3 border-t border-border/50 pt-8">
           <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Certified:</span>
-          {['CE Certified', 'GMP Compliant', 'ISO 9001', 'Cleanroom Grade'].map((c) => (
+          {['CE Certified', 'ISO 9001'].map((c) => (
             <span key={c} className="rounded-full border border-border/60 bg-secondary/30 px-3 py-1 text-xs text-foreground/70">{c}</span>
           ))}
         </div>

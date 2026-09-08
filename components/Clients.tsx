@@ -11,54 +11,54 @@ type Client = {
 };
 
 const ROW_1: Client[] = [
-  { name: 'Aurobindo Pharma', logo: '/assets/clients/aurobindo.png' },
-  { name: 'Hetero Drugs', logo: '/assets/clients/hetero.png' },
-  { name: 'Micro Labs Limited', logo: '/assets/clients/micro-labs.png' },
-  { name: 'Biological E. Limited', logo: '/assets/clients/biological-e.png' },
-  { name: 'iClean Takasago', logo: '/assets/clients/iclean.png' },
-  { name: 'Titan Company', logo: '/assets/clients/titan.png' },
-  { name: 'Amneal Pharmaceuticals', logo: '/assets/clients/amneal.png' },
-  { name: 'Natco Pharma Limited', logo: '/assets/clients/natco.png' },
-  { name: 'Indoco Remedies', logo: '/assets/clients/indoco.png' },
-  { name: 'Indian Immunologicals', logo: '/assets/clients/indian-immunologicals.png' },
-  { name: 'FDC Limited', logo: '/assets/clients/fdc.png' },
-  { name: 'Suven Pharmaceuticals', logo: '/assets/clients/suven.png' },
-  { name: 'Sentiss Pharma', logo: '/assets/clients/sentiss.png' },
-  { name: 'Optimus Pharma', logo: '/assets/clients/optimus.png' },
-  { name: 'Honour Lab', logo: '/assets/clients/honour.png' },
+  { name: 'Aurobindo Pharma', logo: '/assets/clients/aurobindo.jpg' },
+  { name: 'Hetero Drugs', logo: '/assets/clients/hetero.jpg' },
+  { name: 'Micro Labs Limited', logo: '/assets/clients/micro-labs.jpg' },
+  { name: 'Biological E. Limited', logo: '/assets/clients/biological-e.jpg' },
+  { name: 'iClean Takasago', logo: '/assets/clients/iclean.jpg' },
+  { name: 'Titan Company', logo: '/assets/clients/titan.jpg' },
+  { name: 'Amneal Pharmaceuticals', logo: '/assets/clients/amneal.jpg' },
+  { name: 'Natco Pharma Limited', logo: '/assets/clients/natco.jpg' },
+  { name: 'Indoco Remedies', logo: '/assets/clients/indoco.jpg' },
+  { name: 'Indian Immunologicals', logo: '/assets/clients/indian-immunologicals.jpg' },
+  { name: 'FDC Limited', logo: '/assets/clients/fdc.jpg' },
+  { name: 'Suven Pharmaceuticals', logo: '/assets/clients/suven.jpg' },
+  { name: 'Sentiss Pharma', logo: '/assets/clients/sentiss.jpg' },
+  { name: 'Optimus Pharma', logo: '/assets/clients/optimus.jpg' },
+  { name: 'Honour Lab', logo: '/assets/clients/honour.jpg' },
 ];
 
 const ROW_2: Client[] = [
-  { name: 'Vivin Pharmaceuticals', logo: '/assets/clients/vivin.png' },
-  { name: 'Horizon Biolabs', logo: '/assets/clients/horizon.png' },
-  { name: 'Nicomac Far East', logo: '/assets/clients/nicomac.png' },
-  { name: 'Sanzyme Biologics', logo: '/assets/clients/sanzyme.png' },
-  { name: 'Brilliant Bio Pharma', logo: '/assets/clients/brilliant.png' },
-  { name: 'Clean Flow Technology', logo: '/assets/clients/clean-flow.png' },
-  { name: 'Globion Biotech', logo: '/assets/clients/globion.png' },
-  { name: 'Glochem Industries', logo: '/assets/clients/glochem.png' },
-  { name: 'Rampex Labs Pvt. Ltd.', logo: '/assets/clients/rampex.png' },
-  { name: 'RL Fine Chem Pvt. Ltd.', logo: '/assets/clients/rl-fine-chem.png' },
-  { name: 'Limpio Projects', logo: '/assets/clients/limpio.png' },
-  { name: 'Lennox Clean Air Technologies', logo: '/assets/clients/lennox.png' },
-  { name: 'Hemair Luftkanalsysteme', logo: '/assets/clients/hemair.png' },
-  { name: 'Vinair Systems', logo: '/assets/clients/vinair.png' },
+  { name: 'Vivin Pharmaceuticals', logo: '/assets/clients/vivin.jpg' },
+  { name: 'Horizon Biolabs', logo: '/assets/clients/horizon.jpg' },
+  { name: 'Nicomac Far East', logo: '/assets/clients/nicomac.jpg' },
+  { name: 'Sanzyme Biologics', logo: '/assets/clients/sanzyme.jpg' },
+  { name: 'Brilliant Bio Pharma', logo: '/assets/clients/brilliant.jpg' },
+  { name: 'Clean Flow Technology', logo: '/assets/clients/clean-flow.jpg' },
+  { name: 'Globion Biotech', logo: '/assets/clients/globion.jpg' },
+  { name: 'Glochem Industries', logo: '/assets/clients/glochem.jpg' },
+  { name: 'Rampex Labs Pvt. Ltd.', logo: '/assets/clients/rampex.jpg' },
+  { name: 'RL Fine Chem Pvt. Ltd.', logo: '/assets/clients/rl-fine-chem.jpg' },
+  { name: 'Limpio Projects', logo: '/assets/clients/limpio.jpg' },
+  { name: 'Lennox Clean Air Technologies', logo: '/assets/clients/lennox.jpg' },
+  { name: 'Hemair Luftkanalsysteme', logo: '/assets/clients/hemair.jpg' },
+  { name: 'Vinair Systems', logo: '/assets/clients/vinair.jpg' },
 ];
 
 const ROW_3: Client[] = [
-  { name: 'Ezone Rest Assured', logo: '/assets/clients/ezone.png' },
-  { name: 'GreenSignal Bio Pharma', logo: '/assets/clients/green-signal.png' },
-  { name: 'Lara Drugs Pvt. Ltd.', logo: '/assets/clients/lara-drugs.png' },
-  { name: 'LN Laboratories', logo: '/assets/clients/ln-laboratories.png' },
-  { name: 'Lofty Laboratories', logo: '/assets/clients/lofty.png' },
-  { name: 'Maiya Pharma Pvt. Ltd.', logo: '/assets/clients/maiya.png' },
-  { name: 'MAK Industries', logo: '/assets/clients/mak.png' },
-  { name: 'SAM Products Pvt. Ltd.', logo: '/assets/clients/sam.png' },
-  { name: 'Sunrise International', logo: '/assets/clients/sunrise.png' },
-  { name: 'SVR Biograft', logo: '/assets/clients/svr.png' },
-  { name: 'Siflon Drugs', logo: '/assets/clients/siflon.png' },
-  { name: 'Valentis Laboratories', logo: '/assets/clients/valentis.png' },
-  { name: 'Vamsi Pharma Pvt. Ltd.', logo: '/assets/clients/vamsi.png' },
+  { name: 'Ezone Rest Assured', logo: '/assets/clients/ezone.jpg' },
+  { name: 'GreenSignal Bio Pharma', logo: '/assets/clients/green-signal.jpg' },
+  { name: 'Lara Drugs Pvt. Ltd.', logo: '/assets/clients/lara-drugs.jpg' },
+  { name: 'LN Laboratories', logo: '/assets/clients/ln-laboratories.jpg' },
+  { name: 'Lofty Laboratories', logo: '/assets/clients/lofty.jpg' },
+  { name: 'Maiya Pharma Pvt. Ltd.', logo: '/assets/clients/maiya.jpg' },
+  { name: 'MAK Industries', logo: '/assets/clients/mak.jpg' },
+  { name: 'SAM Products Pvt. Ltd.', logo: '/assets/clients/sam.jpg' },
+  { name: 'Sunrise International', logo: '/assets/clients/sunrise.jpg' },
+  { name: 'SVR Biograft', logo: '/assets/clients/svr.jpg' },
+  { name: 'Siflon Drugs', logo: '/assets/clients/siflon.jpg' },
+  { name: 'Valentis Laboratories', logo: '/assets/clients/valentis.jpg' },
+  { name: 'Vamsi Pharma Pvt. Ltd.', logo: '/assets/clients/vamsi.jpg' },
 ];
 
 function LogoCard({ client }: { client: Client }) {
@@ -72,7 +72,7 @@ function LogoCard({ client }: { client: Client }) {
           alt={client.name}
           width={224}
           height={112}
-          quality={95}
+          unoptimized
           className="max-h-full max-w-full object-contain filter contrast-[1.05] brightness-[0.98]"
         />
       </div>
@@ -137,7 +137,7 @@ export default function Clients() {
             Trusted By Industry Leaders
           </p>
           <h2 className="mt-4 text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-            60+ Pharmaceutical &amp; <br />
+            Pharmaceutical &amp; <br />
             <span className="text-white/40">Cleanroom Pioneers</span>
           </h2>
           <p className="mt-5 text-base leading-relaxed text-white/50">

@@ -1,17 +1,14 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
-import { motion, AnimatePresence } from 'framer-motion';
+
 import { Menu, X, Search, ChevronDown, Cpu, Gauge, DoorClosed, Wind, ArrowRight, Lightbulb, Workflow } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 
-// Dynamically loaded — SearchModal imports ALL site data synchronously.
-// Deferring it eliminates that parse cost from every page's initial load.
-const SearchModal = dynamic(() => import('./SearchModal'), { ssr: false });
+import SearchModal from './SearchModal';
 
 
 const navItems = [
@@ -25,21 +22,19 @@ const navItems = [
 
 const MegaMenu = React.memo(function MegaMenu({
   showMega,
-  setShowMega,
+  onMouseEnter,
+  onMouseLeave,
 }: {
   showMega: boolean;
-  setShowMega: (show: boolean) => void;
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
 }) {
   return (
-    <AnimatePresence>
+    <>
       {showMega && (
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 8 }}
-          transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-          onMouseEnter={() => setShowMega(true)}
-          onMouseLeave={() => setShowMega(false)}
+        <div
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
           className="absolute left-0 top-full z-40 w-full border-b border-border/60 bg-background/95 shadow-xl backdrop-blur-md"
         >
           <div className="mx-auto grid max-w-7xl grid-cols-12 gap-8 px-8 py-10 lg:px-12">
@@ -58,7 +53,6 @@ const MegaMenu = React.memo(function MegaMenu({
                 ].map((p) => (
                   <Link
                     key={p.id}
-                    prefetch={false}
                     href={`/products/${p.id}`}
                     className="group block rounded-xl p-2.5 transition-all hover:bg-secondary/40"
                   >
@@ -86,7 +80,6 @@ const MegaMenu = React.memo(function MegaMenu({
                 ].map((p) => (
                   <Link
                     key={p.id}
-                    prefetch={false}
                     href={`/products/${p.id}`}
                     className="group block rounded-xl p-2.5 transition-all hover:bg-secondary/40"
                   >
@@ -114,7 +107,6 @@ const MegaMenu = React.memo(function MegaMenu({
                 ].map((p) => (
                   <Link
                     key={p.id}
-                    prefetch={false}
                     href={`/products/${p.id}`}
                     className="group block rounded-xl p-2.5 transition-all hover:bg-secondary/40"
                   >
@@ -128,9 +120,9 @@ const MegaMenu = React.memo(function MegaMenu({
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       )}
-    </AnimatePresence>
+    </>
   );
 });
 
@@ -141,6 +133,25 @@ export default function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
+
+  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setShowMega(true);
+  };
+
+  const handleMouseLeave = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => {
+      setShowMega(false);
+    }, 200);
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32);
@@ -195,10 +206,7 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.header
-        initial={{ y: -24, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+      <header
         className={cn(
           'fixed top-0 left-0 z-50 w-full transition-all duration-500',
           scrolled || open || showMega
@@ -208,7 +216,7 @@ export default function Navbar() {
       >
         <nav className="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-12">
           {/* Logo */}
-          <Link prefetch={false} href="/" className="group flex items-center">
+          <Link href="/" className="group flex items-center">
             <div className="relative h-12 w-auto transition-transform duration-300 group-hover:scale-105">
               <Image
                 src="/assets/images/logo.png"
@@ -227,12 +235,11 @@ export default function Navbar() {
               <div
                 key={item.href}
                 className="relative"
-                onMouseEnter={() => item.hasMega && setShowMega(true)}
-                onMouseLeave={() => item.hasMega && setShowMega(false)}
+                onMouseEnter={() => item.hasMega && handleMouseEnter()}
+                onMouseLeave={() => item.hasMega && handleMouseLeave()}
               >
                 {item.hasMega ? (
                   <Link
-                    prefetch={false}
                     href={item.href}
                     className={cn(
                       'relative flex items-center gap-1 rounded-full px-4 py-2 text-sm text-muted-foreground transition-all duration-300 hover:text-foreground z-10',
@@ -242,16 +249,13 @@ export default function Navbar() {
                     <span>{item.label}</span>
                     <ChevronDown className={cn("h-3.5 w-3.5 transition-transform duration-300", showMega && "rotate-180 text-primary")} />
                     {pathname.startsWith(item.href) && (
-                      <motion.span
-                        layoutId="activeNavBubble"
+                      <span
                         className="absolute inset-0 -z-10 rounded-full bg-primary/10 border border-primary/20 shadow-[0_0_15px_rgba(59,130,246,0.08)]"
-                        transition={{ type: 'spring', stiffness: 380, damping: 28 }}
                       />
                     )}
                   </Link>
                 ) : (
                   <Link
-                    prefetch={false}
                     href={item.href}
                     className={cn(
                       'relative block rounded-full px-4 py-2 text-sm text-muted-foreground transition-all duration-300 hover:text-foreground z-10',
@@ -260,10 +264,8 @@ export default function Navbar() {
                   >
                     <span>{item.label}</span>
                     {pathname === item.href && (
-                      <motion.span
-                        layoutId="activeNavBubble"
+                      <span
                         className="absolute inset-0 -z-10 rounded-full bg-primary/10 border border-primary/20 shadow-[0_0_15px_rgba(59,130,246,0.08)]"
-                        transition={{ type: 'spring', stiffness: 380, damping: 28 }}
                       />
                     )}
                   </Link>
@@ -313,19 +315,17 @@ export default function Navbar() {
         </nav>
 
         {/* Mega Menu Dropdown */}
-        <MegaMenu showMega={showMega} setShowMega={setShowMega} />
-      </motion.header>
+        <MegaMenu
+          showMega={showMega}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        />
+      </header>
 
       {/* Mobile Nav Menu Drawer */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            key="mobile-menu"
+      {open && (
+          <div
             id="mobile-nav"
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
             className="fixed left-0 top-[72px] z-40 w-full border-b border-border/60 bg-background/95 px-5 pb-8 pt-3 shadow-xl backdrop-blur-md md:hidden overflow-y-auto max-h-[calc(100vh-72px)]"
           >
             <div className="space-y-4">
@@ -335,7 +335,6 @@ export default function Navbar() {
                   {navItems.map((item) => (
                     <li key={item.href}>
                       <Link
-                        prefetch={false}
                         href={item.href}
                         onClick={() => setOpen(false)}
                         className={cn(
@@ -360,12 +359,11 @@ export default function Navbar() {
                 </Link>
               </div>
             </div>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
 
       {/* Global Search Command Palette */}
-      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+      {searchOpen && <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />}
     </>
   );
 }

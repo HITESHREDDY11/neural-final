@@ -35,7 +35,7 @@ const PANELS = [
     label: '04',
     tag: 'Automation',
     title: 'Industrial\nControl\nPanels',
-    summary: 'Custom-engineered control solutions for GMP-compliant manufacturing lines and facility automation.',
+    summary: 'Custom-engineered control solutions for high-precision manufacturing lines and facility automation.',
     image: '/assets/images/panel_control_panel.jpg',
   },
   {

@@ -145,7 +145,7 @@ export default function ProductsPage({ searchParams }: { searchParams: { categor
               </RevealItem>
               <RevealItem>
                 <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-                  Highly-calibrated interlocking systems, controllers, and transmitters engineered for ISO cleanrooms and critical containment suites. Meets CE, GMP, and ISO certification baselines.
+                  Highly-calibrated interlocking systems, controllers, and transmitters engineered for ISO cleanrooms and critical containment suites. Meets CE and ISO certification baselines.
                 </p>
               </RevealItem>
             </div>
@@ -153,12 +153,8 @@ export default function ProductsPage({ searchParams }: { searchParams: { categor
             {/* Technical Stats */}
             <RevealItem className="flex gap-8 border-l border-border/80 pl-6 md:pl-10 py-2">
               <div>
-                <div className="text-3xl font-extrabold text-primary">7</div>
-                <div className="text-xs text-muted-foreground mt-1 uppercase font-semibold tracking-wider">Modular units</div>
-              </div>
-              <div>
-                <div className="text-3xl font-extrabold text-accent">100%</div>
-                <div className="text-xs text-muted-foreground mt-1 uppercase font-semibold tracking-wider">GMP Compliant</div>
+                <div className="text-3xl font-extrabold text-primary">9+</div>
+                <div className="text-xs text-muted-foreground mt-1 uppercase font-semibold tracking-wider">Product Categories</div>
               </div>
             </RevealItem>
           </Reveal>
@@ -172,7 +168,6 @@ export default function ProductsPage({ searchParams }: { searchParams: { categor
             {categories.map((cat) => (
               <Link
                 key={cat}
-                prefetch={false}
                 href={cat === 'All' ? '/products' : `/products?category=${encodeURIComponent(cat)}`}
                 scroll={false}
                 className={`rounded-full px-5 py-2.5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 border ${

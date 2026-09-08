@@ -260,7 +260,7 @@ export default function IndustriesPage() {
               {/* Consultation CTA */}
               <div className="border-t border-border/40 pt-6 flex flex-wrap gap-4 items-center justify-between">
                 <p className="text-xs text-muted-foreground">
-                  Our systems are pre-calibrated to support GMP/WHO cleanroom qualification checklists.
+                  Our systems are pre-calibrated to support cleanroom qualification checklists.
                 </p>
                 <Link
                   href="/contact"

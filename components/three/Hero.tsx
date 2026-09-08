@@ -8,12 +8,12 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.1, delayChildren: 0.3 } },
+  show: { transition: { staggerChildren: 0.06, delayChildren: 0 } },
 };
 
 const item = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 1, ease } },
+  hidden: { opacity: 0, y: 14 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease } },
 };
 
 export default function Hero() {
@@ -69,8 +69,8 @@ export default function Hero() {
             className="mx-auto md:mx-0 mt-7 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
           >
             Making enterprises safe, smart, and sustainable with
-            precision-engineered automation systems trusted by 60+
-            pharmaceutical leaders.
+            precision-engineered automation systems trusted across leading
+            pharmaceutical facilities.
           </motion.p>
 
           <motion.div variants={item} className="mt-10 flex flex-wrap items-center justify-center md:justify-start gap-4">
