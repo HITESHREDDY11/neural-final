@@ -108,16 +108,16 @@ export const products: Product[] = [
     ],
     related: ['pass-box-interlocking-system', 'air-shower-controller', 'differential-pressure-indicator'],
     photos: [
-      { src: '/assets/products/door-interlocking-system/photo1.jpg', alt: '2-Door Interlocking Control Master Unit' },
-      { src: '/assets/products/door-interlocking-system/photo2.jpg', alt: '3-Door Interlocking Controller with Built-in Purge Timer' },
-      { src: '/assets/products/door-interlocking-system/photo3.jpg', alt: '5-Door Interlocking Control Master Panel' },
-      { src: '/assets/products/door-interlocking-system/photo4.jpg', alt: 'High-Visibility Stainless Steel GO/WAIT Status Indicator Panel' },
-      { src: '/assets/products/door-interlocking-system/photo5.jpg', alt: 'GO/WAIT Display Module with Digital Timer' },
-      { src: '/assets/products/door-interlocking-system/photo6.jpg', alt: 'Touchless IR Sensor Door Release Keypad Panel' },
-      { src: '/assets/products/door-interlocking-system/photo7.jpg', alt: '300 lbs Electromagnetic Door Lock (Center Hole)' },
-      { src: '/assets/products/door-interlocking-system/photo8.jpg', alt: '600 lbs Heavy-Duty Electromagnetic Door Lock' },
-      { src: '/assets/products/door-interlocking-system/photo9.jpg', alt: 'Flush-Mount Emergency Lock Override Release Switch' },
-      { src: '/assets/products/door-interlocking-system/photo10.jpg', alt: '12V/24V DC Power Supply Module (SMPS 1122) for Door Locks' }
+      { src: '/assets/products/door-interlocking-system/photo1.jpg?v=2', alt: '2-Door Interlocking Control Master Unit' },
+      { src: '/assets/products/door-interlocking-system/photo2.jpg?v=2', alt: '3-Door Interlocking Controller with Built-in Purge Timer' },
+      { src: '/assets/products/door-interlocking-system/photo3.jpg?v=2', alt: '5-Door Interlocking Control Master Panel' },
+      { src: '/assets/products/door-interlocking-system/photo4.jpg?v=2', alt: 'High-Visibility Stainless Steel GO/WAIT Status Indicator Panel' },
+      { src: '/assets/products/door-interlocking-system/photo5.jpg?v=2', alt: 'GO/WAIT Display Module with Digital Timer' },
+      { src: '/assets/products/door-interlocking-system/photo6.jpg?v=2', alt: 'Touchless IR Sensor Door Release Keypad Panel' },
+      { src: '/assets/products/door-interlocking-system/photo7.jpg?v=2', alt: '300 lbs Electromagnetic Door Lock (Center Hole)' },
+      { src: '/assets/products/door-interlocking-system/photo8.jpg?v=2', alt: '600 lbs Heavy-Duty Electromagnetic Door Lock' },
+      { src: '/assets/products/door-interlocking-system/photo9.jpg?v=2', alt: 'Flush-Mount Emergency Lock Override Release Switch' },
+      { src: '/assets/products/door-interlocking-system/photo10.jpg?v=2', alt: '12V/24V DC Power Supply Module (SMPS 1122) for Door Locks' }
     ],
   },
   {
@@ -178,16 +178,16 @@ export const products: Product[] = [
     ],
     related: ['door-interlocking-system', 'air-shower-controller'],
     photos: [
-      { src: '/assets/products/pass-box-interlocking-system/photo1.jpg', alt: 'Main Pass Box Interlocking Controller Module' },
-      { src: '/assets/products/pass-box-interlocking-system/photo2.jpg', alt: 'Smart Digital Pass Box Interlocking Controller' },
-      { src: '/assets/products/pass-box-interlocking-system/photo3.jpg', alt: 'Smart+ Pass Box Controller with UV Hour Meter' },
-      { src: '/assets/products/pass-box-interlocking-system/photo4.jpg', alt: 'Static Pass Box Interlocking Unit' },
-      { src: '/assets/products/pass-box-interlocking-system/photo5.jpg', alt: 'UCB Dynamic Pass Box Interlocking Controller' },
-      { src: '/assets/products/pass-box-interlocking-system/photo6.jpg', alt: 'Pass Box Stainless Steel Touch Keypad Panel' },
-      { src: '/assets/products/pass-box-interlocking-system/photo7.jpg', alt: 'Programmable UV Sterilization Delay Timer Module' },
-      { src: '/assets/products/pass-box-interlocking-system/photo8.jpg', alt: 'Germicidal UV Sterilization Lamp Tubes (Cleanroom Grade)' },
-      { src: '/assets/products/pass-box-interlocking-system/photo9.jpg', alt: 'Electronic Ballast / Choke Module for UV Lamp' },
-      { src: '/assets/products/pass-box-interlocking-system/photo10.jpg', alt: 'Infrared Touchless Access Keypad for Pass Box' }
+      { src: '/assets/products/pass-box-interlocking-system/photo1.jpg?v=2', alt: 'Main Pass Box Interlocking Controller Module' },
+      { src: '/assets/products/pass-box-interlocking-system/photo2.jpg?v=2', alt: 'Smart Digital Pass Box Interlocking Controller' },
+      { src: '/assets/products/pass-box-interlocking-system/photo3.jpg?v=2', alt: 'Smart+ Pass Box Controller with UV Hour Meter' },
+      { src: '/assets/products/pass-box-interlocking-system/photo4.jpg?v=2', alt: 'Static Pass Box Interlocking Unit' },
+      { src: '/assets/products/pass-box-interlocking-system/photo5.jpg?v=2', alt: 'UCB Dynamic Pass Box Interlocking Controller' },
+      { src: '/assets/products/pass-box-interlocking-system/photo6.jpg?v=2', alt: 'Pass Box Stainless Steel Touch Keypad Panel' },
+      { src: '/assets/products/pass-box-interlocking-system/photo7.jpg?v=2', alt: 'Programmable UV Sterilization Delay Timer Module' },
+      { src: '/assets/products/pass-box-interlocking-system/photo8.jpg?v=2', alt: 'Germicidal UV Sterilization Lamp Tubes (Cleanroom Grade)' },
+      { src: '/assets/products/pass-box-interlocking-system/photo9.jpg?v=2', alt: 'Electronic Ballast / Choke Module for UV Lamp' },
+      { src: '/assets/products/pass-box-interlocking-system/photo10.jpg?v=2', alt: 'Infrared Touchless Access Keypad for Pass Box' }
     ],
   },
   {
@@ -379,12 +379,12 @@ export const products: Product[] = [
     ],
     related: ['door-interlocking-system', 'temperature-rh-indicator', 'temperature-rh-transmitter'],
     photos: [
-      { src: '/assets/products/differential-pressure-indicator/photo1.jpg', alt: 'Digital Differential Pressure Indicator (DPI) Front Panel' },
-      { src: '/assets/products/differential-pressure-indicator/photo2.jpg', alt: 'Flush-Mount Round Differential Pressure Indicator (Stainless Steel Bezel)' },
-      { src: '/assets/products/differential-pressure-indicator/photo3.jpg', alt: 'Flameproof (FLP) Differential Pressure / Interlock Indicator' },
-      { src: '/assets/products/differential-pressure-indicator/photo4.jpg', alt: 'Stainless Steel Pressure Port Cable Gland (19mm)' },
-      { src: '/assets/products/differential-pressure-indicator/photo5.jpg', alt: 'Flameproof Enclosure & Terminal Junction Box' },
-      { src: '/assets/products/differential-pressure-indicator/photo6.jpg', alt: 'Flameproof Blower Trip & Alarm Indicator Module' }
+      { src: '/assets/products/differential-pressure-indicator/photo1.jpg?v=2', alt: 'Digital Differential Pressure Indicator (DPI) Front Panel' },
+      { src: '/assets/products/differential-pressure-indicator/photo2.jpg?v=2', alt: 'Flush-Mount Round Differential Pressure Indicator (Stainless Steel Bezel)' },
+      { src: '/assets/products/differential-pressure-indicator/photo3.jpg?v=2', alt: 'Flameproof (FLP) Differential Pressure / Interlock Indicator' },
+      { src: '/assets/products/differential-pressure-indicator/photo4.jpg?v=2', alt: 'Stainless Steel Pressure Port Cable Gland (19mm)' },
+      { src: '/assets/products/differential-pressure-indicator/photo5.jpg?v=2', alt: 'Flameproof Enclosure & Terminal Junction Box' },
+      { src: '/assets/products/differential-pressure-indicator/photo6.jpg?v=2', alt: 'Flameproof Blower Trip & Alarm Indicator Module' }
     ],
   },
   {
