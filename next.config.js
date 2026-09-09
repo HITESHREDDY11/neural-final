@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
+  trailingSlash: false,
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -7,29 +9,9 @@ const nextConfig = {
   compress: true,
   // Use SWC-based minifier (faster than Terser)
   swcMinify: true,
-  // Image optimization — WebP/AVIF conversion + responsive sizes
+  // Static export serves optimized images directly without requiring a serverless Node.js backend
   images: {
-    formats: ['image/avif', 'image/webp'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
-    minimumCacheTTL: 31536000, // 1 year cache for optimized images
-  },
-  // Aggressive HTTP cache headers for all static assets
-  // After the first visit, everything loads from disk — zero network cost
-  async headers() {
-    return [
-      {
-        source: '/_next/static/:path*',
-        headers: [
-          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
-        ],
-      },
-      {
-        source: '/assets/:path*',
-        headers: [
-          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
-        ],
-      },
-    ];
+    unoptimized: true,
   },
   experimental: {
     // Tree-shake large icon and animation libraries + all Radix UI packages
@@ -49,3 +31,4 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
+
