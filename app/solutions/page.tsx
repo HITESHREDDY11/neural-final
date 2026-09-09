@@ -184,14 +184,6 @@ export default function SolutionsPage() {
             <div className="lg:col-span-7 rounded-2xl border border-primary/20 bg-card/35 p-8 backdrop-blur-md relative overflow-hidden bp-grid-fine flex flex-col min-h-[480px]">
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-transparent pointer-events-none" />
 
-              {/* Status Header */}
-              <div className="w-full flex justify-between items-center text-[9px] font-mono text-muted-foreground/60 border-b border-border/40 pb-4 mb-8">
-                <span>SIMULATION_CONSOLE: {activeTab.toUpperCase()}_v2.4</span>
-                <span className="flex items-center gap-1.5 text-accent">
-                  <span className={`h-1.5 w-1.5 rounded-full bg-accent ${isPlaying && 'animate-ping'}`} />
-                  {isPlaying ? 'SEQUENCE_SIMULATION_ACTIVE' : 'SIMULATION_IDLE'}
-                </span>
-              </div>
 
               {/* Main SVG Schematic */}
               <div className="flex-grow flex items-center justify-center py-6">
@@ -352,7 +344,7 @@ export default function SolutionsPage() {
           <div className="grid gap-8 md:grid-cols-3">
             {activeSol.technicalHighlights.map((hl, idx) => (
               <div key={idx} className="rounded-xl border border-border/80 bg-card/40 p-6 backdrop-blur-sm">
-                <span className="text-xs font-mono text-primary font-bold">SPEC_HIGHLIGHT_0{idx+1}</span>
+                <span className="text-xs font-semibold text-primary">Feature 0{idx+1}</span>
                 <p className="text-sm font-semibold text-foreground/90 mt-4 leading-relaxed">{hl}</p>
               </div>
             ))}

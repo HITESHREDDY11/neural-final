@@ -21,86 +21,6 @@ const iconMap = {
   Binary: Binary
 };
 
-function IndustrySVGGraphic({ id }: { id: string }) {
-  if (id === 'pharmaceutical') {
-    return (
-      <svg className="w-full h-full stroke-primary/30 fill-none" viewBox="0 0 200 100">
-        <rect x="20" y="20" width="70" height="60" rx="3" strokeDasharray="2,2" />
-        <rect x="110" y="20" width="70" height="60" rx="3" />
-        <circle cx="55" cy="50" r="10" className="stroke-accent" />
-        <path d="M 55 40 L 55 60 M 45 50 L 65 50" />
-        {/* Pills */}
-        <path d="M 140 40 L 150 50" strokeWidth="4" strokeLinecap="round" className="stroke-primary" />
-        <path d="M 145 55 L 155 65" strokeWidth="4" strokeLinecap="round" className="stroke-accent" />
-        {/* Connection flow arrow */}
-        <path d="M 95 50 L 105 50" strokeWidth="2" className="stroke-primary" />
-        <polygon points="105,50 101,47 101,53" className="fill-primary" />
-      </svg>
-    );
-  }
-  if (id === 'biotechnology') {
-    return (
-      <svg className="w-full h-full stroke-primary/30 fill-none" viewBox="0 0 200 100">
-        {/* DNA Helix */}
-        <path d="M 20 50 Q 40 20 60 50 T 100 50 T 140 50 T 180 50" className="stroke-primary/50 stroke-2" />
-        <path d="M 20 50 Q 40 80 60 50 T 100 50 T 140 50 T 180 50" className="stroke-accent/50 stroke-2" />
-        {/* Connectors */}
-        <line x1="40" y1="35" x2="40" y2="65" strokeDasharray="2,2" />
-        <line x1="80" y1="35" x2="80" y2="65" strokeDasharray="2,2" />
-        <line x1="120" y1="35" x2="120" y2="65" strokeDasharray="2,2" />
-        <line x1="160" y1="35" x2="160" y2="65" strokeDasharray="2,2" />
-        {/* Biohazard shield outline */}
-        <circle cx="100" cy="50" r="28" className="stroke-accent/20 animate-pulse" />
-      </svg>
-    );
-  }
-  if (id === 'semiconductor') {
-    return (
-      <svg className="w-full h-full stroke-primary/30 fill-none" viewBox="0 0 200 100">
-        <rect x="40" y="10" width="120" height="80" rx="4" />
-        {/* Grid pins */}
-        <line x1="50" y1="10" x2="50" y2="90" strokeDasharray="1,2" />
-        <line x1="70" y1="10" x2="70" y2="90" strokeDasharray="1,2" />
-        <line x1="90" y1="10" x2="90" y2="90" strokeDasharray="1,2" />
-        <line x1="110" y1="10" x2="110" y2="90" strokeDasharray="1,2" />
-        <line x1="130" y1="10" x2="130" y2="90" strokeDasharray="1,2" />
-        <line x1="150" y1="10" x2="150" y2="90" strokeDasharray="1,2" />
-
-        <line x1="40" y1="30" x2="160" y2="30" strokeDasharray="1,2" />
-        <line x1="40" y1="50" x2="160" y2="50" strokeDasharray="1,2" />
-        <line x1="40" y1="70" x2="160" y2="70" strokeDasharray="1,2" />
-
-        {/* Center CPU die */}
-        <rect x="80" y="35" width="40" height="30" rx="2" className="stroke-primary bg-primary/10" />
-        <circle cx="100" cy="50" r="4" className="fill-accent animate-pulse" />
-      </svg>
-    );
-  }
-  if (id === 'hospitals') {
-    return (
-      <svg className="w-full h-full stroke-primary/30 fill-none" viewBox="0 0 200 100">
-        <rect x="15" y="15" width="80" height="70" rx="3" />
-        <rect x="105" y="15" width="80" height="70" rx="3" />
-        {/* Isolation bed */}
-        <path d="M 30 65 L 80 65 M 35 50 L 35 65 M 75 55 L 75 65" />
-        <circle cx="45" cy="50" r="3" className="stroke-primary" />
-        {/* ECG pulse line in right box */}
-        <path d="M 115 50 L 130 50 L 135 25 L 140 75 L 145 45 L 150 55 L 155 50 L 175 50" className="stroke-accent stroke-2 animate-pulse" />
-      </svg>
-    );
-  }
-  // Fallback schematic
-  return (
-    <svg className="w-full h-full stroke-primary/30 fill-none" viewBox="0 0 200 100">
-      <rect x="20" y="20" width="160" height="60" rx="4" />
-      <circle cx="50" cy="50" r="15" />
-      <circle cx="150" cy="50" r="15" strokeDasharray="2,2" />
-      <line x1="65" y1="50" x2="135" y2="50" strokeDasharray="3,3" />
-      <circle cx="100" cy="50" r="4" className="fill-primary animate-ping" />
-    </svg>
-  );
-}
-
 export default function IndustriesPage() {
   const [activeIdx, setActiveIdx] = useState(0);
   const activeInd = industries[activeIdx];
@@ -190,15 +110,6 @@ export default function IndustriesPage() {
             <div className="lg:col-span-8 space-y-8 rounded-2xl border border-primary/20 bg-card/35 p-8 backdrop-blur-md relative overflow-hidden bp-grid-fine">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent pointer-events-none" />
 
-              {/* Technical bar */}
-              <div className="flex justify-between items-center text-[9px] font-mono text-muted-foreground/60 border-b border-border/40 pb-4">
-                <span>SEC_MODULE: {activeInd.title.toUpperCase()}_ENV_VALIDATION</span>
-                <span className="flex items-center gap-1 text-primary">
-                  <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-                  STABLE_STATE
-                </span>
-              </div>
-
               {/* Graphic + Info Header */}
               <div className="grid gap-6 md:grid-cols-12 items-center">
                 <div className="md:col-span-7 space-y-4">
@@ -216,12 +127,6 @@ export default function IndustriesPage() {
                   <div className="text-3xl font-extrabold text-accent mt-2">{activeInd.stats.value}</div>
                   <span className="text-xs font-semibold text-foreground/80 mt-1 uppercase tracking-wider">{activeInd.stats.label}</span>
                 </div>
-              </div>
-
-              {/* Interactive SVG blueprint of the sector */}
-              <div className="h-44 w-full rounded-xl border border-border/60 bg-secondary/5 flex items-center justify-center p-4 relative">
-                <IndustrySVGGraphic id={activeInd.id} />
-                <span className="absolute bottom-2 left-2 text-[8px] font-mono text-muted-foreground/30">SCHEMATIC: SEC-{activeInd.id.toUpperCase()}</span>
               </div>
 
               {/* Parallel Matrices: Challenges vs Solutions */}

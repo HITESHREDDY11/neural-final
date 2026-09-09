@@ -157,14 +157,6 @@ export default function TechnologyPage() {
             <div className="lg:col-span-7 rounded-2xl border border-primary/20 bg-card/35 p-8 backdrop-blur-md relative overflow-hidden bp-grid-fine flex flex-col min-h-[520px]">
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-transparent pointer-events-none" />
 
-              {/* Status Header */}
-              <div className="w-full flex justify-between items-center text-[11px] font-mono text-muted-foreground/60 border-b border-border/40 pb-4 mb-6">
-                <span className="tracking-widest">DIAGRAM_SCHEMATIC: {activeTopic.diagramTitle.toUpperCase()}</span>
-                <span className="flex items-center gap-1.5 text-primary font-bold">
-                  <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-                  CLICK_NODES_TO_DECODE
-                </span>
-              </div>
 
               {/* Interactive Node Map Canvas */}
               <div className="flex-grow relative border border-border/60 rounded-xl bg-secondary/5 overflow-hidden" style={{ minHeight: '280px' }}>
@@ -256,8 +248,8 @@ export default function TechnologyPage() {
                   }}
                 >
                   <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-primary">
-                    <Info className="h-4 w-4 text-primary animate-pulse" />
-                    <span>{selectedNode !== null ? `NODE: ${activeTopic.nodes[selectedNode].label.toUpperCase()}` : 'Telemetry Node Info'}</span>
+                    <Info className="h-4 w-4 text-primary" />
+                    <span>{selectedNode !== null ? activeTopic.nodes[selectedNode].label : 'Architecture Node Details'}</span>
                   </div>
                   <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
                     {selectedNode !== null 

@@ -115,11 +115,6 @@ export default function ManufacturingPage() {
 
             {/* Left: SVG factory floor plan */}
             <div className="lg:col-span-7 rounded-2xl border border-primary/20 bg-card/30 p-6 backdrop-blur-md relative overflow-hidden bp-grid-fine">
-              <div className="w-full flex justify-between items-center text-[9px] font-mono text-muted-foreground/60 border-b border-border/40 pb-4 mb-6">
-                <span>FACILITY_MAP: COMPLEX_A_SEC_2</span>
-                <span className="text-primary animate-pulse">● LIVE_HOTSPOTS</span>
-              </div>
-
               {/* Layout SVG Canvas */}
               <div className="relative h-96 w-full border border-border/60 bg-secondary/5 rounded-xl overflow-hidden">
                 <svg className="w-full h-full stroke-primary/30 fill-none" viewBox="0 0 400 300">
@@ -131,11 +126,11 @@ export default function ManufacturingPage() {
                   <line x1="280" y1="150" x2="280" y2="290" strokeDasharray="3,3" />
 
                   {/* Room labels */}
-                  <text x="25" y="25" className="fill-muted-foreground font-mono text-[7px]" stroke="none">01_SMT_ASSEMBLY</text>
-                  <text x="215" y="25" className="fill-muted-foreground font-mono text-[7px]" stroke="none">02_MANUAL_INTEGRATION</text>
-                  <text x="25" y="165" className="fill-muted-foreground font-mono text-[7px]" stroke="none">03_CALIBRATION_ROOM</text>
-                  <text x="165" y="165" className="fill-muted-foreground font-mono text-[7px]" stroke="none">04_THERMAL_BURN_IN</text>
-                  <text x="295" y="165" className="fill-muted-foreground font-mono text-[7px]" stroke="none">05_QA_DISPATCH</text>
+                  <text x="25" y="25" className="fill-muted-foreground text-[8px] font-medium" stroke="none">SMT Assembly</text>
+                  <text x="215" y="25" className="fill-muted-foreground text-[8px] font-medium" stroke="none">Manual Integration</text>
+                  <text x="25" y="165" className="fill-muted-foreground text-[8px] font-medium" stroke="none">Calibration Lab</text>
+                  <text x="165" y="165" className="fill-muted-foreground text-[8px] font-medium" stroke="none">Thermal Burn-In</text>
+                  <text x="295" y="165" className="fill-muted-foreground text-[8px] font-medium" stroke="none">QA & Dispatch</text>
                 </svg>
 
                 {/* Hotspot boxes overlays */}
