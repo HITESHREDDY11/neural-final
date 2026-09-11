@@ -89,60 +89,60 @@ export default function ProductDetailClient({ product }: { product: Product }) {
                   </div>
                 </RevealItem>
                 <RevealItem>
-                  <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-5xl leading-none">
+                  <h1 className="mt-4 text-2xl min-[380px]:text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground leading-tight">
                     {product.title}
                   </h1>
                 </RevealItem>
                 <RevealItem>
-                  <p className="mt-6 text-base leading-relaxed text-muted-foreground">
+                  <p className="mt-4 sm:mt-6 text-sm sm:text-base leading-relaxed text-muted-foreground">
                     {product.longOverview}
                   </p>
                 </RevealItem>
               </Reveal>
 
               {/* Quick Specs summary */}
-              <Reveal className="border-y border-border/60 py-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <Reveal className="border-y border-border/60 py-5 sm:py-6 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
                 {product.specs[0]?.items.slice(0, 4).map((spec, idx) => (
                   <RevealItem key={idx} className="flex flex-col">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">{spec.label}</span>
-                    <span className="text-sm font-semibold text-foreground mt-1">{spec.value}</span>
+                    <span className="text-xs sm:text-sm font-semibold text-foreground mt-1">{spec.value}</span>
                   </RevealItem>
                 ))}
               </Reveal>
 
               {/* Action buttons */}
-              <Reveal className="flex flex-wrap gap-4 pt-2">
-                <RevealItem>
+              <Reveal className="flex flex-wrap gap-3 sm:gap-4 pt-2">
+                <RevealItem className="w-full sm:w-auto">
                   <a
                     href="#wiring-inquiry"
                     onClick={handleCatalogRequest}
-                    className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-8 text-sm font-semibold text-primary-foreground hover:bg-primary/85 shadow-lg shadow-primary/20"
+                    className="inline-flex min-h-[44px] w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-primary px-6 sm:px-8 py-3 text-xs sm:text-sm font-semibold text-primary-foreground hover:bg-primary/85 shadow-lg shadow-primary/20 text-center active:scale-95 transition-all"
                   >
                     <span>Request Product Catalog & Inquiry</span>
-                    <ArrowRight className="h-4 w-4" />
+                    <ArrowRight className="h-4 w-4 shrink-0" />
                   </a>
                 </RevealItem>
                 {product.downloads && product.downloads.some(d => d.requestCatalog || !d.filename) ? (
-                  <RevealItem>
+                  <RevealItem className="w-full sm:w-auto">
                     <a
                       href="#wiring-inquiry"
                       onClick={handleCatalogRequest}
-                      className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-primary/40 bg-card/60 px-6 text-sm font-semibold text-foreground hover:bg-secondary/40 hover:border-primary transition-all shadow-md backdrop-blur-sm"
+                      className="inline-flex min-h-[44px] w-full sm:w-auto items-center justify-center gap-2 rounded-full border border-primary/40 bg-card/60 px-5 sm:px-6 py-3 text-xs sm:text-sm font-semibold text-foreground hover:bg-secondary/40 hover:border-primary transition-all shadow-md backdrop-blur-sm text-center active:scale-95"
                     >
-                      <FileText className="h-4 w-4 text-primary" />
+                      <FileText className="h-4 w-4 text-primary shrink-0" />
                       <span>Request Full Specification Sheet</span>
                     </a>
                   </RevealItem>
                 ) : product.downloads && product.downloads.length > 0 && product.downloads[0].filename ? (
-                  <RevealItem>
+                  <RevealItem className="w-full sm:w-auto">
                     <a
                       href={product.downloads[0].filename}
                       download
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-primary/40 bg-card/60 px-6 text-sm font-semibold text-foreground hover:bg-secondary/40 hover:border-primary transition-all shadow-md backdrop-blur-sm"
+                      className="inline-flex min-h-[44px] w-full sm:w-auto items-center justify-center gap-2 rounded-full border border-primary/40 bg-card/60 px-5 sm:px-6 py-3 text-xs sm:text-sm font-semibold text-foreground hover:bg-secondary/40 hover:border-primary transition-all shadow-md backdrop-blur-sm text-center active:scale-95"
                     >
-                      <Download className="h-4 w-4 text-primary" />
+                      <Download className="h-4 w-4 text-primary shrink-0" />
                       <span>Download Manual (PDF)</span>
                     </a>
                   </RevealItem>
@@ -252,7 +252,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
 
           {/* Main image container */}
           <div
-            className="flex flex-col items-center gap-4 w-full max-w-5xl px-16"
+            className="flex flex-col items-center gap-4 w-full max-w-5xl px-3 sm:px-16"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Large image */}

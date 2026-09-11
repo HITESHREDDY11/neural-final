@@ -50,7 +50,7 @@ function FeatureCard({
         inView ? { opacity: 1, x: 0, y: 0, filter: 'blur(0px)' } : {}
       }
       transition={{ duration: 0.88, ease, delay: index * 0.12 }}
-      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/40 p-8 transition-shadow duration-500 hover:shadow-[0_28px_70px_-24px_rgba(59,130,246,0.2)]"
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/40 p-5 sm:p-6 md:p-8 transition-shadow duration-500 hover:shadow-[0_28px_70px_-24px_rgba(59,130,246,0.2)]"
     >
       {/* Top accent line — draws in on scroll entry */}
       <div className="absolute inset-x-0 top-0 h-[2px] overflow-hidden rounded-t-2xl">
@@ -130,7 +130,7 @@ export default function Features() {
   return (
     <section
       id="why"
-      className="relative mx-auto max-w-7xl px-6 pt-16 pb-16 sm:px-10 lg:px-16 lg:pt-20 lg:pb-20"
+      className="relative mx-auto max-w-7xl px-4 pt-14 pb-14 sm:px-10 lg:px-16 lg:pt-20 lg:pb-20"
     >
       {/* Background glow */}
       <div className="pointer-events-none absolute left-1/2 top-0 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-primary/5 blur-[96px]" />
@@ -146,12 +146,12 @@ export default function Features() {
           </div>
         </RevealItem>
         <RevealItem>
-          <h2 className="mt-5 text-3xl font-semibold sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
+          <h2 className="mt-4 sm:mt-5 text-3xl font-semibold sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
             Built on Trust &amp; Precision
           </h2>
         </RevealItem>
         <RevealItem>
-          <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground">
+          <p className="mt-4 sm:mt-5 max-w-lg text-sm sm:text-base leading-relaxed text-muted-foreground">
             Three principles guide every system we build — quality without
             compromise, engineering intelligence, and pharmaceutical-grade
             precision.
@@ -160,26 +160,28 @@ export default function Features() {
       </Reveal>
 
       {/* Cards — consolidated scroll trigger */}
-      <div ref={ref} className="mt-16 grid gap-6 md:grid-cols-3">
+      <div ref={ref} className="mt-12 sm:mt-16 grid gap-5 sm:gap-6 md:grid-cols-3">
         {features.map((f, i) => (
           <FeatureCard key={f.title} f={f} index={i} inView={inView} />
         ))}
       </div>
 
       {/* Stats band */}
-      <Reveal className="mt-20">
+      <Reveal className="mt-16 sm:mt-20">
         <RevealItem>
-          <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-5">
+          <div className="grid grid-cols-2 gap-3 sm:gap-6 md:grid-cols-3 lg:grid-cols-5">
             {[
               { num: 'Global', label: 'Trusted Reach', sub: 'Across India & Abroad' },
               { num: '9+', label: 'Product Categories', sub: 'Cleanroom Certified' },
               { num: 'Expert', label: 'Engineering Team', sub: 'Dedicated Specialists' },
               { num: '100%', label: 'Quality Assured', sub: 'Pharma Grade' },
               { num: '2019', label: 'Established', sub: 'Years of Expertise' },
-            ].map((s) => (
+            ].map((s, sIdx) => (
               <div
                 key={s.label}
-                className="group relative flex flex-col items-center justify-center rounded-2xl border border-white/[0.06] bg-white/[0.05] px-6 py-10 text-center transition-all duration-500 hover:-translate-y-1.5 hover:border-primary/30 hover:bg-white/[0.08] hover:shadow-[0_20px_40px_-15px_rgba(59,130,246,0.12)]"
+                className={`group relative flex flex-col items-center justify-center rounded-2xl border border-white/[0.06] bg-white/[0.05] px-4 py-6 sm:px-6 sm:py-10 text-center transition-all duration-500 hover:-translate-y-1.5 hover:border-primary/30 hover:bg-white/[0.08] hover:shadow-[0_20px_40px_-15px_rgba(59,130,246,0.12)] ${
+                  sIdx === 4 ? 'col-span-2 sm:col-span-1' : ''
+                }`}
               >
                 {/* Subtle top light bar on hover */}
                 <div className="absolute inset-x-0 top-0 h-[2px] scale-x-0 rounded-t-2xl bg-gradient-to-r from-primary to-cyan-400 transition-transform duration-500 group-hover:scale-x-100" />
@@ -187,13 +189,13 @@ export default function Features() {
                 {/* Radial glow background on hover */}
                 <div className="pointer-events-none absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,0.06),transparent_50%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-                <span className="bg-gradient-to-r from-primary to-cyan-400 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent transition-all duration-300 group-hover:scale-105">
+                <span className="bg-gradient-to-r from-primary to-cyan-400 bg-clip-text text-3xl sm:text-4xl font-extrabold tracking-tight text-transparent transition-all duration-300 group-hover:scale-105">
                   {s.num}
                 </span>
-                <span className="mt-3 text-sm font-semibold text-foreground">
+                <span className="mt-2.5 sm:mt-3 text-xs sm:text-sm font-semibold text-foreground">
                   {s.label}
                 </span>
-                <span className="mt-1 text-xs text-muted-foreground group-hover:text-muted-foreground/80">
+                <span className="mt-1 text-[11px] sm:text-xs text-muted-foreground group-hover:text-muted-foreground/80">
                   {s.sub}
                 </span>
               </div>

@@ -383,7 +383,7 @@ export default function CTA() {
   };
 
   return (
-    <section id="contact" className="mx-auto max-w-7xl px-6 py-16 sm:px-10 lg:px-16 lg:py-20">
+    <section id="contact" className="mx-auto max-w-7xl px-4 py-12 sm:px-10 lg:px-16 lg:py-20">
       <Reveal>
         <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-card shadow-2xl shadow-primary/5">
           <div
@@ -392,9 +392,9 @@ export default function CTA() {
           />
           <div className="pointer-events-none absolute inset-0 bp-grid-fine opacity-30" />
 
-          <div className="relative grid lg:grid-cols-12 gap-8 lg:gap-4">
+          <div className="relative grid lg:grid-cols-12 gap-6 lg:gap-4">
             {/* Left — contact info */}
-            <div className="lg:col-span-5 flex flex-col justify-center p-8 sm:p-12 lg:p-14">
+            <div className="lg:col-span-5 flex flex-col justify-center p-5 sm:p-10 lg:p-14">
               <RevealItem>
                 <div className="flex items-center gap-3">
                   <span className="h-px w-10 bg-primary/40" />
@@ -402,41 +402,41 @@ export default function CTA() {
                 </div>
               </RevealItem>
               <RevealItem>
-                <h2 className="mt-5 text-3xl font-semibold tracking-[-0.02em] text-foreground sm:text-4xl lg:text-[2.5rem] lg:leading-[1.15]">
+                <h2 className="mt-4 sm:mt-5 text-2xl min-[380px]:text-3xl font-semibold tracking-[-0.02em] text-foreground sm:text-4xl lg:text-[2.5rem] lg:leading-[1.15]">
                   Let&apos;s Build Something Remarkable
                 </h2>
               </RevealItem>
               <RevealItem>
-                <p className="mt-5 max-w-md text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-4 sm:mt-5 max-w-md text-sm leading-relaxed text-muted-foreground">
                   Talk to our team about custom automation solutions tailored for your enterprise.
                   We respond within 24 hours.
                 </p>
               </RevealItem>
               <RevealItem>
-                <div className="mt-10 space-y-4">
+                <div className="mt-8 sm:mt-10 space-y-4">
                   <a
                     href="mailto:sales@neuralindustrialautmation.in"
                     className="group flex items-center gap-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
-                    <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <span className="flex h-10 w-10 min-h-[40px] min-w-[40px] items-center justify-center rounded-lg bg-primary/10 text-primary shrink-0">
                       <Mail className="h-4 w-4" />
                     </span>
-                    sales@neuralindustrialautmation.in
+                    <span className="break-all">sales@neuralindustrialautmation.in</span>
                   </a>
                   <a
                     href="tel:+918977724519"
                     className="group flex items-center gap-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
-                    <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <span className="flex h-10 w-10 min-h-[40px] min-w-[40px] items-center justify-center rounded-lg bg-primary/10 text-primary shrink-0">
                       <Phone className="h-4 w-4" />
                     </span>
-                    +91 89777 24519
+                    <span>+91 89777 24519</span>
                   </a>
                   <div className="flex items-start gap-3 text-sm text-muted-foreground">
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <span className="flex h-10 w-10 min-h-[40px] min-w-[40px] shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
                       <MapPin className="h-4 w-4" />
                     </span>
-                    <span>
+                    <span className="leading-relaxed">
                       2-1/126, N NCL Ln, Ruby Block, Satyam Enclave,
                       <br />
                       Kompally, Hyderabad, Telangana 500014
@@ -447,48 +447,48 @@ export default function CTA() {
             </div>
 
             {/* Right — form */}
-            <div className="lg:col-span-7 flex items-center p-6 sm:p-10 lg:p-12">
+            <div className="lg:col-span-7 flex items-center p-3.5 sm:p-8 lg:p-12">
               <RevealItem className="w-full">
                 <div
-                  className="w-full rounded-2xl border border-border/60 bg-secondary/95 p-6 sm:p-8 shadow-2xl relative overflow-hidden"
+                  className="w-full rounded-2xl border border-border/60 bg-secondary/95 p-4 sm:p-8 shadow-2xl relative overflow-hidden"
                   style={{
                     boxShadow:
                       '0 20px 40px -15px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.05)',
                   }}
                 >
                   {/* Form header selector tabs */}
-                  <div className="flex border-b border-border/60 pb-5 mb-5 gap-2 flex-wrap">
+                  <div className="flex border-b border-border/60 pb-4 mb-5 gap-2 flex-wrap">
                     <button
                       onClick={() => { setInquiryType('general'); handleReset(); }}
-                      className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-wider transition-all border ${
+                      className={`flex min-h-[44px] items-center gap-1.5 rounded-full px-4 py-2.5 text-[11px] font-semibold uppercase tracking-wider transition-all border active:scale-95 ${
                         inquiryType === 'general'
                           ? 'bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20'
                           : 'bg-secondary/20 text-muted-foreground border-border/80 hover:bg-secondary/40'
                       }`}
                     >
-                      <MessageSquare className="h-3 w-3" />
+                      <MessageSquare className="h-3.5 w-3.5" />
                       <span>General</span>
                     </button>
                     <button
                       onClick={() => { setInquiryType('custom'); handleReset(); }}
-                      className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-wider transition-all border ${
+                      className={`flex min-h-[44px] items-center gap-1.5 rounded-full px-4 py-2.5 text-[11px] font-semibold uppercase tracking-wider transition-all border active:scale-95 ${
                         inquiryType === 'custom'
                           ? 'bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20'
                           : 'bg-secondary/20 text-muted-foreground border-border/80 hover:bg-secondary/40'
                       }`}
                     >
-                      <Cog className="h-3 w-3" />
+                      <Cog className="h-3.5 w-3.5" />
                       <span>Custom Spec</span>
                     </button>
                     <button
                       onClick={() => { setInquiryType('dealer'); handleReset(); }}
-                      className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-wider transition-all border ${
+                      className={`flex min-h-[44px] items-center gap-1.5 rounded-full px-4 py-2.5 text-[11px] font-semibold uppercase tracking-wider transition-all border active:scale-95 ${
                         inquiryType === 'dealer'
                           ? 'bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20'
                           : 'bg-secondary/20 text-muted-foreground border-border/80 hover:bg-secondary/40'
                       }`}
                     >
-                      <UserPlus className="h-3 w-3" />
+                      <UserPlus className="h-3.5 w-3.5" />
                       <span>Dealer</span>
                     </button>
                   </div>

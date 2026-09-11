@@ -74,12 +74,12 @@ export default function AboutPage() {
               </div>
             </RevealItem>
             <RevealItem>
-              <h1 className="mt-5 text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+              <h1 className="mt-4 sm:mt-5 text-3xl min-[380px]:text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
                 Redefining Cleanroom <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Precision</span>
               </h1>
             </RevealItem>
             <RevealItem>
-              <p className="mt-6 text-base leading-relaxed text-muted-foreground">
+              <p className="mt-4 sm:mt-6 text-sm sm:text-base leading-relaxed text-muted-foreground">
                 Established in 2019, Neural Industrial Automation has grown from a specialized engineering firm into a premier cleanroom automation partner trusted across leading pharmaceutical facilities and technology laboratories.
               </p>
             </RevealItem>
@@ -133,7 +133,7 @@ export default function AboutPage() {
               </div>
             </RevealItem>
             <RevealItem>
-              <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+              <h2 className="mt-4 text-2xl min-[400px]:text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
                 Driving innovation <span className="text-primary font-normal">•</span> Delivering impact <span className="text-primary font-normal">•</span> Building the future.
               </h2>
             </RevealItem>
@@ -243,7 +243,7 @@ export default function AboutPage() {
                 <RevealItem>
                   {/* Official Siemens System Integrator Authorization Badge Block */}
                   <div className="mt-6 w-full max-w-md rounded-xl border border-border/60 p-2 bg-secondary/30 backdrop-blur-md shadow-xl overflow-hidden">
-                    <div className="relative p-4 sm:p-5 rounded-lg bg-[#efefe8] overflow-hidden border border-black/10">
+                    <div className="relative p-3 sm:p-5 rounded-lg bg-[#efefe8] overflow-hidden border border-black/10">
                       
                       {/* Faint repeating official watermark background */}
                       <div className="absolute inset-0 opacity-[0.06] pointer-events-none select-none overflow-hidden font-mono text-[8px] text-black leading-relaxed tracking-wider py-1 px-1 whitespace-nowrap">
@@ -255,16 +255,16 @@ export default function AboutPage() {
                       </div>
 
                       {/* Official Authorization Badge Grid (Matching Heights & Proportions) */}
-                      <div className="relative z-10 grid grid-cols-2 gap-3 sm:gap-4 items-stretch">
+                      <div className="relative z-10 grid grid-cols-2 gap-2 sm:gap-4 items-stretch">
                         
                         {/* Official Authorization Badge Block 1 (Left: Authorized System Integrator) */}
-                        <div className="bg-[#dcdcd4] p-4 sm:p-5 rounded-sm text-left shadow-sm flex flex-col justify-between border border-black/5 min-h-[120px] sm:min-h-[140px]">
-                          <div className="text-xs sm:text-sm font-extrabold tracking-tight text-[#1a1a1a] leading-tight font-sans">
+                        <div className="bg-[#dcdcd4] p-3 sm:p-5 rounded-sm text-left shadow-sm flex flex-col justify-between border border-black/5 min-h-[110px] sm:min-h-[140px]">
+                          <div className="text-[11px] min-[360px]:text-xs sm:text-sm font-extrabold tracking-tight text-[#1a1a1a] leading-tight font-sans">
                             Authorized<br />
                             System<br />
                             Integrator
                           </div>
-                          <div className="mt-3 text-[10px] sm:text-xs font-semibold text-[#404040] leading-snug font-sans">
+                          <div className="mt-2 sm:mt-3 text-[9px] min-[360px]:text-[10px] sm:text-xs font-semibold text-[#404040] leading-snug font-sans">
                             Industrial<br />
                             Automation &<br />
                             Communication
@@ -272,8 +272,8 @@ export default function AboutPage() {
                         </div>
 
                         {/* Official Authorization Badge Block 2 (Right: SIEMENS) */}
-                        <div className="bg-[#e5e5de] p-4 sm:p-5 rounded-sm flex items-center justify-center shadow-sm border border-black/5 min-h-[120px] sm:min-h-[140px]">
-                          <span className="text-xl sm:text-2xl lg:text-3xl font-black tracking-[0.18em] text-[#111111] font-sans text-center">
+                        <div className="bg-[#e5e5de] p-3 sm:p-5 rounded-sm flex items-center justify-center shadow-sm border border-black/5 min-h-[110px] sm:min-h-[140px]">
+                          <span className="text-lg min-[360px]:text-xl sm:text-2xl lg:text-3xl font-black tracking-[0.14em] sm:tracking-[0.18em] text-[#111111] font-sans text-center">
                             SIEMENS
                           </span>
                         </div>

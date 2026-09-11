@@ -118,7 +118,7 @@ export default function Scene({ inView = true }: { inView?: boolean }) {
         depth: true,
       }}
       camera={{ position: [0, 3, 7.5], fov: 45, near: 0.5, far: 60 }}
-      style={{ background: 'transparent' }}
+      style={{ background: 'transparent', touchAction: 'pan-y' }}
     >
       <Suspense fallback={null}>
         <SceneContents inView={inView} />

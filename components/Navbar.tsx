@@ -298,18 +298,18 @@ export default function Navbar() {
           <div className="flex items-center gap-2 md:hidden">
             <button
               onClick={() => setSearchOpen(true)}
-              className="flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+              className="flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-border/60 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground active:scale-95"
               aria-label="Search"
             >
-              <Search className="h-4 w-4 text-primary" />
+              <Search className="h-4.5 w-4.5 text-primary" />
             </button>
             <button
               onClick={() => setOpen((o) => !o)}
-              className="flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 text-foreground transition-colors hover:bg-secondary"
+              className="flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-lg border border-border/60 text-foreground transition-colors hover:bg-secondary active:scale-95"
               aria-label={open ? 'Close menu' : 'Open menu'}
               aria-expanded={open}
             >
-              {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
         </nav>
@@ -326,7 +326,7 @@ export default function Navbar() {
       {open && (
           <div
             id="mobile-nav"
-            className="fixed left-0 top-[72px] z-40 w-full border-b border-border/60 bg-background/95 px-5 pb-8 pt-3 shadow-xl backdrop-blur-md md:hidden overflow-y-auto max-h-[calc(100vh-72px)]"
+            className="fixed left-0 top-[72px] z-40 w-full border-b border-border/60 bg-background/98 px-5 pb-8 pt-3 shadow-2xl backdrop-blur-xl md:hidden overflow-y-auto max-h-[calc(100svh-72px)]"
           >
             <div className="space-y-4">
               <div>
@@ -338,8 +338,8 @@ export default function Navbar() {
                         href={item.href}
                         onClick={() => setOpen(false)}
                         className={cn(
-                          'flex h-11 items-center rounded-xl px-4 text-sm font-medium text-foreground transition-colors hover:bg-secondary',
-                          pathname.startsWith(item.href) && 'bg-secondary text-primary'
+                          'flex h-11 min-h-[44px] items-center rounded-xl px-4 text-sm font-medium text-foreground transition-colors hover:bg-secondary active:bg-secondary/80',
+                          pathname.startsWith(item.href) && 'bg-secondary text-primary font-semibold'
                         )}
                       >
                         {item.label}
@@ -349,11 +349,11 @@ export default function Navbar() {
                 </ul>
               </div>
 
-              <div className="border-t border-border/50 pt-4 px-2">
+              <div className="border-t border-border/50 pt-4 px-1">
                 <Link
                   href="/contact"
                   onClick={() => setOpen(false)}
-                  className="flex h-11 w-full items-center justify-center rounded-xl bg-primary text-sm font-medium text-primary-foreground"
+                  className="flex h-12 min-h-[44px] w-full items-center justify-center rounded-xl bg-primary text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 active:scale-[0.99] transition-transform"
                 >
                   Get in Touch
                 </Link>

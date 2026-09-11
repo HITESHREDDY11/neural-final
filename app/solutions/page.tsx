@@ -105,10 +105,10 @@ export default function SolutionsPage() {
       <section className="relative py-4 z-10">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
           <div className="flex border-b border-border/60 pb-6">
-            <div className="flex flex-wrap gap-3 sm:gap-4">
+            <div className="flex gap-2 sm:gap-3 overflow-x-auto no-scrollbar sm:flex-wrap pb-1">
               <button
                 onClick={() => { setActiveTab('cleanroom-entry-control'); handleReset(); }}
-                className={`rounded-full px-5 sm:px-6 py-2.5 text-xs font-semibold uppercase tracking-wider transition-all border ${
+                className={`shrink-0 rounded-full px-4 sm:px-6 py-2.5 min-h-[44px] text-xs font-semibold uppercase tracking-wider transition-all border ${
                   activeTab === 'cleanroom-entry-control'
                     ? 'bg-primary text-primary-foreground border-primary shadow-[0_0_15px_rgba(59,130,246,0.4)]'
                     : 'bg-secondary/20 text-muted-foreground border-border/80 hover:bg-secondary/40'
@@ -118,7 +118,7 @@ export default function SolutionsPage() {
               </button>
               <button
                 onClick={() => { setActiveTab('environmental-monitoring-cascade'); handleReset(); }}
-                className={`rounded-full px-5 sm:px-6 py-2.5 text-xs font-semibold uppercase tracking-wider transition-all border ${
+                className={`shrink-0 rounded-full px-4 sm:px-6 py-2.5 min-h-[44px] text-xs font-semibold uppercase tracking-wider transition-all border ${
                   activeTab === 'environmental-monitoring-cascade'
                     ? 'bg-primary text-primary-foreground border-primary shadow-[0_0_15px_rgba(59,130,246,0.4)]'
                     : 'bg-secondary/20 text-muted-foreground border-border/80 hover:bg-secondary/40'
@@ -128,7 +128,7 @@ export default function SolutionsPage() {
               </button>
               <button
                 onClick={() => { setActiveTab('laminar-air-flow'); handleReset(); }}
-                className={`rounded-full px-5 sm:px-6 py-2.5 text-xs font-semibold uppercase tracking-wider transition-all border ${
+                className={`shrink-0 rounded-full px-4 sm:px-6 py-2.5 min-h-[44px] text-xs font-semibold uppercase tracking-wider transition-all border ${
                   activeTab === 'laminar-air-flow'
                     ? 'bg-primary text-primary-foreground border-primary shadow-[0_0_15px_rgba(59,130,246,0.4)]'
                     : 'bg-secondary/20 text-muted-foreground border-border/80 hover:bg-secondary/40'
@@ -181,7 +181,7 @@ export default function SolutionsPage() {
             </div>
 
             {/* Right side: Interactive Workflow Schematic Diagram */}
-            <div className="lg:col-span-7 rounded-2xl border border-primary/20 bg-card/35 p-8 backdrop-blur-md relative overflow-hidden bp-grid-fine flex flex-col min-h-[480px]">
+            <div className="lg:col-span-7 rounded-2xl border border-primary/20 bg-card/35 p-5 sm:p-7 md:p-8 backdrop-blur-md relative overflow-hidden bp-grid-fine flex flex-col min-h-[480px]">
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-transparent pointer-events-none" />
 
 
@@ -286,12 +286,12 @@ export default function SolutionsPage() {
               </div>
 
               {/* Simulation panel controls */}
-              <div className="border-t border-border/40 pt-5 flex items-center justify-between mt-auto">
-                <div className="flex gap-2">
+              <div className="border-t border-border/40 pt-5 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mt-auto">
+                <div className="flex flex-wrap items-center gap-2">
                   <button
                     disabled={isPlaying}
                     onClick={triggerSimulation}
-                    className="inline-flex h-9 items-center justify-center gap-1.5 rounded-lg bg-primary px-4 text-xs font-semibold text-primary-foreground hover:bg-primary/85 disabled:opacity-50"
+                    className="inline-flex h-11 sm:h-9 min-h-[44px] items-center justify-center gap-1.5 rounded-lg bg-primary px-4 text-xs font-semibold text-primary-foreground hover:bg-primary/85 disabled:opacity-50 flex-1 sm:flex-initial"
                   >
                     <Play className="h-3.5 w-3.5" />
                     <span>Run Simulation</span>
@@ -299,14 +299,14 @@ export default function SolutionsPage() {
                   <button
                     onClick={handleNextStep}
                     disabled={isPlaying}
-                    className="inline-flex h-9 items-center justify-center gap-1.5 rounded-lg border border-border/80 bg-secondary/15 px-4 text-xs font-semibold hover:bg-secondary disabled:opacity-50"
+                    className="inline-flex h-11 sm:h-9 min-h-[44px] items-center justify-center gap-1.5 rounded-lg border border-border/80 bg-secondary/15 px-4 text-xs font-semibold hover:bg-secondary disabled:opacity-50 flex-1 sm:flex-initial"
                   >
                     <span>Next Step</span>
                     <ArrowRight className="h-3.5 w-3.5" />
                   </button>
                 </div>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center justify-between sm:justify-end gap-4">
                   {activeTab === 'cleanroom-entry-control' && simulationStep === 2 && (
                     <div className="text-xs font-mono text-accent animate-pulse font-bold">
                       HEPA TIMER: 00:{timerVal < 10 ? `0${timerVal}` : timerVal}
@@ -314,7 +314,7 @@ export default function SolutionsPage() {
                   )}
                   <button
                     onClick={handleReset}
-                    className="rounded-lg p-2 text-muted-foreground hover:bg-secondary hover:text-foreground"
+                    className="rounded-lg p-2.5 sm:p-2 min-h-[44px] min-w-[44px] flex items-center justify-center text-muted-foreground hover:bg-secondary hover:text-foreground"
                     title="Reset Simulator"
                   >
                     <RotateCcw className="h-4 w-4" />

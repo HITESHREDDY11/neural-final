@@ -34,7 +34,7 @@ const products = [
 export default function Products() {
   return (
     <section id="products" className="border-y border-border/50 bg-secondary/10">
-      <div className="mx-auto max-w-7xl px-6 py-16 sm:px-10 lg:px-16 lg:py-20">
+      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-10 lg:px-16 lg:py-20">
         <Reveal className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <div className="max-w-xl">
             <RevealItem>
@@ -44,7 +44,7 @@ export default function Products() {
               </div>
             </RevealItem>
             <RevealItem>
-              <h2 className="mt-5 text-3xl font-semibold tracking-[-0.02em] text-foreground sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
+              <h2 className="mt-4 sm:mt-5 text-3xl font-semibold tracking-[-0.02em] text-foreground sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
                 Featured Products
               </h2>
             </RevealItem>
@@ -56,13 +56,13 @@ export default function Products() {
           </RevealItem>
         </Reveal>
 
-        <Reveal className="mt-16 grid gap-6 md:grid-cols-3">
+        <Reveal className="mt-12 sm:mt-16 grid gap-6 md:grid-cols-3">
           {products.map((p) => (
             <RevealItem key={p.title}>
               <Link
                 href={p.href}
                 aria-label={`View ${p.title} product details`}
-                className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/40 p-8 transition-all duration-500 hover:-translate-y-1.5 hover:border-primary/30 hover:shadow-[0_24px_70px_-24px_rgba(59,130,246,0.2)]"
+                className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/40 p-5 sm:p-7 md:p-8 transition-all duration-500 hover:-translate-y-1.5 hover:border-primary/30 hover:shadow-[0_24px_70px_-24px_rgba(59,130,246,0.2)]"
               >
                 <div className="flex items-center justify-between">
                   <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">{p.tag}</span>
@@ -70,12 +70,12 @@ export default function Products() {
                     <ArrowUpRight className="h-4 w-4" />
                   </span>
                 </div>
-                <div className="mt-10 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-all duration-500 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground">
-                  <p.icon className="h-7 w-7" />
+                <div className="mt-8 sm:mt-10 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-all duration-500 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground">
+                  <p.icon className="h-6 w-6 sm:h-7 sm:w-7" />
                 </div>
-                <h3 className="mt-7 text-xl font-semibold tracking-tight text-foreground">{p.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
-                <ul className="mt-6 space-y-2 border-t border-border/50 pt-5">
+                <h3 className="mt-6 sm:mt-7 text-lg sm:text-xl font-semibold tracking-tight text-foreground">{p.title}</h3>
+                <p className="mt-2.5 sm:mt-3 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
+                <ul className="mt-5 sm:mt-6 space-y-2 border-t border-border/50 pt-4 sm:pt-5">
                   {p.specs.map((s) => (
                     <li key={s} className="flex items-center gap-2 text-xs text-foreground/70">
                       <span className="h-1 w-1 rounded-full bg-primary" />
@@ -83,7 +83,7 @@ export default function Products() {
                     </li>
                   ))}
                 </ul>
-                <span className="mt-7 flex items-center text-sm font-medium text-foreground">
+                <span className="mt-6 sm:mt-7 flex items-center text-sm font-medium text-foreground">
                   View Details
                   <span className="ml-1.5 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1 group-hover:text-primary">→</span>
                 </span>
@@ -96,7 +96,7 @@ export default function Products() {
           <RevealItem>
             <Link
               href="/products"
-              className="group inline-flex h-12 items-center gap-2 rounded-full border border-border px-7 text-sm font-medium text-foreground transition-all hover:border-primary/40 hover:bg-secondary"
+              className="group inline-flex h-12 min-h-[44px] items-center justify-center gap-2 rounded-full border border-border px-7 text-sm font-semibold text-foreground transition-all hover:border-primary/40 hover:bg-secondary active:scale-95"
             >
               View All Products
               <span className="transition-transform group-hover:translate-x-1">→</span>

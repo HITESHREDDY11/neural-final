@@ -52,7 +52,7 @@ export default function HoverGallery() {
   const [active, setActive] = useState<number | null>(null);
 
   return (
-    <section className="bg-[hsl(222,47%,6%)] px-6 py-10 sm:px-10 lg:px-16">
+    <section className="bg-[hsl(222,47%,6%)] px-4 py-8 sm:px-10 lg:px-16">
       {/* Section label */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
@@ -67,13 +67,13 @@ export default function HoverGallery() {
         </p>
       </motion.div>
 
-      {/* ── Desktop: hover-accordion gallery ── */}
+      {/* ── Desktop: hover-accordion gallery (lg: and above) ── */}
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-        className="relative hidden h-[82vh] min-h-[480px] overflow-hidden rounded-2xl border border-[hsl(222,30%,16%)] md:block"
+        className="relative hidden h-[82vh] min-h-[480px] overflow-hidden rounded-2xl border border-[hsl(222,30%,16%)] lg:block"
         onMouseLeave={() => setActive(null)}
       >
         <div className="flex h-full w-full">
@@ -245,18 +245,18 @@ export default function HoverGallery() {
         </div>
       </motion.div>
 
-      {/* ── Mobile: vertical card stack ── */}
+      {/* ── Mobile & Tablet: responsive card grid (lg:hidden) ── */}
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-        className="grid grid-cols-1 gap-4 md:hidden"
+        className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:hidden"
       >
         {PANELS.map((panel) => (
           <div
             key={panel.id}
-            className="relative overflow-hidden rounded-2xl border border-[hsl(222,30%,16%)]"
+            className="relative overflow-hidden rounded-2xl border border-[hsl(222,30%,16%)] flex flex-col justify-between"
           >
             {/* Background */}
             <div
@@ -264,31 +264,33 @@ export default function HoverGallery() {
               style={{ backgroundImage: `url(${panel.image})` }}
             />
             {/* Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[hsl(222,47%,6%)/90%] via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[hsl(222,47%,6%)/92%] via-[hsl(222,47%,6%)/40%] to-transparent" />
 
             {/* Content */}
-            <div className="relative z-10 p-6">
-              <div className="mb-3 flex items-center gap-2">
-                <span className="font-mono text-[11px] font-bold tracking-[0.2em] text-white/60">
-                  {panel.label}
-                </span>
-                <span className="h-px w-4 bg-[hsl(217,100%,72%,0.5)]" />
-                <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-[hsl(217,100%,72%)]">
-                  {panel.tag}
-                </span>
+            <div className="relative z-10 p-5 sm:p-6 flex flex-col h-full justify-between">
+              <div>
+                <div className="mb-3 flex items-center gap-2">
+                  <span className="font-mono text-[11px] font-bold tracking-[0.2em] text-white/60">
+                    {panel.label}
+                  </span>
+                  <span className="h-px w-4 bg-[hsl(217,100%,72%,0.5)]" />
+                  <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-[hsl(217,100%,72%)]">
+                    {panel.tag}
+                  </span>
+                </div>
+
+                <h3 className="whitespace-pre-line text-lg sm:text-xl font-bold leading-tight tracking-tight text-white">
+                  {panel.title}
+                </h3>
+
+                <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-white/70">
+                  {panel.summary}
+                </p>
               </div>
-
-              <h3 className="whitespace-pre-line text-xl font-bold leading-tight tracking-tight text-white">
-                {panel.title}
-              </h3>
-
-              <p className="mt-3 text-sm leading-relaxed text-white/70">
-                {panel.summary}
-              </p>
 
               <a
                 href="#contact"
-                className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[hsl(217,100%,72%)]"
+                className="mt-4 inline-flex min-h-[44px] items-center gap-2 text-sm font-semibold text-[hsl(217,100%,72%)] hover:underline active:scale-95 transition-transform"
               >
                 Learn more <ArrowRight className="h-4 w-4" />
               </a>

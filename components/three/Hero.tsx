@@ -39,12 +39,12 @@ export default function Hero() {
       <div className="pointer-events-none absolute bottom-0 left-0 h-48 w-full bg-gradient-to-t from-background to-transparent" />
 
       {/* Hero text */}
-      <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center md:items-start md:text-left md:pl-20 lg:pl-32">
+      <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 sm:px-6 text-center md:items-start md:text-left md:pl-20 lg:pl-32">
         <motion.div id="hero-text" variants={container} initial="hidden" animate="show" className="max-w-2xl">
 
           <motion.div
             variants={item}
-            className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5 text-xs font-medium tracking-[0.2em] text-primary backdrop-blur-sm"
+            className="mb-5 sm:mb-6 inline-flex items-center gap-2 sm:gap-2.5 rounded-full border border-primary/30 bg-primary/5 px-3.5 sm:px-4 py-1.5 text-[11px] sm:text-xs font-medium tracking-[0.16em] sm:tracking-[0.2em] text-primary backdrop-blur-sm"
           >
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
@@ -55,7 +55,7 @@ export default function Hero() {
 
           <motion.h1
             variants={item}
-            className="text-[2.75rem] leading-[1.05] font-semibold tracking-[-0.03em] text-foreground sm:text-6xl md:text-7xl lg:text-[5rem]"
+            className="text-3xl min-[380px]:text-4xl min-[480px]:text-5xl sm:text-6xl md:text-7xl lg:text-[5rem] leading-[1.08] sm:leading-[1.05] font-semibold tracking-[-0.03em] text-foreground break-words"
           >
             Redefining Innovation
             <br />
@@ -66,17 +66,17 @@ export default function Hero() {
 
           <motion.p
             variants={item}
-            className="mx-auto md:mx-0 mt-7 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
+            className="mx-auto md:mx-0 mt-5 sm:mt-7 max-w-xl text-sm sm:text-base md:text-lg leading-relaxed text-muted-foreground"
           >
             Making enterprises safe, smart, and sustainable with
             precision-engineered automation systems trusted across leading
             pharmaceutical facilities.
           </motion.p>
 
-          <motion.div variants={item} className="mt-10 flex flex-wrap items-center justify-center md:justify-start gap-4">
+          <motion.div variants={item} className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center md:justify-start gap-4 w-full">
             <a
               href="#products"
-              className="group relative inline-flex h-[52px] items-center gap-2.5 overflow-hidden rounded-full bg-primary px-8 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:shadow-xl hover:shadow-primary/40"
+              className="group relative inline-flex h-[52px] w-full min-[400px]:w-auto items-center justify-center gap-2.5 overflow-hidden rounded-full bg-primary px-8 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:shadow-xl hover:shadow-primary/40 active:scale-[0.98]"
             >
               <span className="relative z-10 flex items-center gap-2.5">
                 Explore Products

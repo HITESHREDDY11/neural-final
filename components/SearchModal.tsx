@@ -148,14 +148,14 @@ export default function SearchModal({ isOpen, onClose }: { isOpen: boolean; onCl
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center pt-[12vh] px-4">
+        <div className="fixed inset-0 z-50 flex items-start justify-center pt-4 sm:pt-[12vh] px-3 sm:px-4">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-background/95"
+            className="absolute inset-0 bg-background/95 backdrop-blur-sm"
           />
 
           {/* Modal Panel */}
@@ -170,31 +170,39 @@ export default function SearchModal({ isOpen, onClose }: { isOpen: boolean; onCl
             <div className="absolute left-0 top-0 h-[2px] w-full bg-gradient-to-r from-transparent via-primary/80 to-transparent" />
 
             {/* Input Wrapper */}
-            <div className="flex items-center gap-3 border-b border-border/80 px-5 py-4">
-              <Search className="h-5 w-5 text-primary animate-pulse" />
+            <div className="flex items-center gap-2.5 sm:gap-3 border-b border-border/80 px-4 sm:px-5 py-3.5 sm:py-4">
+              <Search className="h-5 w-5 text-primary shrink-0 animate-pulse" />
               <input
                 ref={inputRef}
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search products, datasheets, industries, and pages..."
-                className="flex-1 bg-transparent text-base text-foreground placeholder-muted-foreground outline-none border-none focus:ring-0"
+                placeholder="Search products, datasheets, industries..."
+                className="flex-1 min-w-0 bg-transparent text-sm sm:text-base text-foreground placeholder-muted-foreground outline-none border-none focus:ring-0"
               />
               {query && (
                 <button
                   onClick={() => setQuery('')}
-                  className="rounded-lg p-1 text-muted-foreground hover:bg-secondary hover:text-foreground"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-secondary hover:text-foreground active:scale-95"
+                  aria-label="Clear search input"
                 >
                   <X className="h-4 w-4" />
                 </button>
               )}
+              <button
+                onClick={onClose}
+                className="flex sm:hidden h-9 w-9 items-center justify-center rounded-lg border border-border/60 text-muted-foreground hover:bg-secondary hover:text-foreground"
+                aria-label="Close search dialog"
+              >
+                <X className="h-4.5 w-4.5" />
+              </button>
               <span className="hidden rounded border border-border bg-muted px-2 py-0.5 text-[10px] font-mono text-muted-foreground sm:inline-block">
                 ESC
               </span>
             </div>
 
             {/* Results Container */}
-            <div className="max-h-[360px] overflow-y-auto p-4">
+            <div className="max-h-[50vh] sm:max-h-[360px] overflow-y-auto p-3 sm:p-4">
               {results.length > 0 ? (
                 <div className="space-y-1">
                   <div className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-wider text-primary">
@@ -204,7 +212,7 @@ export default function SearchModal({ isOpen, onClose }: { isOpen: boolean; onCl
                     <button
                       key={i}
                       onClick={() => handleSelect(r.href)}
-                      className="group flex w-full items-start gap-4 rounded-xl border border-transparent p-3 text-left transition-all duration-200 hover:border-primary/10 hover:bg-secondary/40"
+                      className="group flex w-full items-start gap-3 sm:gap-4 rounded-xl border border-transparent p-3 text-left transition-all duration-200 hover:border-primary/10 hover:bg-secondary/40 min-h-[44px]"
                     >
                       <div className="mt-0.5 rounded-lg bg-primary/10 p-2 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                         <r.icon className="h-4 w-4" />

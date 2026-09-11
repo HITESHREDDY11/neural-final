@@ -106,14 +106,14 @@ export default function TechnologyPage() {
       {/* Navigation tabs */}
       <section className="relative py-4 z-10">
         <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
-          <div className="flex flex-wrap gap-2 border-b border-border/60 pb-6">
+          <div className="flex gap-2 overflow-x-auto no-scrollbar sm:flex-wrap border-b border-border/60 pb-3 sm:pb-6">
             {techTopics.map((t) => {
               const TabIcon = iconMap[t.id] || Cpu;
               return (
                 <button
                   key={t.id}
                   onClick={() => { setActiveTopicId(t.id); setSelectedNode(null); }}
-                  className={`flex items-center gap-2.5 rounded-full px-5 py-2.5 text-xs font-semibold uppercase tracking-wider transition-all border ${
+                  className={`shrink-0 flex items-center gap-2.5 rounded-full px-4 sm:px-5 py-2.5 min-h-[44px] text-xs font-semibold uppercase tracking-wider transition-all border ${
                     activeTopicId === t.id
                       ? 'bg-primary text-primary-foreground border-primary shadow-md shadow-primary/20'
                       : 'bg-secondary/20 text-muted-foreground border-border/80 hover:bg-secondary/40 hover:text-foreground'
@@ -154,7 +154,7 @@ export default function TechnologyPage() {
             </div>
 
             {/* Right side: Interactive click-to-explore node diagram */}
-            <div className="lg:col-span-7 rounded-2xl border border-primary/20 bg-card/35 p-8 backdrop-blur-md relative overflow-hidden bp-grid-fine flex flex-col min-h-[520px]">
+            <div className="lg:col-span-7 rounded-2xl border border-primary/20 bg-card/35 p-4 sm:p-6 md:p-8 backdrop-blur-md relative overflow-hidden bp-grid-fine flex flex-col min-h-[520px]">
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-transparent to-transparent pointer-events-none" />
 
 
@@ -284,16 +284,16 @@ export default function TechnologyPage() {
                 Our controllers support Modbus registers pre-mapped to easily drag-and-drop into architectures by Siemens (TIA Portal), Schneider Electric (EcoStruxure), and Rockwell Automation.
               </p>
             </RevealItem>
-            <RevealItem className="mt-8 flex gap-4">
+            <RevealItem className="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto items-stretch sm:items-center justify-center">
               <Link
                 href="/resources"
-                className="inline-flex h-11 items-center justify-center rounded-full bg-primary px-7 text-xs font-semibold text-primary-foreground hover:bg-primary/85"
+                className="inline-flex h-11 min-h-[44px] items-center justify-center rounded-full bg-primary px-7 text-xs font-semibold text-primary-foreground hover:bg-primary/85"
               >
                 Download Modbus Maps
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex h-11 items-center justify-center rounded-full border border-border bg-transparent px-7 text-xs font-semibold hover:bg-secondary"
+                className="inline-flex h-11 min-h-[44px] items-center justify-center rounded-full border border-border bg-transparent px-7 text-xs font-semibold hover:bg-secondary"
               >
                 Ask our Integrator
               </Link>

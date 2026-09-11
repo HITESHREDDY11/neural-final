@@ -69,11 +69,35 @@ export default function IndustriesPage() {
       </section>
 
       {/* Split Control Dashboard */}
-      <section className="relative pb-32 pt-4 z-10">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+      <section className="relative pb-24 sm:pb-32 pt-4 z-10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12">
+          {/* Mobile & Tablet Horizontal Sector Selector (lg:hidden) */}
+          <div className="lg:hidden mb-6">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground block mb-2 px-1">Select Industrial Sector</span>
+            <div className="flex gap-2 overflow-x-auto no-scrollbar pb-2">
+              {industries.map((ind, idx) => {
+                const TabIcon = iconMap[ind.iconName] || ShieldAlert;
+                return (
+                  <button
+                    key={ind.id}
+                    onClick={() => setActiveIdx(idx)}
+                    className={`flex items-center gap-2 rounded-xl border px-3.5 py-2.5 text-xs font-semibold whitespace-nowrap transition-all shrink-0 active:scale-95 ${
+                      activeIdx === idx
+                        ? 'border-primary bg-primary text-primary-foreground shadow-md shadow-primary/20'
+                        : 'border-border/60 bg-card/40 text-muted-foreground hover:bg-secondary/40'
+                    }`}
+                  >
+                    <TabIcon className="h-4 w-4 shrink-0" />
+                    <span>{ind.title}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
           <div className="grid gap-8 lg:grid-cols-12 items-start">
-            {/* Left Col: Navigation list tabs */}
-            <div className="lg:col-span-4 space-y-2.5">
+            {/* Left Col: Navigation list tabs (Desktop lg: and above) */}
+            <div className="hidden lg:block lg:col-span-4 space-y-2.5">
               <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground block mb-2 px-2">Industrial Sectors</span>
               {industries.map((ind, idx) => {
                 const TabIcon = iconMap[ind.iconName] || ShieldAlert;
@@ -107,36 +131,36 @@ export default function IndustriesPage() {
             </div>
 
             {/* Right Col: Active Industry Dashboard display */}
-            <div className="lg:col-span-8 space-y-8 rounded-2xl border border-primary/20 bg-card/35 p-8 backdrop-blur-md relative overflow-hidden bp-grid-fine">
+            <div className="lg:col-span-8 space-y-6 sm:space-y-8 rounded-2xl border border-primary/20 bg-card/35 p-5 sm:p-8 backdrop-blur-md relative overflow-hidden bp-grid-fine">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent pointer-events-none" />
 
               {/* Graphic + Info Header */}
-              <div className="grid gap-6 md:grid-cols-12 items-center">
-                <div className="md:col-span-7 space-y-4">
+              <div className="grid gap-5 sm:gap-6 md:grid-cols-12 items-center">
+                <div className="md:col-span-7 space-y-3 sm:space-y-4">
                   <div className="flex items-center gap-3">
                     <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
                       <IconComponent className="h-5 w-5" />
                     </div>
-                    <h2 className="text-3xl font-extrabold tracking-tight text-foreground">{activeInd.title}</h2>
+                    <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">{activeInd.title}</h2>
                   </div>
-                  <p className="text-sm leading-relaxed text-muted-foreground">{activeInd.description}</p>
+                  <p className="text-xs sm:text-sm leading-relaxed text-muted-foreground">{activeInd.description}</p>
                 </div>
                 {/* Stats Widget */}
-                <div className="md:col-span-5 border border-border bg-secondary/10 rounded-xl p-5 text-center flex flex-col items-center justify-center">
+                <div className="md:col-span-5 border border-border bg-secondary/10 rounded-xl p-4 sm:p-5 text-center flex flex-col items-center justify-center">
                   <span className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground">Compliance Target</span>
-                  <div className="text-3xl font-extrabold text-accent mt-2">{activeInd.stats.value}</div>
-                  <span className="text-xs font-semibold text-foreground/80 mt-1 uppercase tracking-wider">{activeInd.stats.label}</span>
+                  <div className="text-2xl sm:text-3xl font-extrabold text-accent mt-1.5 sm:mt-2">{activeInd.stats.value}</div>
+                  <span className="text-[11px] sm:text-xs font-semibold text-foreground/80 mt-1 uppercase tracking-wider">{activeInd.stats.label}</span>
                 </div>
               </div>
 
               {/* Parallel Matrices: Challenges vs Solutions */}
-              <div className="grid gap-6 md:grid-cols-2 border-t border-border/40 pt-6">
+              <div className="grid gap-6 md:grid-cols-2 border-t border-border/40 pt-5 sm:pt-6">
                 <div>
-                  <h3 className="text-xs font-bold uppercase tracking-wider text-destructive flex items-center gap-1.5 mb-4">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-destructive flex items-center gap-1.5 mb-3 sm:mb-4">
                     <AlertCircle className="h-4 w-4" />
                     <span>Industry Challenges</span>
                   </h3>
-                  <ul className="space-y-3">
+                  <ul className="space-y-2.5 sm:space-y-3">
                     {activeInd.challenges.map((c, idx) => (
                       <li key={idx} className="flex gap-2.5 items-start text-xs text-muted-foreground leading-relaxed">
                         <span className="h-1.5 w-1.5 rounded-full bg-destructive shrink-0 mt-1.5" />
@@ -147,11 +171,11 @@ export default function IndustriesPage() {
                 </div>
 
                 <div>
-                  <h3 className="text-xs font-bold uppercase tracking-wider text-primary flex items-center gap-1.5 mb-4">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-primary flex items-center gap-1.5 mb-3 sm:mb-4">
                     <ShieldCheck className="h-4 w-4" />
                     <span>Neural Automation Solutions</span>
                   </h3>
-                  <ul className="space-y-3">
+                  <ul className="space-y-2.5 sm:space-y-3">
                     {activeInd.solutions.map((sol, idx) => (
                       <li key={idx} className="flex gap-2.5 items-start text-xs text-foreground/80 leading-relaxed">
                         <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0 mt-1.5" />
@@ -163,13 +187,13 @@ export default function IndustriesPage() {
               </div>
 
               {/* Consultation CTA */}
-              <div className="border-t border-border/40 pt-6 flex flex-wrap gap-4 items-center justify-between">
+              <div className="border-t border-border/40 pt-5 sm:pt-6 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
                 <p className="text-xs text-muted-foreground">
                   Our systems are pre-calibrated to support cleanroom qualification checklists.
                 </p>
                 <Link
                   href="/contact"
-                  className="inline-flex h-10 items-center justify-center gap-1.5 rounded-full bg-primary px-6 text-xs font-semibold text-primary-foreground hover:bg-primary/85 transition-all"
+                  className="inline-flex min-h-[44px] w-full sm:w-auto items-center justify-center gap-1.5 rounded-full bg-primary px-6 py-2.5 text-xs font-semibold text-primary-foreground hover:bg-primary/85 active:scale-95 transition-all text-center"
                 >
                   <span>Request Custom Calibration Matrix</span>
                   <ArrowRight className="h-3.5 w-3.5" />

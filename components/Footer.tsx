@@ -51,8 +51,8 @@ export default function Footer() {
 
   return (
     <footer className="border-t border-border/50 bg-secondary/10 relative z-10">
-      <div className="mx-auto max-w-7xl px-6 py-16 sm:px-10 lg:px-16">
-        <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr_1.5fr]">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-10 lg:px-16">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.5fr] lg:gap-12">
           <div>
             <Link href="/" className="group flex items-center">
               <div className="relative h-10 w-auto transition-transform duration-300 group-hover:scale-105">
@@ -65,10 +65,10 @@ export default function Footer() {
                 />
               </div>
             </Link>
-            <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted-foreground">
+            <p className="mt-4 sm:mt-5 max-w-xs text-sm leading-relaxed text-muted-foreground">
               Making enterprises safe, smart, and sustainable with precision-engineered automation solutions.
             </p>
-            <div className="mt-6 flex items-center gap-2.5">
+            <div className="mt-5 sm:mt-6 flex items-center gap-2.5">
               {socials.map((s) => (
                 <a
                   key={s.label}
@@ -76,9 +76,9 @@ export default function Footer() {
                   target={s.external ? "_blank" : undefined}
                   rel={s.external ? "noopener noreferrer" : undefined}
                   aria-label={s.label}
-                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 text-muted-foreground transition-all hover:border-primary/30 hover:bg-secondary hover:text-primary"
+                  className="flex h-11 w-11 min-h-[44px] min-w-[44px] sm:h-9 sm:w-9 items-center justify-center rounded-lg border border-border/60 text-muted-foreground transition-all hover:border-primary/30 hover:bg-secondary hover:text-primary active:scale-95"
                 >
-                  <s.icon className="h-4 w-4" />
+                  <s.icon className="h-4.5 w-4.5 sm:h-4 sm:w-4" />
                 </a>
               ))}
             </div>
@@ -89,7 +89,7 @@ export default function Footer() {
             <ul className="mt-4 space-y-3">
               {productLinks.map((l) => (
                 <li key={l.label}>
-                  <Link href={l.href} className="text-sm text-muted-foreground transition-colors hover:text-primary">
+                  <Link href={l.href} className="text-sm text-muted-foreground transition-colors hover:text-primary inline-block py-0.5">
                     {l.label}
                   </Link>
                 </li>
@@ -107,7 +107,7 @@ export default function Footer() {
                       href={l.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                      className="text-sm text-muted-foreground transition-colors hover:text-primary inline-block py-0.5"
                     >
                       {l.label}
                     </a>
@@ -115,7 +115,7 @@ export default function Footer() {
                     <Link
                       href={l.href}
                       onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleAnchorClick(e, l.href)}
-                      className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                      className="text-sm text-muted-foreground transition-colors hover:text-primary inline-block py-0.5"
                     >
                       {l.label}
                     </Link>
@@ -134,7 +134,7 @@ export default function Footer() {
               </p>
               <p>
                 Email:{' '}
-                <a href="mailto:sales@neuralindustrialautmation.in" className="transition-colors hover:text-primary">
+                <a href="mailto:sales@neuralindustrialautmation.in" className="transition-colors hover:text-primary break-all">
                   sales@neuralindustrialautmation.in
                 </a>
               </p>

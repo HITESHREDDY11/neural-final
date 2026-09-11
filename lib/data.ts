@@ -1037,7 +1037,7 @@ export const generalFAQs = [
 ];
 
 export const resourceDownloads = [
-  { category: 'Manual', title: 'Neural Corporate Product Brochure', format: 'PDF', size: '11.4 MB', filename: '/assets/docs/neural-company-brochure.pdf' },
+  { category: 'Manual', title: 'Neural Corporate Product Brochure', format: 'PDF', size: '11.3 MB', filename: '/assets/docs/neural-company-brochure.pdf' },
   { category: 'Manual', title: 'Door Interlocking System User & Installation Manual', format: 'PDF', size: '430 KB', filename: '/assets/docs/door-interlock-system-manual.pdf' },
   { category: 'Manual', title: 'Pass Box Interlocking Controller Manual', format: 'PDF', size: '2.0 MB', filename: '/assets/docs/passbox-interlock-manual.pdf' },
   { category: 'Manual', title: 'Air Shower Manual', format: 'PDF', size: '420 KB', filename: '/assets/docs/air-shower-controller-manual.pdf' },

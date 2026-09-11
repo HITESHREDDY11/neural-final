@@ -95,8 +95,8 @@ function MarqueeTrack({
 
   return (
     <div className="relative flex w-full overflow-hidden">
-      <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-[hsl(222,47%,6%)] to-transparent" />
-      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-[hsl(222,47%,6%)] to-transparent" />
+      <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-12 sm:w-24 md:w-32 bg-gradient-to-r from-[hsl(222,47%,6%)] to-transparent" />
+      <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-12 sm:w-24 md:w-32 bg-gradient-to-l from-[hsl(222,47%,6%)] to-transparent" />
       <div
         className="flex"
         aria-hidden="true"
@@ -125,22 +125,22 @@ export default function Clients() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,hsl(217,91%,60%,0.07),transparent)]" />
 
       {/* Header */}
-      <div className="relative mx-auto mb-16 max-w-3xl px-6 text-center">
+      <div className="relative mx-auto mb-12 sm:mb-16 max-w-3xl px-4 sm:px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-blue-400">
+          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-3.5 sm:px-4 py-1.5 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] sm:tracking-[0.2em] text-blue-400">
             <span className="h-1 w-1 rounded-full bg-blue-400" />
             Trusted By Industry Leaders
           </p>
-          <h2 className="mt-4 text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white min-[420px]:text-4xl sm:text-5xl">
             Pharmaceutical &amp; <br />
             <span className="text-white/40">Cleanroom Pioneers</span>
           </h2>
-          <p className="mt-5 text-base leading-relaxed text-white/50">
+          <p className="mt-4 sm:mt-5 text-sm sm:text-base leading-relaxed text-white/50">
             From multinational pharma corporations to specialist biotech labs — the industry&apos;s most
             demanding environments trust Neural systems.
           </p>
@@ -171,9 +171,9 @@ export default function Clients() {
         <button
           onClick={() => setPaused((p) => !p)}
           aria-label={paused ? 'Play client logos animation' : 'Pause client logos animation'}
-          className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-xs font-medium text-white/50 transition-colors hover:border-white/20 hover:text-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+          className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-5 py-2 text-xs font-medium text-white/60 transition-colors hover:border-white/20 hover:text-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 active:scale-95"
         >
-          {paused ? <Play className="h-3 w-3" /> : <Pause className="h-3 w-3" />}
+          {paused ? <Play className="h-3.5 w-3.5" /> : <Pause className="h-3.5 w-3.5" />}
           {paused ? 'Play' : 'Pause'}
         </button>
       </div>

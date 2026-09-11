@@ -141,21 +141,21 @@ export default function ProductsClient() {
                 </div>
               </RevealItem>
               <RevealItem>
-                <h1 className="mt-5 text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+                <h1 className="mt-4 sm:mt-5 text-3xl min-[380px]:text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
                   Precision Industrial <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Hardware</span>
                 </h1>
               </RevealItem>
               <RevealItem>
-                <p className="mt-6 text-base leading-relaxed text-muted-foreground">
+                <p className="mt-4 sm:mt-6 text-sm sm:text-base leading-relaxed text-muted-foreground">
                   Highly-calibrated interlocking systems, controllers, and transmitters engineered for ISO cleanrooms and critical containment suites. Meets CE and ISO certification baselines.
                 </p>
               </RevealItem>
             </div>
 
             {/* Technical Stats */}
-            <RevealItem className="flex gap-8 border-l border-border/80 pl-6 md:pl-10 py-2">
+            <RevealItem className="flex gap-6 sm:gap-8 border-t md:border-t-0 md:border-l border-border/80 pt-4 md:pt-0 pl-0 md:pl-10 py-2">
               <div>
-                <div className="text-3xl font-extrabold text-primary">9+</div>
+                <div className="text-2xl sm:text-3xl font-extrabold text-primary">9+</div>
                 <div className="text-xs text-muted-foreground mt-1 uppercase font-semibold tracking-wider">Product Categories</div>
               </div>
             </RevealItem>
@@ -165,14 +165,14 @@ export default function ProductsClient() {
 
       {/* Filter Tabs */}
       <section className="relative py-4 z-10">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
-          <div className="flex flex-wrap gap-2 border-b border-border/60 pb-6">
+        <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12">
+          <div className="flex gap-2 overflow-x-auto no-scrollbar sm:flex-wrap border-b border-border/60 pb-4">
             {categories.map((cat) => (
               <Link
                 key={cat}
                 href={cat === 'All' ? '/products' : `/products?category=${encodeURIComponent(cat)}`}
                 scroll={false}
-                className={`rounded-full px-5 py-2.5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 border ${
+                className={`whitespace-nowrap rounded-full px-4 sm:px-5 py-2 sm:py-2.5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 border shrink-0 active:scale-95 ${
                   activeCategory === cat
                     ? 'bg-primary text-primary-foreground border-primary shadow-md shadow-primary/20'
                     : 'bg-secondary/20 text-muted-foreground border-border/80 hover:bg-secondary/40 hover:text-foreground'
@@ -186,16 +186,16 @@ export default function ProductsClient() {
       </section>
 
       {/* Products Grid */}
-      <section className="relative pb-32 pt-8 z-10">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
-          <Reveal key={activeCategory} className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <section className="relative pb-24 sm:pb-32 pt-6 sm:pt-8 z-10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-12">
+          <Reveal key={activeCategory} className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
             {filteredProducts.map((p) => {
               const Icon = iconMap[p.iconName as keyof typeof iconMap] || Cpu;
               return (
                 <RevealItem key={p.id} className="h-full">
                   <Link
                     href={`/products/${p.id}`}
-                    className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/95 p-8 card-premium"
+                    className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card/95 p-5 sm:p-7 md:p-8 card-premium"
                   >
                     {/* Blueprint Grid Accent within Card */}
                     <div className="absolute inset-0 -z-10 pointer-events-none opacity-[0.03] bp-grid-fine group-hover:opacity-[0.06] transition-opacity" />
@@ -211,28 +211,28 @@ export default function ProductsClient() {
                     </div>
 
                     {/* Animated Blueprint Drawing Block */}
-                    <div className="relative mt-8 h-40 w-full rounded-xl border border-border/50 bg-secondary/5 overflow-hidden flex items-center justify-center p-4">
+                    <div className="relative mt-6 sm:mt-8 h-36 sm:h-40 w-full rounded-xl border border-border/50 bg-secondary/5 overflow-hidden flex items-center justify-center p-4">
                       <BlueprintDrawing id={p.id} />
                     </div>
 
                     {/* Text details */}
-                    <div className="mt-8 flex items-center gap-3">
+                    <div className="mt-6 sm:mt-8 flex items-center gap-3">
                       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary transition-all duration-300 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground">
                         <Icon className="h-5 w-5" />
                       </div>
-                      <h3 className="text-xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
+                      <h3 className="text-lg sm:text-xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
                         {p.title}
                       </h3>
                     </div>
 
-                    <p className="mt-4 text-sm leading-relaxed text-muted-foreground flex-grow">
+                    <p className="mt-3 sm:mt-4 text-xs sm:text-sm leading-relaxed text-muted-foreground flex-grow">
                       {p.shortDescription}
                     </p>
 
                     {/* Applications bullets */}
-                    <div className="mt-6 border-t border-border/50 pt-5 space-y-2">
+                    <div className="mt-5 sm:mt-6 border-t border-border/50 pt-4 sm:pt-5 space-y-2">
                       <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground block">Key Applications</span>
-                      <ul className="grid grid-cols-2 gap-2">
+                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {p.applications.slice(0, 2).map((app, idx) => (
                           <li key={idx} className="flex items-center gap-1.5 text-xs text-foreground/80 font-medium truncate">
                             <span className="h-1 w-1 shrink-0 rounded-full bg-primary" />
@@ -243,7 +243,7 @@ export default function ProductsClient() {
                     </div>
 
                     {/* Explore Details link */}
-                    <span className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-foreground">
+                    <span className="mt-6 sm:mt-8 inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-foreground">
                       Explore Technical Specifications
                       <span className="text-muted-foreground transition-transform duration-300 group-hover:translate-x-1.5 group-hover:text-primary">→</span>
                     </span>

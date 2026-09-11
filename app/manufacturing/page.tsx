@@ -114,9 +114,9 @@ export default function ManufacturingPage() {
           <div className="grid gap-12 lg:grid-cols-12 items-start">
 
             {/* Left: SVG factory floor plan */}
-            <div className="lg:col-span-7 rounded-2xl border border-primary/20 bg-card/30 p-6 backdrop-blur-md relative overflow-hidden bp-grid-fine">
+            <div className="lg:col-span-7 rounded-2xl border border-primary/20 bg-card/30 p-4 sm:p-6 backdrop-blur-md relative overflow-hidden bp-grid-fine">
               {/* Layout SVG Canvas */}
-              <div className="relative h-96 w-full border border-border/60 bg-secondary/5 rounded-xl overflow-hidden">
+              <div className="relative aspect-[4/3] w-full min-h-[260px] sm:min-h-[340px] border border-border/60 bg-secondary/5 rounded-xl overflow-hidden">
                 <svg className="w-full h-full stroke-primary/30 fill-none" viewBox="0 0 400 300">
                   {/* Outer boundaries */}
                   <rect x="10" y="10" width="380" height="280" rx="4" />
@@ -138,6 +138,7 @@ export default function ManufacturingPage() {
                   <button
                     key={zone.id}
                     onClick={() => setActiveZoneId(zone.id)}
+                    aria-label={`Select Factory Zone ${zone.id}: ${zone.name}`}
                     className={`absolute rounded-lg border transition-all duration-300 flex items-center justify-center font-bold text-xs ${activeZoneId === zone.id
                       ? 'border-primary bg-primary/10 shadow-[0_0_20px_rgba(59,130,246,0.25)] text-primary'
                       : 'border-transparent bg-transparent hover:bg-secondary/10 text-muted-foreground/60'
@@ -145,10 +146,27 @@ export default function ManufacturingPage() {
                     style={{ left: zone.x, top: zone.y, width: zone.w, height: zone.h }}
                   >
                     <div className="flex flex-col items-center gap-1.5">
-                      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-card border border-border/80 text-[10px] font-mono text-foreground font-bold">
+                      <span className="flex h-6 w-6 sm:h-5 sm:w-5 items-center justify-center rounded-full bg-card border border-border/80 text-[11px] sm:text-[10px] font-mono text-foreground font-bold shadow-sm">
                         {zone.id}
                       </span>
                     </div>
+                  </button>
+                ))}
+              </div>
+
+              {/* Quick Zone selector pills for mobile touch */}
+              <div className="mt-4 flex gap-2 overflow-x-auto no-scrollbar pb-1 sm:hidden">
+                {zones.map((zone) => (
+                  <button
+                    key={zone.id}
+                    onClick={() => setActiveZoneId(zone.id)}
+                    className={`shrink-0 rounded-lg px-3 py-2 text-xs font-semibold min-h-[44px] border transition-colors ${
+                      activeZoneId === zone.id
+                        ? 'border-primary bg-primary/15 text-primary'
+                        : 'border-border/60 bg-secondary/20 text-muted-foreground hover:bg-secondary/40'
+                    }`}
+                  >
+                    Zone 0{zone.id}: {zone.name.split(' ')[0]}
                   </button>
                 ))}
               </div>
@@ -156,7 +174,7 @@ export default function ManufacturingPage() {
 
             {/* Right: Selected Zone Details Console */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="rounded-xl border border-border/80 bg-card/45 p-6 min-h-[400px] flex flex-col">
+              <div className="rounded-xl border border-border/80 bg-card/45 p-5 sm:p-6 min-h-[360px] sm:min-h-[400px] flex flex-col">
                 <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-primary mb-4">
                   <Info className="h-4.5 w-4.5 text-primary animate-pulse" />
                   <span>Factory Zone 0{activeZone.id}</span>
